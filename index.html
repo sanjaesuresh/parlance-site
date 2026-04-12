@@ -514,8 +514,10 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 2rem; color: var(--gold); flex-shrink: 0;
     }
+    .arrow-v { display: none; }
     @media (max-width: 600px) {
-      .ba-arrow { transform: rotate(90deg); margin: -0.5rem 0; }
+      .arrow-h { display: none; }
+      .arrow-v { display: inline; }
     }
     .ba-detail {
       margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);
@@ -899,7 +901,7 @@
         <div class="ba-detail"><strong>12 filler words</strong> &bull; Ran over time &bull; No clear structure</div>
       </div>
 
-      <div class="ba-arrow fade-up delay-3">→</div>
+      <div class="ba-arrow fade-up delay-3"><span class="arrow-h">→</span><span class="arrow-v">↓</span></div>
 
       <div class="ba-card after fade-up delay-3">
         <div class="ba-label">Session 30</div>
@@ -946,8 +948,8 @@
       <div class="game-card fade-up delay-3">
         <h4>🏆 Weekly League — Gold</h4>
         <div class="league-rows">
-          <div class="league-row you"><span class="league-rank">1</span><span class="league-name">Sanjae S.</span><span class="league-xp">1,240 XP</span></div>
-          <div class="league-row"><span class="league-rank">2</span><span class="league-name">Sarah K.</span><span class="league-xp">1,080 XP</span></div>
+          <div class="league-row"><span class="league-rank">1</span><span class="league-name">Sanjae S.</span><span class="league-xp">1,240 XP</span></div>
+          <div class="league-row you"><span class="league-rank">2</span><span class="league-name">You</span><span class="league-xp">1,080 XP</span></div>
           <div class="league-row"><span class="league-rank">3</span><span class="league-name">James R.</span><span class="league-xp">960 XP</span></div>
           <div class="league-row"><span class="league-rank">4</span><span class="league-name">Priya M.</span><span class="league-xp">840 XP</span></div>
         </div>
