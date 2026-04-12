@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parlance — Your AI Speech Coach</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #F5F3EF;
+      --card: #FFFFFF;
+      --card2: #F0EDE8;
+      --border: #E0DDD8;
+      --text: #1A1A1A;
+      --sub: #666666;
+      --dim: #999999;
+      --gold: #E8A838;
+      --red: #E05A4E;
+      --purple: #6A58DD;
+      --teal: #2E9E8B;
+      --app-bg: #121212;
+      --app-card: #1A1A1A;
+      --app-border: #2A2A2A;
+      --radius: 18px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- Typography ---- */
+    .display { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; }
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .section-title { font-size: clamp(1.75rem, 4vw, 2.75rem); line-height: 1.2; margin-bottom: 1rem; }
+    .section-sub { font-size: 1.05rem; color: var(--sub); max-width: 540px; margin: 0 auto 2.5rem; }
+
+    /* ---- Layout ---- */
+    section { padding: 5rem 1.5rem; text-align: center; overflow: hidden; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* ---- Nav ---- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(245, 243, 239, 0.85);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    nav .logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--text); }
+    nav .logo span { color: var(--gold); }
+    .nav-cta {
+      background: var(--text); color: #fff;
+      padding: 0.5rem 1.25rem; border-radius: 10px;
+      font-size: 0.85rem; font-weight: 600; text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ---- Buttons ---- */
+    .btn-appstore {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--text); color: #fff;
+      padding: 0.85rem 1.75rem; border-radius: 14px;
+      font-size: 1rem; font-weight: 600; text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .btn-appstore:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    .btn-appstore svg { width: 22px; height: 22px; fill: #fff; }
+
+    .badge-coming {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--text);
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ---- Phone Mockup ---- */
+    .phone {
+      width: 280px; height: 580px;
+      background: var(--app-bg);
+      border-radius: 40px;
+      border: 4px solid #2A2A2A;
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05);
+    }
+    .phone-notch {
+      position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+      width: 100px; height: 28px;
+      background: #000; border-radius: 20px; z-index: 10;
+    }
+    .phone-screen {
+      position: absolute; inset: 0;
+      padding: 48px 16px 16px;
+      overflow: hidden;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* ---- Hero ---- */
+    #hero { padding-top: 8rem; }
+    .hero-headline { font-size: clamp(2.25rem, 5.5vw, 3.75rem); line-height: 1.1; margin-bottom: 1rem; }
+    .hero-sub { font-size: 1.15rem; color: var(--sub); max-width: 480px; margin: 0 auto 1.5rem; }
+
+    /* Mode Tabs */
+    .mode-tabs {
+      display: flex; gap: 0.5rem; justify-content: center;
+      margin: 2.5rem auto 2rem; flex-wrap: wrap; max-width: 520px;
+    }
+    .mode-tab {
+      padding: 0.5rem 1.1rem; border-radius: 10px;
+      font-size: 0.85rem; font-weight: 600;
+      background: var(--card); border: 2px solid var(--border);
+      cursor: pointer; transition: all 0.25s;
+      color: var(--sub);
+    }
+    .mode-tab:hover { border-color: var(--gold); color: var(--text); }
+    .mode-tab.active { background: var(--gold); color: var(--text); border-color: var(--gold); }
+
+    /* Phone content slides */
+    .phone-content { display: none; }
+    .phone-content.active { display: block; }
+    .phone-mode-label {
+      font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.75rem;
+    }
+    .phone-question {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; line-height: 1.4; margin-bottom: 1rem; color: #fff;
+    }
+    .phone-tips { list-style: none; margin-bottom: 1.25rem; }
+    .phone-tips li {
+      font-size: 0.7rem; color: #999; padding: 0.4rem 0;
+      border-bottom: 1px solid var(--app-border);
+      display: flex; align-items: baseline; gap: 0.4rem;
+    }
+    .phone-tips li::before { content: "→"; color: var(--gold); font-weight: 700; }
+    .phone-record-btn {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.5rem;
+      background: var(--gold); color: var(--app-bg);
+      padding: 0.65rem; border-radius: 14px;
+      font-size: 0.8rem; font-weight: 700;
+      margin-top: auto;
+    }
+    .phone-record-btn .dot {
+      width: 10px; height: 10px; background: var(--red);
+      border-radius: 50%; animation: pulse-dot 1.5s infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+    .phone-meta {
+      display: flex; justify-content: space-between;
+      font-size: 0.6rem; color: #666; margin-bottom: 1rem;
+    }
+
+    /* ---- How It Works ---- */
+    .steps {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; text-align: left;
+    }
+    @media (max-width: 768px) { .steps { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } }
+    .step-card {
+      background: var(--card); border-radius: var(--radius);
+      padding: 1.75rem; border: 1px solid var(--border);
+      transition: transform 0.3s;
+    }
+    .step-card:hover { transform: translateY(-4px); }
+    .step-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; border-radius: 10px;
+      background: var(--gold); color: var(--text);
+      font-weight: 700; font-size: 0.85rem; margin-bottom: 1rem;
+    }
+    .step-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+    .step-card p { font-size: 0.9rem; color: var(--sub); }
+
+    /* Mini mockup inside step cards */
+    .mini-phone {
+      background: var(--app-bg); border-radius: 16px;
+      padding: 12px; margin-top: 1rem;
+      border: 2px solid var(--app-border);
+      overflow: hidden;
+    }
+    .mini-modes-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;
+    }
+    .mini-mode {
+      background: var(--app-card); border-radius: 8px;
+      padding: 8px; font-size: 0.6rem; color: #999;
+      text-align: center; border: 1px solid var(--app-border);
+    }
+    .mini-mode .icon { font-size: 1rem; margin-bottom: 2px; }
+
+    /* Waveform */
+    .waveform {
+      display: flex; align-items: center; justify-content: center;
+      gap: 3px; height: 50px; margin: 0.75rem 0;
+    }
+    .wave-bar {
+      width: 4px; border-radius: 2px; background: var(--gold);
+      animation: wave 1.2s ease-in-out infinite;
+    }
+    @keyframes wave {
+      0%, 100% { height: 8px; opacity: 0.4; }
+      50% { height: var(--h, 30px); opacity: 1; }
+    }
+
+    /* Mini scores */
+    .mini-scores { margin-top: 0.5rem; }
+    .mini-score-row {
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 6px; font-size: 0.6rem; color: #999;
+    }
+    .mini-score-bar {
+      flex: 1; height: 6px; background: var(--app-border); border-radius: 3px; overflow: hidden;
+    }
+    .mini-score-fill {
+      height: 100%; border-radius: 3px;
+      width: 0; transition: width 1.2s ease-out;
+    }
+    .mini-score-val { width: 20px; text-align: right; font-weight: 700; color: var(--gold); font-size: 0.65rem; }
+
+    /* ---- Feedback Section ---- */
+    .feedback-toggle {
+      display: inline-flex; gap: 0; margin-bottom: 2.5rem;
+      background: var(--card); border-radius: 12px; border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .feedback-toggle button {
+      padding: 0.6rem 1.5rem; font-size: 0.85rem; font-weight: 600;
+      border: none; background: transparent; cursor: pointer;
+      color: var(--sub); transition: all 0.25s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .feedback-toggle button.active { background: var(--gold); color: var(--text); }
+
+    .feedback-phone { width: 300px; height: 620px; }
+    .feedback-screen { padding: 48px 14px 14px; }
+
+    .score-circle {
+      width: 80px; height: 80px; border-radius: 50%;
+      border: 4px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; font-weight: 700; color: var(--gold);
+      margin: 0 auto 1rem;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .score-label { font-size: 0.6rem; color: #666; margin-bottom: 1rem; text-align: center; }
+
+    .metric-row {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 8px; font-size: 0.65rem;
+    }
+    .metric-name { width: 65px; color: #999; text-align: left; flex-shrink: 0; }
+    .metric-bar {
+      flex: 1; height: 7px; background: var(--app-border); border-radius: 4px; overflow: hidden;
+    }
+    .metric-fill {
+      height: 100%; border-radius: 4px; width: 0;
+      transition: width 1s ease-out;
+    }
+    .metric-val { width: 18px; text-align: right; font-weight: 700; color: #fff; }
+
+    .ai-coach {
+      background: var(--app-card); border-radius: 12px;
+      padding: 10px; margin-top: 12px;
+      border: 1px solid var(--app-border); text-align: left;
+    }
+    .ai-coach-label { font-size: 0.6rem; color: var(--gold); font-weight: 700; margin-bottom: 4px; }
+    .ai-coach p { font-size: 0.6rem; color: #ccc; line-height: 1.5; }
+
+    .moment {
+      background: var(--app-card); border-radius: 10px;
+      padding: 8px; margin-top: 6px;
+      border: 1px solid var(--app-border); text-align: left;
+    }
+    .moment-label { font-size: 0.55rem; font-weight: 700; margin-bottom: 2px; }
+    .moment-label.best { color: var(--teal); }
+    .moment-label.worst { color: var(--red); }
+    .moment p { font-size: 0.55rem; color: #999; line-height: 1.4; }
+
+    .feedback-content { display: none; }
+    .feedback-content.active { display: block; }
+
+    /* ---- Modes Grid ---- */
+    .modes-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 1rem; max-width: 900px; margin: 0 auto;
+    }
+    @media (max-width: 900px) { .modes-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 560px) { .modes-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .mode-card {
+      background: var(--card); border-radius: var(--radius);
+      padding: 1.25rem 1rem; border: 1px solid var(--border);
+      cursor: default; transition: all 0.3s; position: relative;
+      overflow: hidden;
+    }
+    .mode-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+    .mode-card .mode-icon { font-size: 1.75rem; margin-bottom: 0.5rem; }
+    .mode-card h4 { font-size: 0.85rem; margin-bottom: 0.25rem; }
+    .mode-card .mode-focus { font-size: 0.75rem; color: var(--sub); }
+    .mode-card .mode-prompt {
+      position: absolute; inset: 0;
+      background: var(--text); color: #fff;
+      padding: 1rem; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center;
+      opacity: 0; transition: opacity 0.3s;
+      border-radius: var(--radius);
+    }
+    .mode-card:hover .mode-prompt { opacity: 1; }
+    .mode-card .mode-prompt .prompt-label {
+      font-size: 0.6rem; color: var(--gold); letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 700;
+    }
+    .mode-card .mode-prompt .prompt-text {
+      font-size: 0.78rem; font-style: italic; line-height: 1.4;
+    }
+
+    /* ---- Gamification ---- */
+    .game-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem; max-width: 700px; margin: 0 auto;
+    }
+    @media (max-width: 600px) { .game-grid { grid-template-columns: 1fr; max-width: 360px; } }
+
+    .game-card {
+      background: var(--card); border-radius: var(--radius);
+      padding: 1.5rem; border: 1px solid var(--border); text-align: left;
+    }
+    .game-card h4 { font-size: 0.95rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+
+    .xp-bar-track {
+      height: 12px; background: var(--card2); border-radius: 6px; overflow: hidden; margin-bottom: 0.5rem;
+    }
+    .xp-bar-fill {
+      height: 100%; background: linear-gradient(90deg, var(--gold), #F0C060);
+      border-radius: 6px; width: 0; transition: width 1.5s ease-out;
+    }
+    .xp-label { font-size: 0.75rem; color: var(--sub); display: flex; justify-content: space-between; }
+
+    .streak-display {
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .streak-num {
+      font-size: 2.5rem; font-weight: 700; color: var(--gold);
+      font-family: 'Playfair Display', serif;
+    }
+    .streak-text { font-size: 0.85rem; color: var(--sub); }
+    .streak-text strong { color: var(--text); }
+
+    .league-rows { display: flex; flex-direction: column; gap: 6px; }
+    .league-row {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.5rem 0.75rem; border-radius: 10px; font-size: 0.85rem;
+    }
+    .league-row.you { background: rgba(232, 168, 56, 0.1); }
+    .league-rank { width: 20px; font-weight: 700; color: var(--sub); }
+    .league-name { flex: 1; }
+    .league-xp { font-weight: 700; color: var(--gold); }
+
+    .badges-row {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+    }
+    .badge-item {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      background: var(--card2); border: 1px solid var(--border);
+      opacity: 0; transform: scale(0.5);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .badge-item.visible { opacity: 1; transform: scale(1); }
+
+    /* ---- CTA Footer ---- */
+    #cta {
+      background: var(--text); color: #fff;
+      border-radius: 32px 32px 0 0; margin-top: -2rem;
+    }
+    #cta .section-title { color: #fff; }
+    #cta .section-sub { color: #999; }
+    #cta .btn-appstore { background: var(--gold); color: var(--text); }
+
+    /* ---- Animations ---- */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+    .fade-up.delay-3 { transition-delay: 0.3s; }
+    .fade-up.delay-4 { transition-delay: 0.4s; }
+
+    /* ---- Scroll Spacing ---- */
+    section + section { padding-top: 4rem; }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <div class="logo">Parlance<span>.</span></div>
+  <a href="#cta" class="nav-cta">Coming Soon</a>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section id="hero">
+  <div class="container">
+    <div class="badge-coming fade-up">Coming Soon</div>
+    <h1 class="display hero-headline fade-up delay-1">Your AI<br>Speech Coach</h1>
+    <p class="hero-sub fade-up delay-2">Practice speaking. Get instant AI feedback. Improve. Repeat.</p>
+    <a href="#" class="btn-appstore fade-up delay-3" onclick="return false">
+      <svg viewBox="0 0 24 24"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 21.99 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 21.99C7.79 22.03 6.8 20.68 5.96 19.47C4.25 16.99 2.97 12.5 4.7 9.56C5.55 8.11 7.02 7.18 8.62 7.16C9.9 7.14 11.1 8.03 11.88 8.03C12.66 8.03 14.09 6.96 15.64 7.12C16.29 7.15 17.96 7.38 19.02 8.94C18.92 9.01 16.62 10.35 16.65 13.14C16.68 16.45 19.55 17.55 19.58 17.56C19.55 17.64 19.11 19.14 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/></svg>
+      Download on the App Store
+    </a>
+
+    <div class="mode-tabs fade-up delay-4">
+      <div class="mode-tab active" data-mode="interview">Interview</div>
+      <div class="mode-tab" data-mode="pitch">Pitch</div>
+      <div class="mode-tab" data-mode="keynote">Keynote</div>
+      <div class="mode-tab" data-mode="convo">Daily Convo</div>
+    </div>
+
+    <div class="phone fade-up delay-4" style="margin-top:0.5rem">
+      <div class="phone-notch"></div>
+
+      <!-- Interview -->
+      <div class="phone-screen phone-content active" data-mode="interview">
+        <div class="phone-mode-label">Job Interview</div>
+        <div class="phone-meta"><span>Level 3 &bull; Behavioral</span><span>2 min</span></div>
+        <div class="phone-question">"Tell me about a time you had to lead a project with an unclear scope."</div>
+        <ul class="phone-tips">
+          <li>Use the STAR framework — Situation, Task, Action, Result</li>
+          <li>Keep your answer under 90 seconds</li>
+          <li>End with a measurable outcome</li>
+        </ul>
+        <div class="phone-record-btn"><div class="dot"></div> Tap to Record</div>
+      </div>
+
+      <!-- Pitch -->
+      <div class="phone-screen phone-content" data-mode="pitch">
+        <div class="phone-mode-label">Pitch / Sales</div>
+        <div class="phone-meta"><span>Level 4 &bull; Investor Pitch</span><span>2 min</span></div>
+        <div class="phone-question">"You have 60 seconds. Convince an investor your product solves a real problem."</div>
+        <ul class="phone-tips">
+          <li>Lead with the problem, not the product</li>
+          <li>Create urgency — why now?</li>
+          <li>End with a clear ask</li>
+        </ul>
+        <div class="phone-record-btn"><div class="dot"></div> Tap to Record</div>
+      </div>
+
+      <!-- Keynote -->
+      <div class="phone-screen phone-content" data-mode="keynote">
+        <div class="phone-mode-label">Keynote / Talk</div>
+        <div class="phone-meta"><span>Level 5 &bull; Conference</span><span>3 min</span></div>
+        <div class="phone-question">"Open a talk about why most teams fail at remote work — hook the audience in 30 seconds."</div>
+        <ul class="phone-tips">
+          <li>Start with a bold claim or question, not "Hi, my name is..."</li>
+          <li>Paint a vivid picture with a specific detail</li>
+          <li>Set up tension — promise the audience a resolution</li>
+        </ul>
+        <div class="phone-record-btn"><div class="dot"></div> Tap to Record</div>
+      </div>
+
+      <!-- Daily Convo -->
+      <div class="phone-screen phone-content" data-mode="convo">
+        <div class="phone-mode-label">Daily Conversation</div>
+        <div class="phone-meta"><span>Level 2 &bull; Impromptu</span><span>1.5 min</span></div>
+        <div class="phone-question">"A colleague asks what you're working on. Explain your current project clearly in under a minute."</div>
+        <ul class="phone-tips">
+          <li>Start with the one-sentence summary</li>
+          <li>Avoid jargon — explain like they're from a different team</li>
+          <li>End with why it matters</li>
+        </ul>
+        <div class="phone-record-btn"><div class="dot"></div> Tap to Record</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== HOW IT WORKS ==================== -->
+<section id="how-it-works">
+  <div class="container">
+    <div class="section-label fade-up">How It Works</div>
+    <h2 class="display section-title fade-up delay-1">Three steps. Real improvement.</h2>
+    <p class="section-sub fade-up delay-2">No scheduling. No awkward role-play with strangers. Just you, a prompt, and an AI coach.</p>
+
+    <div class="steps">
+      <!-- Step 1 -->
+      <div class="step-card fade-up delay-1">
+        <div class="step-num">1</div>
+        <h3>Pick a Mode</h3>
+        <p>Interview, pitch, keynote, negotiation — 10 modes built for real situations.</p>
+        <div class="mini-phone">
+          <div class="mini-modes-grid">
+            <div class="mini-mode"><div class="icon">💼</div>Interview</div>
+            <div class="mini-mode"><div class="icon">🚀</div>Pitch</div>
+            <div class="mini-mode"><div class="icon">🎤</div>Keynote</div>
+            <div class="mini-mode"><div class="icon">🤝</div>Negotiate</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-card fade-up delay-2">
+        <div class="step-num">2</div>
+        <h3>Record Yourself</h3>
+        <p>Read the prompt, tap record, and speak. Up to 3 minutes per session.</p>
+        <div class="mini-phone">
+          <div style="text-align:center;color:#999;font-size:0.6rem;margin-bottom:4px;">Recording...</div>
+          <div class="waveform" id="waveform-mini">
+            <!-- bars injected by JS -->
+          </div>
+          <div style="text-align:center;color:var(--gold);font-size:0.75rem;font-weight:700;">1:24</div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-card fade-up delay-3">
+        <div class="step-num">3</div>
+        <h3>Get AI Feedback</h3>
+        <p>Scores, coaching tips, and your best & worst moments — instantly.</p>
+        <div class="mini-phone">
+          <div style="text-align:center;color:var(--gold);font-weight:700;font-size:1.1rem;margin-bottom:8px;">82<span style="font-size:0.6rem;color:#666">/100</span></div>
+          <div class="mini-scores" id="mini-scores">
+            <div class="mini-score-row">
+              <span style="width:50px">Filler</span>
+              <div class="mini-score-bar"><div class="mini-score-fill" data-width="90%" style="background:var(--teal)"></div></div>
+              <div class="mini-score-val">9</div>
+            </div>
+            <div class="mini-score-row">
+              <span style="width:50px">Pace</span>
+              <div class="mini-score-bar"><div class="mini-score-fill" data-width="70%" style="background:var(--gold)"></div></div>
+              <div class="mini-score-val">7</div>
+            </div>
+            <div class="mini-score-row">
+              <span style="width:50px">Clarity</span>
+              <div class="mini-score-bar"><div class="mini-score-fill" data-width="80%" style="background:var(--purple)"></div></div>
+              <div class="mini-score-val">8</div>
+            </div>
+            <div class="mini-score-row">
+              <span style="width:50px">Structure</span>
+              <div class="mini-score-bar"><div class="mini-score-fill" data-width="85%" style="background:var(--teal)"></div></div>
+              <div class="mini-score-val">8.5</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== AI FEEDBACK ==================== -->
+<section id="feedback">
+  <div class="container">
+    <div class="section-label fade-up">AI Coaching</div>
+    <h2 class="display section-title fade-up delay-1">Structure, not just delivery.</h2>
+    <p class="section-sub fade-up delay-2">Most tools count filler words. Parlance coaches argument flow, hook strength, and persuasion — the things that actually matter.</p>
+
+    <div class="feedback-toggle fade-up delay-2">
+      <button class="active" data-feedback="interview">Interview Feedback</button>
+      <button data-feedback="pitch">Pitch Feedback</button>
+    </div>
+
+    <div class="phone feedback-phone fade-up delay-3" style="margin:0 auto">
+      <div class="phone-notch"></div>
+
+      <!-- Interview Feedback -->
+      <div class="phone-screen feedback-content active feedback-screen" data-feedback="interview">
+        <div class="score-circle" id="score-interview">82</div>
+        <div class="score-label">Overall Score</div>
+        <div id="metrics-interview">
+          <div class="metric-row"><span class="metric-name">Fillers</span><div class="metric-bar"><div class="metric-fill" data-width="90%" style="background:var(--teal)"></div></div><span class="metric-val">9</span></div>
+          <div class="metric-row"><span class="metric-name">Pace</span><div class="metric-bar"><div class="metric-fill" data-width="70%" style="background:var(--gold)"></div></div><span class="metric-val">7</span></div>
+          <div class="metric-row"><span class="metric-name">Clarity</span><div class="metric-bar"><div class="metric-fill" data-width="85%" style="background:var(--purple)"></div></div><span class="metric-val">8.5</span></div>
+          <div class="metric-row"><span class="metric-name">Structure</span><div class="metric-bar"><div class="metric-fill" data-width="80%" style="background:var(--teal)"></div></div><span class="metric-val">8</span></div>
+          <div class="metric-row"><span class="metric-name">Vocab</span><div class="metric-bar"><div class="metric-fill" data-width="75%" style="background:var(--gold)"></div></div><span class="metric-val">7.5</span></div>
+        </div>
+        <div class="ai-coach">
+          <div class="ai-coach-label">AI Coach</div>
+          <p>Strong STAR structure. Your situation was specific and your action steps were clear. Tighten the result — quantify the impact. "Improved efficiency" is vague. Say "cut review time by 40%."</p>
+        </div>
+        <div class="moment">
+          <div class="moment-label best">Best Moment — 0:34</div>
+          <p>"...so I mapped every stakeholder's actual concern, not their stated objection..."</p>
+        </div>
+        <div class="moment">
+          <div class="moment-label worst">Work On — 1:12</div>
+          <p>"...and then we, um, basically just sort of improved things..."</p>
+        </div>
+      </div>
+
+      <!-- Pitch Feedback -->
+      <div class="phone-screen feedback-content feedback-screen" data-feedback="pitch">
+        <div class="score-circle">76</div>
+        <div class="score-label">Overall Score</div>
+        <div id="metrics-pitch">
+          <div class="metric-row"><span class="metric-name">Fillers</span><div class="metric-bar"><div class="metric-fill" data-width="80%" style="background:var(--teal)"></div></div><span class="metric-val">8</span></div>
+          <div class="metric-row"><span class="metric-name">Pace</span><div class="metric-bar"><div class="metric-fill" data-width="65%" style="background:var(--gold)"></div></div><span class="metric-val">6.5</span></div>
+          <div class="metric-row"><span class="metric-name">Clarity</span><div class="metric-bar"><div class="metric-fill" data-width="75%" style="background:var(--purple)"></div></div><span class="metric-val">7.5</span></div>
+          <div class="metric-row"><span class="metric-name">Structure</span><div class="metric-bar"><div class="metric-fill" data-width="70%" style="background:var(--teal)"></div></div><span class="metric-val">7</span></div>
+          <div class="metric-row"><span class="metric-name">Vocab</span><div class="metric-bar"><div class="metric-fill" data-width="90%" style="background:var(--gold)"></div></div><span class="metric-val">9</span></div>
+        </div>
+        <div class="ai-coach">
+          <div class="ai-coach-label">AI Coach</div>
+          <p>Your hook was strong — leading with the pain point grabbed attention. But you buried the urgency. Move "the market is shifting now" to right after the problem statement. Your ask was clear but needs a specific number.</p>
+        </div>
+        <div class="moment">
+          <div class="moment-label best">Best Moment — 0:08</div>
+          <p>"Every sales team wastes 11 hours a week on calls that go nowhere..."</p>
+        </div>
+        <div class="moment">
+          <div class="moment-label worst">Work On — 0:52</div>
+          <p>"...so basically our solution is kind of like a smarter way to..."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MODES GRID ==================== -->
+<section id="modes">
+  <div class="container">
+    <div class="section-label fade-up">Practice Modes</div>
+    <h2 class="display section-title fade-up delay-1">10 ways to practice.</h2>
+    <p class="section-sub fade-up delay-2">Every mode has tailored prompts, coaching tips, and AI feedback tuned to that specific skill.</p>
+
+    <div class="modes-grid">
+      <div class="mode-card fade-up delay-1">
+        <div class="mode-icon">💼</div>
+        <h4>Job Interview</h4>
+        <div class="mode-focus">STAR structure, conciseness</div>
+        <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Describe a time you disagreed with your manager's decision."</div></div>
+      </div>
+      <div class="mode-card fade-up delay-1">
+        <div class="mode-icon">🚀</div>
+        <h4>Pitch / Sales</h4>
+        <div class="mode-focus">Hook strength, persuasion</div>
+        <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Pitch a product that solves a problem nobody knows they have."</div></div>
+      </div>
+      <div class="mode-card fade-up delay-2">
+        <div class="mode-icon">🎤</div>
+        <h4>Keynote / Talk</h4>
+        <div class="mode-focus">Narrative arc, pacing</div>
+        <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Open a conference talk about the future of your industry."</div></div>
+      </div>
+      <div class="mode-card fade-up delay-2">
+        <div class="mode-icon">💬</div>
+        <h4>Daily Convo</h4>
+        <div class="mode-focus">Clarity, naturalness</div>
+        <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Explain what you do for a living to someone outside your field."</div></div>
+      </div>
+      <div class="mode-card fade-up delay-3">
+        <div class="mode-icon">⚔️</div>
+        <h4>Debate</h4>
+        <div class="mode-focus">Argument flow, rebuttal</div>
+        <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Argue for or against: remote work makes teams more productive."</div></div>
+      </div>
+      <div class="mode-card fade-up delay-3">
+        <div class="mode-icon">📖</div>
+        <h4>Storytelling</h4>
+        <div class="mode-focus">Engagement, vivid detail</div>
+        <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Tell the story of a risk you took that changed your career."</div></div>
+      </div>
+      <div class="mode-card fade-up delay-3">
+        <div class="mode-icon">🔬</div>
+        <h4>Explanation</h4>
+        <div class="mode-focus">Clarity, simplification</div>
+        <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Explain blockchain to a curious 10-year-old."</div></div>
+      </div>
+      <div class="mode-card fade-up delay-4">
+        <div class="mode-icon">🤝</div>
+        <h4>Negotiation</h4>
+        <div class="mode-focus">Persuasion, framing</div>
+        <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Negotiate a raise after exceeding your targets for two quarters."</div></div>
+      </div>
+      <div class="mode-card fade-up delay-4">
+        <div class="mode-icon">⚡</div>
+        <h4>Impromptu</h4>
+        <div class="mode-focus">Quick thinking, coherence</div>
+        <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"You're asked to give a toast at a dinner with 5 seconds notice."</div></div>
+      </div>
+      <div class="mode-card fade-up delay-4">
+        <div class="mode-icon">🌐</div>
+        <h4>Networking</h4>
+        <div class="mode-focus">Rapport, memorable delivery</div>
+        <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Introduce yourself at a conference to someone you admire."</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== GAMIFICATION ==================== -->
+<section id="gamification">
+  <div class="container">
+    <div class="section-label fade-up">Stay Consistent</div>
+    <h2 class="display section-title fade-up delay-1">Built to keep you coming back.</h2>
+    <p class="section-sub fade-up delay-2">Not willpower. Gamification. XP, streaks, leagues, and achievements make practice a habit.</p>
+
+    <div class="game-grid">
+      <!-- XP -->
+      <div class="game-card fade-up delay-1">
+        <h4>⭐ XP Progress</h4>
+        <div class="xp-bar-track"><div class="xp-bar-fill" id="xp-fill"></div></div>
+        <div class="xp-label"><span>Level 5 — Confident Communicator</span><span style="color:var(--gold);font-weight:700;">2,840 XP</span></div>
+      </div>
+
+      <!-- Streak -->
+      <div class="game-card fade-up delay-2">
+        <h4>🔥 Daily Streak</h4>
+        <div class="streak-display">
+          <div class="streak-num" id="streak-num">0</div>
+          <div class="streak-text"><strong>days in a row</strong><br>Don't break the chain.</div>
+        </div>
+      </div>
+
+      <!-- League -->
+      <div class="game-card fade-up delay-3">
+        <h4>🏆 Weekly League — Gold</h4>
+        <div class="league-rows">
+          <div class="league-row"><span class="league-rank">1</span><span class="league-name">Sarah K.</span><span class="league-xp">1,240 XP</span></div>
+          <div class="league-row you"><span class="league-rank">2</span><span class="league-name">You</span><span class="league-xp">1,080 XP</span></div>
+          <div class="league-row"><span class="league-rank">3</span><span class="league-name">James R.</span><span class="league-xp">960 XP</span></div>
+          <div class="league-row"><span class="league-rank">4</span><span class="league-name">Priya M.</span><span class="league-xp">840 XP</span></div>
+        </div>
+      </div>
+
+      <!-- Achievements -->
+      <div class="game-card fade-up delay-4">
+        <h4>🏅 Achievements</h4>
+        <div class="badges-row" id="badges">
+          <div class="badge-item" data-delay="0">🎙️</div>
+          <div class="badge-item" data-delay="100">🔥</div>
+          <div class="badge-item" data-delay="200">💯</div>
+          <div class="badge-item" data-delay="300">🏆</div>
+          <div class="badge-item" data-delay="400">⚡</div>
+          <div class="badge-item" data-delay="500">🎯</div>
+        </div>
+        <div style="margin-top:0.75rem;font-size:0.75rem;color:var(--sub);">First Session &bull; 7-Day Streak &bull; Perfect Score &bull; 30 Sessions &bull; Zero Fillers &bull; Level 5</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CTA ==================== -->
+<section id="cta">
+  <div class="container">
+    <h2 class="display section-title fade-up">Start speaking better.</h2>
+    <p class="section-sub fade-up delay-1">Parlance is coming soon to the App Store.</p>
+    <a href="#" class="btn-appstore fade-up delay-2" onclick="return false">
+      <svg viewBox="0 0 24 24" style="fill:var(--text)"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 21.99 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 21.99C7.79 22.03 6.8 20.68 5.96 19.47C4.25 16.99 2.97 12.5 4.7 9.56C5.55 8.11 7.02 7.18 8.62 7.16C9.9 7.14 11.1 8.03 11.88 8.03C12.66 8.03 14.09 6.96 15.64 7.12C16.29 7.15 17.96 7.38 19.02 8.94C18.92 9.01 16.62 10.35 16.65 13.14C16.68 16.45 19.55 17.55 19.58 17.56C19.55 17.64 19.11 19.14 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/></svg>
+      Download on the App Store
+    </a>
+  </div>
+</section>
+
+<script>
+  // ---- Mode Tabs ----
+  const modeTabs = document.querySelectorAll('.mode-tab');
+  const modeContents = document.querySelectorAll('.phone-content');
+
+  modeTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const mode = tab.dataset.mode;
+      modeTabs.forEach(t => t.classList.remove('active'));
+      modeContents.forEach(c => c.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelector(`.phone-content[data-mode="${mode}"]`).classList.add('active');
+    });
+  });
+
+  // ---- Feedback Toggle ----
+  const feedbackBtns = document.querySelectorAll('.feedback-toggle button');
+  const feedbackContents = document.querySelectorAll('.feedback-content');
+
+  feedbackBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const fb = btn.dataset.feedback;
+      feedbackBtns.forEach(b => b.classList.remove('active'));
+      feedbackContents.forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelector(`.feedback-content[data-feedback="${fb}"]`).classList.add('active');
+      // Re-trigger metric animations
+      setTimeout(() => animateMetrics(document.querySelector(`.feedback-content[data-feedback="${fb}"]`)), 50);
+    });
+  });
+
+  // ---- Waveform Bars ----
+  const waveContainer = document.getElementById('waveform-mini');
+  for (let i = 0; i < 20; i++) {
+    const bar = document.createElement('div');
+    bar.className = 'wave-bar';
+    const h = 10 + Math.random() * 30;
+    bar.style.setProperty('--h', h + 'px');
+    bar.style.animationDelay = (i * 0.06) + 's';
+    waveContainer.appendChild(bar);
+  }
+
+  // ---- Scroll Animations ----
+  function animateMetrics(container) {
+    const fills = container.querySelectorAll('.metric-fill, .mini-score-fill');
+    fills.forEach(fill => {
+      fill.style.width = '0';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          fill.style.width = fill.dataset.width;
+        });
+      });
+    });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Fade up
+        if (entry.target.classList.contains('fade-up')) {
+          entry.target.classList.add('visible');
+        }
+        // Metric bars
+        if (entry.target.id === 'mini-scores' || entry.target.id === 'metrics-interview' || entry.target.id === 'metrics-pitch') {
+          animateMetrics(entry.target);
+        }
+        // XP bar
+        if (entry.target.id === 'xp-fill') {
+          entry.target.style.width = '72%';
+        }
+        // Streak counter
+        if (entry.target.id === 'streak-num') {
+          let count = 0;
+          const target = 12;
+          const interval = setInterval(() => {
+            count++;
+            entry.target.textContent = count;
+            if (count >= target) clearInterval(interval);
+          }, 80);
+        }
+        // Badges
+        if (entry.target.id === 'badges') {
+          entry.target.querySelectorAll('.badge-item').forEach(badge => {
+            setTimeout(() => badge.classList.add('visible'), parseInt(badge.dataset.delay));
+          });
+        }
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  // Observe all animated elements
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  ['mini-scores', 'metrics-interview', 'metrics-pitch', 'xp-fill', 'streak-num', 'badges'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
