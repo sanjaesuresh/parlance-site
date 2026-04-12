@@ -337,7 +337,8 @@
       opacity: 0; transition: opacity 0.3s;
       border-radius: var(--radius);
     }
-    .mode-card:hover .mode-prompt { opacity: 1; }
+    .mode-card.flipped .mode-prompt { opacity: 1; }
+    @media (hover: hover) { .mode-card:hover .mode-prompt { opacity: 1; } }
     .mode-card .mode-prompt .prompt-label {
       font-size: 0.6rem; color: var(--gold); letter-spacing: 1.5px;
       text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 700;
@@ -786,6 +787,11 @@
 </section>
 
 <script>
+  // ---- Mode Card Tap Toggle ----
+  document.querySelectorAll('.mode-card').forEach(card => {
+    card.addEventListener('click', () => card.classList.toggle('flipped'));
+  });
+
   // ---- Mode Tabs ----
   const modeTabs = document.querySelectorAll('.mode-tab');
   const modeContents = document.querySelectorAll('.phone-content');
