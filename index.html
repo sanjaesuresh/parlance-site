@@ -1082,7 +1082,7 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.2 });
+  }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' });
 
   // Observe all animated elements
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
@@ -1090,6 +1090,18 @@
     const el = document.getElementById(id);
     if (el) observer.observe(el);
   });
+
+  // Fallback: force-show everything if observer fails (e.g. mobile edge cases)
+  setTimeout(() => {
+    document.querySelectorAll('.fade-up:not(.visible)').forEach(el => el.classList.add('visible'));
+    document.querySelectorAll('.ba-metric-fill, .mini-score-fill, .metric-fill').forEach(fill => {
+      if (fill.style.width === '0px' || fill.style.width === '0' || !fill.style.width) {
+        fill.style.width = fill.dataset.width;
+      }
+    });
+    const xp = document.getElementById('xp-fill');
+    if (xp && (!xp.style.width || xp.style.width === '0px')) xp.style.width = '72%';
+  }, 2500);
 </script>
 
 </body>
