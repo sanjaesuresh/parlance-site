@@ -437,6 +437,92 @@
     .fade-up.delay-3 { transition-delay: 0.3s; }
     .fade-up.delay-4 { transition-delay: 0.4s; }
 
+    /* ---- Stats Bar ---- */
+    .stats-bar {
+      display: flex; justify-content: center; gap: 3rem;
+      flex-wrap: wrap; padding: 3rem 1.5rem;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 700; color: var(--text);
+    }
+    .stat-num span { color: var(--gold); }
+    .stat-label { font-size: 0.85rem; color: var(--sub); margin-top: 0.25rem; }
+
+    /* ---- Who It's For ---- */
+    .persona-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem; max-width: 900px; margin: 0 auto;
+    }
+    @media (max-width: 768px) { .persona-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 420px) { .persona-grid { grid-template-columns: 1fr; max-width: 320px; } }
+    .persona-card {
+      background: var(--card); border-radius: var(--radius);
+      padding: 1.5rem 1.25rem; border: 1px solid var(--border);
+      text-align: left; transition: transform 0.3s, border-color 0.3s;
+    }
+    .persona-card:hover { transform: translateY(-3px); border-color: var(--gold); }
+    .persona-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .persona-card h4 { font-size: 0.95rem; margin-bottom: 0.35rem; color: var(--text); }
+    .persona-card p { font-size: 0.8rem; color: var(--sub); line-height: 1.5; }
+
+    /* ---- Before / After ---- */
+    .ba-container {
+      display: flex; gap: 2rem; justify-content: center; align-items: stretch;
+      max-width: 700px; margin: 0 auto;
+    }
+    @media (max-width: 600px) { .ba-container { flex-direction: column; max-width: 340px; } }
+    .ba-card {
+      flex: 1; border-radius: var(--radius); padding: 2rem 1.5rem;
+      border: 1px solid var(--border); position: relative; text-align: left;
+    }
+    .ba-card.before { background: var(--card); }
+    .ba-card.after { background: var(--card); border-color: var(--gold); }
+    .ba-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 1.25rem;
+    }
+    .ba-card.before .ba-label { color: var(--dim); }
+    .ba-card.after .ba-label { color: var(--gold); }
+    .ba-score-big {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem; font-weight: 700; line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .ba-card.before .ba-score-big { color: var(--dim); }
+    .ba-card.after .ba-score-big { color: var(--gold); }
+    .ba-score-label { font-size: 0.8rem; color: var(--sub); margin-bottom: 1.25rem; }
+    .ba-metrics { display: flex; flex-direction: column; gap: 0.6rem; }
+    .ba-metric {
+      display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem;
+    }
+    .ba-metric-name { width: 70px; color: var(--sub); flex-shrink: 0; }
+    .ba-metric-bar {
+      flex: 1; height: 8px; background: var(--card2); border-radius: 4px; overflow: hidden;
+    }
+    .ba-metric-fill {
+      height: 100%; border-radius: 4px; width: 0; transition: width 1.2s ease-out;
+    }
+    .ba-card.before .ba-metric-fill { background: var(--dim); }
+    .ba-card.after .ba-metric-fill { background: var(--gold); }
+    .ba-metric-val { width: 20px; text-align: right; font-weight: 700; font-size: 0.8rem; }
+    .ba-card.before .ba-metric-val { color: var(--dim); }
+    .ba-card.after .ba-metric-val { color: var(--gold); }
+    .ba-arrow {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; color: var(--gold); flex-shrink: 0;
+    }
+    @media (max-width: 600px) {
+      .ba-arrow { transform: rotate(90deg); }
+    }
+    .ba-detail {
+      margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);
+      font-size: 0.75rem; color: var(--sub); line-height: 1.5;
+    }
+    .ba-detail strong { color: var(--text); }
+
     /* ---- Scroll Spacing ---- */
     section + section { padding-top: 4rem; }
   </style>
@@ -527,6 +613,26 @@
   </div>
 </section>
 
+<!-- ==================== STATS BAR ==================== -->
+<div class="stats-bar">
+  <div class="stat-item fade-up">
+    <div class="stat-num">400<span>+</span></div>
+    <div class="stat-label">Practice Prompts</div>
+  </div>
+  <div class="stat-item fade-up delay-1">
+    <div class="stat-num">10</div>
+    <div class="stat-label">Speaking Modes</div>
+  </div>
+  <div class="stat-item fade-up delay-2">
+    <div class="stat-num">5</div>
+    <div class="stat-label">Metrics Per Session</div>
+  </div>
+  <div class="stat-item fade-up delay-3">
+    <div class="stat-num">AI</div>
+    <div class="stat-label">Powered Coaching</div>
+  </div>
+</div>
+
 <!-- ==================== HOW IT WORKS ==================== -->
 <section id="how-it-works">
   <div class="container">
@@ -594,6 +700,38 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WHO IT'S FOR ==================== -->
+<section id="who">
+  <div class="container">
+    <div class="section-label fade-up">Who It's For</div>
+    <h2 class="display section-title fade-up delay-1">Sound like you've done this before.</h2>
+    <p class="section-sub fade-up delay-2">Whether you're preparing for something specific or building a general skill, Parlance meets you where you are.</p>
+
+    <div class="persona-grid">
+      <div class="persona-card fade-up delay-1">
+        <div class="persona-icon">💼</div>
+        <h4>Preparing for interviews?</h4>
+        <p>Practice behavioral questions with STAR coaching. Stop rambling. Start landing offers.</p>
+      </div>
+      <div class="persona-card fade-up delay-2">
+        <div class="persona-icon">🚀</div>
+        <h4>Pitching investors?</h4>
+        <p>Sharpen your hook, build urgency, and nail the ask. AI feedback on persuasion, not just delivery.</p>
+      </div>
+      <div class="persona-card fade-up delay-3">
+        <div class="persona-icon">🎤</div>
+        <h4>Leading meetings or talks?</h4>
+        <p>Work on pacing, narrative arc, and opening impact. Command the room before you walk in.</p>
+      </div>
+      <div class="persona-card fade-up delay-4">
+        <div class="persona-icon">📈</div>
+        <h4>Just want to communicate better?</h4>
+        <p>Everyday clarity, negotiation, networking — the skills that compound across your entire career.</p>
       </div>
     </div>
   </div>
@@ -739,6 +877,47 @@
   </div>
 </section>
 
+<!-- ==================== BEFORE / AFTER ==================== -->
+<section id="transformation">
+  <div class="container">
+    <div class="section-label fade-up">The Difference</div>
+    <h2 class="display section-title fade-up delay-1">Session 1 vs. Session 30.</h2>
+    <p class="section-sub fade-up delay-2">Consistent practice compounds. Here's what progress looks like.</p>
+
+    <div class="ba-container">
+      <div class="ba-card before fade-up delay-2">
+        <div class="ba-label">Session 1</div>
+        <div class="ba-score-big">54</div>
+        <div class="ba-score-label">Overall Score</div>
+        <div class="ba-metrics" id="ba-before">
+          <div class="ba-metric"><span class="ba-metric-name">Fillers</span><div class="ba-metric-bar"><div class="ba-metric-fill" data-width="40%"></div></div><span class="ba-metric-val">4</span></div>
+          <div class="ba-metric"><span class="ba-metric-name">Pace</span><div class="ba-metric-bar"><div class="ba-metric-fill" data-width="50%"></div></div><span class="ba-metric-val">5</span></div>
+          <div class="ba-metric"><span class="ba-metric-name">Clarity</span><div class="ba-metric-bar"><div class="ba-metric-fill" data-width="60%"></div></div><span class="ba-metric-val">6</span></div>
+          <div class="ba-metric"><span class="ba-metric-name">Structure</span><div class="ba-metric-bar"><div class="ba-metric-fill" data-width="50%"></div></div><span class="ba-metric-val">5</span></div>
+          <div class="ba-metric"><span class="ba-metric-name">Vocab</span><div class="ba-metric-bar"><div class="ba-metric-fill" data-width="70%"></div></div><span class="ba-metric-val">7</span></div>
+        </div>
+        <div class="ba-detail"><strong>12 filler words</strong> &bull; Ran over time &bull; No clear structure</div>
+      </div>
+
+      <div class="ba-arrow fade-up delay-3">→</div>
+
+      <div class="ba-card after fade-up delay-3">
+        <div class="ba-label">Session 30</div>
+        <div class="ba-score-big">87</div>
+        <div class="ba-score-label">Overall Score</div>
+        <div class="ba-metrics" id="ba-after">
+          <div class="ba-metric"><span class="ba-metric-name">Fillers</span><div class="ba-metric-bar"><div class="ba-metric-fill" data-width="90%"></div></div><span class="ba-metric-val">9</span></div>
+          <div class="ba-metric"><span class="ba-metric-name">Pace</span><div class="ba-metric-bar"><div class="ba-metric-fill" data-width="85%"></div></div><span class="ba-metric-val">8.5</span></div>
+          <div class="ba-metric"><span class="ba-metric-name">Clarity</span><div class="ba-metric-bar"><div class="ba-metric-fill" data-width="90%"></div></div><span class="ba-metric-val">9</span></div>
+          <div class="ba-metric"><span class="ba-metric-name">Structure</span><div class="ba-metric-bar"><div class="ba-metric-fill" data-width="85%"></div></div><span class="ba-metric-val">8.5</span></div>
+          <div class="ba-metric"><span class="ba-metric-name">Vocab</span><div class="ba-metric-bar"><div class="ba-metric-fill" data-width="90%"></div></div><span class="ba-metric-val">9</span></div>
+        </div>
+        <div class="ba-detail"><strong>1 filler word</strong> &bull; Perfect pacing &bull; Clean STAR structure</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== GAMIFICATION ==================== -->
 <section id="gamification">
   <div class="container">
@@ -874,6 +1053,12 @@
         if (entry.target.id === 'mini-scores' || entry.target.id === 'metrics-interview' || entry.target.id === 'metrics-pitch') {
           animateMetrics(entry.target);
         }
+        // Before/After bars
+        if (entry.target.id === 'ba-before' || entry.target.id === 'ba-after') {
+          entry.target.querySelectorAll('.ba-metric-fill').forEach(fill => {
+            fill.style.width = fill.dataset.width;
+          });
+        }
         // XP bar
         if (entry.target.id === 'xp-fill') {
           entry.target.style.width = '72%';
@@ -901,7 +1086,7 @@
 
   // Observe all animated elements
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-  ['mini-scores', 'metrics-interview', 'metrics-pitch', 'xp-fill', 'streak-num', 'badges'].forEach(id => {
+  ['mini-scores', 'metrics-interview', 'metrics-pitch', 'ba-before', 'ba-after', 'xp-fill', 'streak-num', 'badges'].forEach(id => {
     const el = document.getElementById(id);
     if (el) observer.observe(el);
   });
