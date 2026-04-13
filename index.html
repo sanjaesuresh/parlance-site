@@ -494,11 +494,11 @@
     .ba-score-big {
       font-family: 'Playfair Display', serif;
       font-size: 3rem; font-weight: 700; line-height: 1;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.15rem;
     }
     .ba-card.before .ba-score-big { color: var(--dim); }
     .ba-card.after .ba-score-big { color: var(--gold); }
-    .ba-score-label { font-size: 0.8rem; color: var(--sub); margin-bottom: 1.25rem; }
+    .ba-score-label { font-size: 0.8rem; color: var(--sub); margin-bottom: 0.75rem; }
     .ba-metrics { display: flex; flex-direction: column; gap: 0.6rem; }
     .ba-metric {
       display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem;
@@ -529,6 +529,96 @@
       font-size: 0.75rem; color: var(--sub); line-height: 1.5;
     }
     .ba-detail strong { color: var(--text); }
+
+    /* ---- Audio Analysis Pills ---- */
+    .audio-pills {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 0.6rem; margin-top: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;
+    }
+    .audio-pill {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--card); border: 1px solid var(--border);
+      padding: 0.4rem 0.85rem; border-radius: 20px;
+      font-size: 0.78rem; color: var(--sub);
+    }
+    .audio-pill .pill-icon { font-size: 0.9rem; }
+
+    /* ---- Filler Transcript ---- */
+    .transcript-mock {
+      background: var(--app-card); border-radius: 10px;
+      padding: 8px; margin-top: 8px;
+      border: 1px solid var(--app-border); text-align: left;
+    }
+    .transcript-label { font-size: 0.55rem; color: var(--gold); font-weight: 700; margin-bottom: 3px; }
+    .transcript-text { font-size: 0.55rem; color: #ccc; line-height: 1.6; }
+    .filler-mark {
+      background: rgba(224, 90, 78, 0.25); color: var(--red);
+      padding: 1px 3px; border-radius: 3px; font-weight: 600;
+    }
+
+    /* ---- Difficulty Tiers ---- */
+    .tiers-track {
+      display: flex; align-items: stretch; gap: 0;
+      max-width: 800px; margin: 0 auto;
+      border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    @media (max-width: 768px) {
+      .tiers-track { flex-direction: column; max-width: 400px; }
+    }
+    .tier-item {
+      flex: 1; padding: 1.5rem 1rem; text-align: center;
+      background: var(--card); border-right: 1px solid var(--border);
+      transition: all 0.3s; cursor: default; position: relative;
+    }
+    .tier-item:last-child { border-right: none; }
+    @media (max-width: 768px) {
+      .tier-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .tier-item:last-child { border-bottom: none; }
+    }
+    .tier-item:hover { background: var(--card2); }
+    .tier-item .tier-emoji { font-size: 1.5rem; margin-bottom: 0.4rem; }
+    .tier-item .tier-name { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.15rem; }
+    .tier-item .tier-levels { font-size: 0.7rem; color: var(--sub); margin-bottom: 0.5rem; }
+    .tier-item .tier-desc { font-size: 0.7rem; color: var(--dim); line-height: 1.4; }
+    .tier-progress-bar {
+      height: 4px; background: var(--card2); margin: 2rem auto 0;
+      max-width: 800px; border-radius: 2px; overflow: hidden;
+    }
+    .tier-progress-fill {
+      height: 100%; width: 0; border-radius: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--gold), var(--purple));
+      transition: width 1.5s ease-out;
+    }
+
+    /* ---- League Toggle ---- */
+    .league-toggle {
+      display: inline-flex; gap: 0; margin-bottom: 0.75rem;
+      background: var(--card2); border-radius: 8px; overflow: hidden;
+    }
+    .league-toggle button {
+      padding: 0.3rem 0.8rem; font-size: 0.7rem; font-weight: 600;
+      border: none; background: transparent; cursor: pointer;
+      color: var(--sub); transition: all 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .league-toggle button.active { background: var(--gold); color: var(--text); border-radius: 8px; }
+
+    .league-content { display: none; }
+    .league-content.active { display: block; }
+
+    /* ---- Privacy Strip ---- */
+    .privacy-strip {
+      display: flex; justify-content: center; gap: 2.5rem;
+      flex-wrap: wrap; padding: 2.5rem 1.5rem;
+      max-width: 800px; margin: 0 auto;
+    }
+    .privacy-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.85rem; color: var(--sub);
+    }
+    .privacy-item .priv-icon { font-size: 1.1rem; }
+    .privacy-item strong { color: var(--text); }
 
     /* ---- Scroll Spacing ---- */
     section + section { padding-top: 4rem; }
@@ -749,9 +839,18 @@
   <div class="container">
     <div class="section-label fade-up">AI Coaching</div>
     <h2 class="display section-title fade-up delay-1">Structure, not just delivery.</h2>
-    <p class="section-sub fade-up delay-2">Most tools count filler words. Parlance coaches argument flow, hook strength, and persuasion — the things that actually matter.</p>
+    <p class="section-sub fade-up delay-2">Most tools count filler words. Parlance analyzes how you actually speak — then coaches what matters.</p>
 
-    <div class="feedback-toggle fade-up delay-2">
+    <div class="audio-pills fade-up delay-2">
+      <div class="audio-pill"><span class="pill-icon">🎵</span> Pitch variation</div>
+      <div class="audio-pill"><span class="pill-icon">📊</span> Speaking energy</div>
+      <div class="audio-pill"><span class="pill-icon">⏸️</span> Pause timing</div>
+      <div class="audio-pill"><span class="pill-icon">🎯</span> Argument structure</div>
+      <div class="audio-pill"><span class="pill-icon">⚡</span> Rate variation</div>
+      <div class="audio-pill"><span class="pill-icon">🔇</span> Filler detection</div>
+    </div>
+
+    <div class="feedback-toggle fade-up delay-2" style="margin-top:2rem">
       <button class="active" data-feedback="interview">Interview Feedback</button>
       <button data-feedback="pitch">Pitch Feedback</button>
     </div>
@@ -782,6 +881,10 @@
           <div class="moment-label worst">Work On — 1:12</div>
           <p>"...and then we, um, basically just sort of improved things..."</p>
         </div>
+        <div class="transcript-mock">
+          <div class="transcript-label">Transcript — Fillers Highlighted</div>
+          <div class="transcript-text">"So I took ownership of the project and <span class="filler-mark">um</span> started by mapping out every stakeholder's concern. I <span class="filler-mark">basically</span> created a framework that <span class="filler-mark">like</span> addressed each one..."</div>
+        </div>
       </div>
 
       <!-- Pitch Feedback -->
@@ -806,6 +909,10 @@
         <div class="moment">
           <div class="moment-label worst">Work On — 0:52</div>
           <p>"...so basically our solution is kind of like a smarter way to..."</p>
+        </div>
+        <div class="transcript-mock">
+          <div class="transcript-label">Transcript — Fillers Highlighted</div>
+          <div class="transcript-text">"Every sales team wastes 11 hours a week on calls that go nowhere. <span class="filler-mark">So</span> we built a tool that <span class="filler-mark">basically</span> tells you who's ready to buy before you <span class="filler-mark">like</span> pick up the phone..."</div>
         </div>
       </div>
     </div>
@@ -884,6 +991,49 @@
   </div>
 </section>
 
+<!-- ==================== DIFFICULTY TIERS ==================== -->
+<section id="tiers">
+  <div class="container">
+    <div class="section-label fade-up">Difficulty System</div>
+    <h2 class="display section-title fade-up delay-1">It grows with you.</h2>
+    <p class="section-sub fade-up delay-2">Five tiers. Harder prompts, stricter scoring, and deeper AI feedback as you level up.</p>
+
+    <div class="tiers-track fade-up delay-3">
+      <div class="tier-item">
+        <div class="tier-emoji">🌱</div>
+        <div class="tier-name">Starter</div>
+        <div class="tier-levels">Level 1–2</div>
+        <div class="tier-desc">Nervous Novice → First-Timer</div>
+      </div>
+      <div class="tier-item">
+        <div class="tier-emoji">📈</div>
+        <div class="tier-name">Developing</div>
+        <div class="tier-levels">Level 3–4</div>
+        <div class="tier-desc">Getting Warmed Up → Emerging Orator</div>
+      </div>
+      <div class="tier-item">
+        <div class="tier-emoji">💪</div>
+        <div class="tier-name">Confident</div>
+        <div class="tier-levels">Level 5–6</div>
+        <div class="tier-desc">Confident Communicator → Polished Speaker</div>
+      </div>
+      <div class="tier-item">
+        <div class="tier-emoji">🎯</div>
+        <div class="tier-name">Advanced</div>
+        <div class="tier-levels">Level 7–8</div>
+        <div class="tier-desc">Compelling Storyteller → Stage Commander</div>
+      </div>
+      <div class="tier-item">
+        <div class="tier-emoji">👑</div>
+        <div class="tier-name">Expert</div>
+        <div class="tier-levels">Level 9–10</div>
+        <div class="tier-desc">Master Presenter → Elite Orator</div>
+      </div>
+    </div>
+    <div class="tier-progress-bar fade-up delay-4"><div class="tier-progress-fill" id="tier-fill"></div></div>
+  </div>
+</section>
+
 <!-- ==================== BEFORE / AFTER ==================== -->
 <section id="transformation">
   <div class="container">
@@ -952,11 +1102,24 @@
       <!-- League -->
       <div class="game-card fade-up delay-3">
         <h4>🏆 Weekly League — Gold</h4>
-        <div class="league-rows">
-          <div class="league-row"><span class="league-rank">1</span><span class="league-name">Sanjae S.</span><span class="league-xp">1,240 XP</span></div>
-          <div class="league-row you"><span class="league-rank">2</span><span class="league-name">You</span><span class="league-xp">1,080 XP</span></div>
-          <div class="league-row"><span class="league-rank">3</span><span class="league-name">James R.</span><span class="league-xp">960 XP</span></div>
-          <div class="league-row"><span class="league-rank">4</span><span class="league-name">Priya M.</span><span class="league-xp">840 XP</span></div>
+        <div class="league-toggle">
+          <button class="active" data-league="global">Global</button>
+          <button data-league="friends">Friends</button>
+        </div>
+        <div class="league-content active" data-league="global">
+          <div class="league-rows">
+            <div class="league-row"><span class="league-rank">1</span><span class="league-name">Sanjae S.</span><span class="league-xp">1,240 XP</span></div>
+            <div class="league-row you"><span class="league-rank">2</span><span class="league-name">You</span><span class="league-xp">1,080 XP</span></div>
+            <div class="league-row"><span class="league-rank">3</span><span class="league-name">James R.</span><span class="league-xp">960 XP</span></div>
+            <div class="league-row"><span class="league-rank">4</span><span class="league-name">Priya M.</span><span class="league-xp">840 XP</span></div>
+          </div>
+        </div>
+        <div class="league-content" data-league="friends">
+          <div class="league-rows">
+            <div class="league-row you"><span class="league-rank">1</span><span class="league-name">You</span><span class="league-xp">1,080 XP</span></div>
+            <div class="league-row"><span class="league-rank">2</span><span class="league-name">Alex T.</span><span class="league-xp">920 XP</span></div>
+            <div class="league-row"><span class="league-rank">3</span><span class="league-name">Maya L.</span><span class="league-xp">710 XP</span></div>
+          </div>
         </div>
       </div>
 
@@ -978,6 +1141,13 @@
     </div>
   </div>
 </section>
+
+<!-- ==================== PRIVACY ==================== -->
+<div class="privacy-strip fade-up">
+  <div class="privacy-item"><span class="priv-icon">🔒</span> <strong>No audio</strong> leaves your device</div>
+  <div class="privacy-item"><span class="priv-icon">📱</span> <strong>On-device</strong> transcription</div>
+  <div class="privacy-item"><span class="priv-icon">🗑️</span> <strong>Nothing stored</strong> after scoring</div>
+</div>
 
 <!-- ==================== CTA ==================== -->
 <section id="cta">
@@ -1027,6 +1197,19 @@
     });
   });
 
+  // ---- League Toggle ----
+  const leagueBtns = document.querySelectorAll('.league-toggle button');
+  const leagueContents = document.querySelectorAll('.league-content');
+  leagueBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lg = btn.dataset.league;
+      leagueBtns.forEach(b => b.classList.remove('active'));
+      leagueContents.forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelector(`.league-content[data-league="${lg}"]`).classList.add('active');
+    });
+  });
+
   // ---- Waveform Bars ----
   const waveContainer = document.getElementById('waveform-mini');
   for (let i = 0; i < 20; i++) {
@@ -1068,6 +1251,10 @@
             fill.style.width = fill.dataset.width;
           });
         }
+        // Tier progress bar
+        if (entry.target.id === 'tier-fill') {
+          entry.target.style.width = '100%';
+        }
         // XP bar
         if (entry.target.id === 'xp-fill') {
           entry.target.style.width = '72%';
@@ -1095,7 +1282,7 @@
 
   // Observe all animated elements
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-  ['mini-scores', 'metrics-interview', 'metrics-pitch', 'ba-before', 'ba-after', 'xp-fill', 'streak-num', 'badges'].forEach(id => {
+  ['mini-scores', 'metrics-interview', 'metrics-pitch', 'ba-before', 'ba-after', 'tier-fill', 'xp-fill', 'streak-num', 'badges'].forEach(id => {
     const el = document.getElementById(id);
     if (el) observer.observe(el);
   });
