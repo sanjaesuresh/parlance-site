@@ -52,7 +52,7 @@
     .section-sub { font-size: 1.05rem; color: var(--sub); max-width: 540px; margin: 0 auto 2.5rem; }
 
     /* ---- Layout ---- */
-    section { padding: 5rem 1.5rem; text-align: center; overflow: hidden; }
+    section { padding: 3.5rem 1.5rem; text-align: center; overflow: hidden; }
     .container { max-width: 1100px; margin: 0 auto; }
 
     /* ---- Nav ---- */
@@ -132,11 +132,14 @@
     }
     .phone-screen {
       position: absolute; inset: 0;
-      padding: 48px 16px 16px;
-      overflow: hidden;
+      padding: 48px 14px 16px;
+      overflow-y: auto; overflow-x: hidden;
       color: #fff;
       font-family: 'DM Sans', sans-serif;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
+    .phone-screen::-webkit-scrollbar { display: none; }
 
     /* ---- Hero ---- */
     #hero { padding-top: 8rem; }
@@ -160,41 +163,134 @@
 
     /* Phone content slides */
     .phone-content { display: none; }
-    .phone-content.active { display: block; }
-    .phone-mode-label {
-      font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 0.75rem;
+    .phone-content.active { display: flex; flex-direction: column; }
+
+    /* Phone nav bar */
+    .phone-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .phone-nav-btn {
+      font-size: 0.6rem; color: #fff; background: var(--app-card);
+      padding: 4px 8px; border-radius: 8px;
+    }
+    .phone-nav-pill {
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.5px;
+      padding: 3px 8px; border-radius: 10px;
+    }
+    .phone-nav-lvl {
+      font-size: 0.55rem; font-weight: 600; color: #666;
+      background: var(--app-card); padding: 3px 6px; border-radius: 8px;
+    }
+
+    /* Prompt card */
+    .phone-prompt-card {
+      background: var(--app-card); border-radius: 14px;
+      padding: 12px; margin-bottom: 10px;
+      border: 1px solid rgba(232, 168, 56, 0.3);
+    }
+    .phone-prompt-badges {
+      display: flex; gap: 6px; margin-bottom: 8px;
+    }
+    .phone-prompt-badges span {
+      font-size: 0.5rem; font-weight: 600;
+      padding: 2px 6px; border-radius: 8px;
+      background: var(--app-border); color: #666;
     }
     .phone-question {
       font-family: 'Playfair Display', serif;
-      font-size: 1rem; line-height: 1.4; margin-bottom: 1rem; color: #fff;
+      font-size: 0.9rem; line-height: 1.4; color: #fff;
     }
-    .phone-tips { list-style: none; margin-bottom: 1.25rem; }
+
+    /* Coaching tips */
+    .phone-tips-header {
+      font-size: 0.5rem; font-weight: 700; color: #666;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .phone-tips { list-style: none; margin-bottom: 12px; }
     .phone-tips li {
-      font-size: 0.7rem; color: #999; padding: 0.4rem 0;
-      border-bottom: 1px solid var(--app-border);
-      display: flex; align-items: baseline; gap: 0.4rem;
+      font-size: 0.6rem; color: #999; padding: 4px 0;
+      display: flex; align-items: baseline; gap: 6px;
     }
-    .phone-tips li::before { content: "→"; color: var(--gold); font-weight: 700; }
-    .phone-record-btn {
+    .phone-tip-num {
+      width: 16px; height: 16px; border-radius: 50%;
+      background: rgba(232, 168, 56, 0.15); color: var(--gold);
+      font-size: 0.5rem; font-weight: 700;
       display: flex; align-items: center; justify-content: center;
-      gap: 0.5rem;
-      background: var(--gold); color: var(--app-bg);
-      padding: 0.65rem; border-radius: 14px;
-      font-size: 0.8rem; font-weight: 700;
-      margin-top: auto;
+      flex-shrink: 0;
     }
-    .phone-record-btn .dot {
-      width: 10px; height: 10px; background: var(--red);
-      border-radius: 50%; animation: pulse-dot 1.5s infinite;
+
+    /* Mic button area */
+    .phone-mic-area {
+      display: flex; flex-direction: column; align-items: center;
+      margin-top: auto; padding-top: 8px;
+    }
+    .phone-mic-btn {
+      width: 72px; height: 72px; border-radius: 50%;
+      position: relative; margin-bottom: 6px;
+    }
+    .phone-mic-outer {
+      position: absolute; inset: 0; border-radius: 50%;
+      border: 3px solid var(--app-border);
+    }
+    .phone-mic-progress {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: var(--gold);
+      border-right-color: var(--gold);
+      transform: rotate(-90deg);
+    }
+    .phone-mic-inner {
+      position: absolute; inset: 8px; border-radius: 50%;
+      background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .phone-mic-status {
+      font-size: 0.5rem; font-weight: 700; color: var(--gold);
+      letter-spacing: 1px; margin-bottom: 2px;
+    }
+    .phone-mic-label {
+      font-size: 0.55rem; color: #666;
+    }
+
+    /* Waveform in mic area */
+    .phone-waveform {
+      display: flex; align-items: center; justify-content: center;
+      gap: 2px; height: 30px; margin-bottom: 6px;
+    }
+    .phone-wave-bar {
+      width: 3px; border-radius: 1.5px; background: var(--gold);
+      animation: wave 1.2s ease-in-out infinite;
+    }
+
+    /* Timer */
+    .phone-timer {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 700; color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    /* Recording indicator */
+    .phone-rec-dot {
+      width: 6px; height: 6px; background: var(--gold);
+      border-radius: 50%; display: inline-block;
+      animation: pulse-dot 1.5s infinite;
     }
     @keyframes pulse-dot {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.5; transform: scale(1.3); }
     }
-    .phone-meta {
-      display: flex; justify-content: space-between;
-      font-size: 0.6rem; color: #666; margin-bottom: 1rem;
+
+    /* Ready button (loading screen style) */
+    .phone-ready-btn {
+      display: flex; align-items: center; justify-content: center;
+      background: var(--gold); color: var(--app-bg);
+      padding: 10px; border-radius: 14px;
+      font-size: 0.75rem; font-weight: 700;
+      margin-top: auto;
     }
 
     /* ---- How It Works ---- */
@@ -279,7 +375,6 @@
     .feedback-toggle button.active { background: var(--gold); color: var(--text); }
 
     .feedback-phone { width: 300px; height: 620px; }
-    .feedback-screen { padding: 48px 14px 14px; }
 
     .score-circle {
       width: 80px; height: 80px; border-radius: 50%;
@@ -445,7 +540,7 @@
     /* ---- Stats Bar ---- */
     .stats-bar {
       display: flex; justify-content: center; gap: 3rem;
-      flex-wrap: wrap; padding: 3rem 1.5rem;
+      flex-wrap: wrap; padding: 1rem 1.5rem 2rem;
     }
     .stat-item { text-align: center; }
     .stat-num {
@@ -487,7 +582,7 @@
     .ba-card.after { background: var(--card); border-color: var(--gold); }
     .ba-label {
       font-size: 0.7rem; font-weight: 700; letter-spacing: 2px;
-      text-transform: uppercase; margin-bottom: 0.25rem;
+      text-transform: uppercase; margin-bottom: 0.1rem;
     }
     .ba-card.before .ba-label { color: var(--dim); }
     .ba-card.after .ba-label { color: var(--gold); }
@@ -556,40 +651,97 @@
       padding: 1px 3px; border-radius: 3px; font-weight: 600;
     }
 
-    /* ---- Difficulty Tiers ---- */
-    .tiers-track {
-      display: flex; align-items: stretch; gap: 0;
-      max-width: 800px; margin: 0 auto;
-      border-radius: var(--radius); overflow: hidden;
-      border: 1px solid var(--border);
+    /* ---- Prompt Explorer ---- */
+    .prompt-mode-tabs {
+      display: flex; gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; padding-bottom: 4px;
+      max-width: 100%;
     }
-    @media (max-width: 768px) {
-      .tiers-track { flex-direction: column; max-width: 400px; }
+    .prompt-mode-tabs::-webkit-scrollbar { display: none; }
+    .prompt-mode-tab {
+      padding: 0.5rem 0.9rem; border-radius: 12px;
+      font-size: 0.8rem; font-weight: 600;
+      background: var(--card); border: 2px solid var(--border);
+      cursor: pointer; transition: all 0.25s;
+      color: var(--sub); font-family: 'DM Sans', sans-serif;
+      display: flex; align-items: center; gap: 0.35rem;
+      white-space: nowrap; flex-shrink: 0;
     }
-    .tier-item {
-      flex: 1; padding: 1.5rem 1rem; text-align: center;
-      background: var(--card); border-right: 1px solid var(--border);
-      transition: all 0.3s; cursor: default; position: relative;
+    .prompt-mode-tab:hover { border-color: var(--gold); color: var(--text); }
+    .prompt-mode-tab.active { background: var(--text); color: #fff; border-color: var(--text); }
+    .prompt-mode-tab span { font-size: 1rem; }
+
+    .prompt-diff-tabs {
+      display: flex; gap: 0.4rem; justify-content: center;
+      flex-wrap: wrap; margin-bottom: 2rem;
     }
-    .tier-item:last-child { border-right: none; }
-    @media (max-width: 768px) {
-      .tier-item { border-right: none; border-bottom: 1px solid var(--border); }
-      .tier-item:last-child { border-bottom: none; }
+    .prompt-diff-tab {
+      padding: 0.4rem 0.85rem; border-radius: 20px;
+      font-size: 0.75rem; font-weight: 600;
+      background: transparent; border: 1px solid var(--border);
+      cursor: pointer; transition: all 0.25s;
+      color: var(--dim); font-family: 'DM Sans', sans-serif;
     }
-    .tier-item:hover { background: var(--card2); }
-    .tier-item .tier-emoji { font-size: 1.5rem; margin-bottom: 0.4rem; }
-    .tier-item .tier-name { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.15rem; }
-    .tier-item .tier-levels { font-size: 0.7rem; color: var(--sub); margin-bottom: 0.5rem; }
-    .tier-item .tier-desc { font-size: 0.7rem; color: var(--dim); line-height: 1.4; }
-    .tier-progress-bar {
-      height: 4px; background: var(--card2); margin: 2rem auto 0;
-      max-width: 800px; border-radius: 2px; overflow: hidden;
+    .prompt-diff-tab:hover { border-color: var(--gold); color: var(--text); }
+    .prompt-diff-tab.active { background: var(--gold); color: var(--text); border-color: var(--gold); }
+
+    .prompt-display {
+      max-width: 560px; margin: 0 auto;
+      background: var(--card); border-radius: var(--radius);
+      padding: 2rem 1.75rem; border: 1px solid var(--border);
+      text-align: left;
+      transition: opacity 0.25s, transform 0.25s;
     }
-    .tier-progress-fill {
-      height: 100%; width: 0; border-radius: 2px;
-      background: linear-gradient(90deg, var(--teal), var(--gold), var(--purple));
-      transition: width 1.5s ease-out;
+    .prompt-display-badges {
+      display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;
     }
+    .prompt-badge-mode {
+      font-size: 0.7rem; font-weight: 700; padding: 3px 10px;
+      border-radius: 10px; background: rgba(232,168,56,0.15); color: var(--gold);
+    }
+    .prompt-badge-diff {
+      font-size: 0.7rem; font-weight: 600; padding: 3px 10px;
+      border-radius: 10px; background: var(--card2); color: var(--sub);
+    }
+    .prompt-badge-dur {
+      font-size: 0.7rem; font-weight: 600; padding: 3px 10px;
+      border-radius: 10px; background: var(--card2); color: var(--sub);
+    }
+    .prompt-display-question {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem; line-height: 1.4; margin-bottom: 1.25rem;
+      color: var(--text); min-height: 3.8rem;
+    }
+    .prompt-display-tips-header {
+      font-size: 0.65rem; font-weight: 700; color: var(--dim);
+      letter-spacing: 1px; margin-bottom: 0.5rem;
+    }
+    .prompt-display-tips {
+      list-style: none; margin-bottom: 1.25rem;
+    }
+    .prompt-display-tips li {
+      font-size: 0.85rem; color: var(--sub); padding: 0.35rem 0;
+      display: flex; align-items: baseline; gap: 0.5rem; line-height: 1.4;
+    }
+    .prompt-tip-num {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: rgba(232,168,56,0.15); color: var(--gold);
+      font-size: 0.65rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .prompt-shuffle-btn {
+      display: block; width: 100%;
+      padding: 0.75rem; border-radius: 14px;
+      font-size: 0.9rem; font-weight: 700;
+      background: var(--text); color: #fff; border: none;
+      cursor: pointer; transition: all 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .prompt-shuffle-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .prompt-shuffle-btn:active { transform: scale(0.98); }
 
     /* ---- League Toggle ---- */
     .league-toggle {
@@ -609,19 +761,28 @@
 
     /* ---- Privacy Strip ---- */
     .privacy-strip {
-      display: flex; justify-content: center; gap: 2.5rem;
-      flex-wrap: wrap; padding: 2.5rem 1.5rem;
+      display: flex; justify-content: center; gap: 0.75rem;
+      flex-wrap: wrap; padding: 2rem 1.5rem;
       max-width: 800px; margin: 0 auto;
     }
-    .privacy-item {
-      display: flex; align-items: center; gap: 0.5rem;
-      font-size: 0.85rem; color: var(--sub);
+    .privacy-card {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 0.6rem 1.1rem;
+      font-size: 0.8rem; color: var(--sub);
+      transition: transform 0.2s, border-color 0.2s;
     }
-    .privacy-item .priv-icon { font-size: 1.1rem; }
-    .privacy-item strong { color: var(--text); }
+    .privacy-card:hover { transform: translateY(-2px); border-color: var(--gold); }
+    .privacy-card .priv-icon {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: var(--card2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; flex-shrink: 0;
+    }
+    .privacy-card strong { color: var(--text); }
 
     /* ---- Scroll Spacing ---- */
-    section + section { padding-top: 4rem; }
+    section + section { padding-top: 2.5rem; }
   </style>
 </head>
 <body>
@@ -657,54 +818,94 @@
 
       <!-- Interview -->
       <div class="phone-screen phone-content active" data-mode="interview">
-        <div class="phone-mode-label">Job Interview</div>
-        <div class="phone-meta"><span>Level 3 &bull; Behavioral</span><span>2 min</span></div>
-        <div class="phone-question">"Tell me about a time you had to lead a project with an unclear scope."</div>
+        <div class="phone-nav">
+          <div class="phone-nav-btn">← Cancel</div>
+          <div style="display:flex;gap:4px;align-items:center;">
+            <div class="phone-nav-pill" style="background:rgba(232,168,56,0.15);color:var(--gold);">💼 Interview</div>
+            <div class="phone-nav-lvl">Lv 3</div>
+          </div>
+        </div>
+        <div style="text-align:center;font-size:0.6rem;color:#999;margin-bottom:10px;">Read the prompt, then tap to begin recording.</div>
+        <div class="phone-prompt-card">
+          <div class="phone-prompt-badges"><span>Behavioral</span><span>⏱ 90s</span></div>
+          <div class="phone-question">"Tell me about a time you had to lead a project with an unclear scope."</div>
+        </div>
+        <div class="phone-tips-header">Coaching Tips</div>
         <ul class="phone-tips">
-          <li>Use the STAR framework — Situation, Task, Action, Result</li>
-          <li>Keep your answer under 90 seconds</li>
-          <li>End with a measurable outcome</li>
+          <li><div class="phone-tip-num">1</div> Use the STAR framework — Situation, Task, Action, Result</li>
+          <li><div class="phone-tip-num">2</div> Keep your answer under 90 seconds</li>
+          <li><div class="phone-tip-num">3</div> End with a measurable outcome</li>
         </ul>
-        <div class="phone-record-btn"><div class="dot"></div> Tap to Record</div>
+        <div class="phone-ready-btn">Tap when ready</div>
       </div>
 
       <!-- Pitch -->
       <div class="phone-screen phone-content" data-mode="pitch">
-        <div class="phone-mode-label">Pitch / Sales</div>
-        <div class="phone-meta"><span>Level 4 &bull; Investor Pitch</span><span>2 min</span></div>
-        <div class="phone-question">"You have 60 seconds. Convince an investor your product solves a real problem."</div>
+        <div class="phone-nav">
+          <div class="phone-nav-btn">← Cancel</div>
+          <div style="display:flex;gap:4px;align-items:center;">
+            <div class="phone-nav-pill" style="background:rgba(232,168,56,0.15);color:var(--gold);">🚀 Pitch</div>
+            <div class="phone-nav-lvl">Lv 4</div>
+          </div>
+        </div>
+        <div style="text-align:center;font-size:0.6rem;color:#999;margin-bottom:10px;">Read the prompt, then tap to begin recording.</div>
+        <div class="phone-prompt-card">
+          <div class="phone-prompt-badges"><span>Investor Pitch</span><span>⏱ 60s</span></div>
+          <div class="phone-question">"You have 60 seconds. Convince an investor your product solves a real problem."</div>
+        </div>
+        <div class="phone-tips-header">Coaching Tips</div>
         <ul class="phone-tips">
-          <li>Lead with the problem, not the product</li>
-          <li>Create urgency — why now?</li>
-          <li>End with a clear ask</li>
+          <li><div class="phone-tip-num">1</div> Lead with the problem, not the product</li>
+          <li><div class="phone-tip-num">2</div> Create urgency — why now?</li>
+          <li><div class="phone-tip-num">3</div> End with a clear ask</li>
         </ul>
-        <div class="phone-record-btn"><div class="dot"></div> Tap to Record</div>
+        <div class="phone-ready-btn">Tap when ready</div>
       </div>
 
       <!-- Keynote -->
       <div class="phone-screen phone-content" data-mode="keynote">
-        <div class="phone-mode-label">Keynote / Talk</div>
-        <div class="phone-meta"><span>Level 5 &bull; Conference</span><span>3 min</span></div>
-        <div class="phone-question">"Open a talk about why most teams fail at remote work — hook the audience in 30 seconds."</div>
+        <div class="phone-nav">
+          <div class="phone-nav-btn">← Cancel</div>
+          <div style="display:flex;gap:4px;align-items:center;">
+            <div class="phone-nav-pill" style="background:rgba(106,88,221,0.15);color:var(--purple);">🎤 Keynote</div>
+            <div class="phone-nav-lvl">Lv 5</div>
+          </div>
+        </div>
+        <div style="text-align:center;font-size:0.6rem;color:#999;margin-bottom:10px;">Read the prompt, then tap to begin recording.</div>
+        <div class="phone-prompt-card" style="border-color:rgba(106,88,221,0.3);">
+          <div class="phone-prompt-badges"><span>Conference</span><span>⏱ 2m</span></div>
+          <div class="phone-question">"Open a talk about why most teams fail at remote work — hook the audience in 30 seconds."</div>
+        </div>
+        <div class="phone-tips-header">Coaching Tips</div>
         <ul class="phone-tips">
-          <li>Start with a bold claim or question, not "Hi, my name is..."</li>
-          <li>Paint a vivid picture with a specific detail</li>
-          <li>Set up tension — promise the audience a resolution</li>
+          <li><div class="phone-tip-num" style="background:rgba(106,88,221,0.15);color:var(--purple);">1</div> Start with a bold claim or question, not "Hi, my name is..."</li>
+          <li><div class="phone-tip-num" style="background:rgba(106,88,221,0.15);color:var(--purple);">2</div> Paint a vivid picture with a specific detail</li>
+          <li><div class="phone-tip-num" style="background:rgba(106,88,221,0.15);color:var(--purple);">3</div> Set up tension — promise the audience a resolution</li>
         </ul>
-        <div class="phone-record-btn"><div class="dot"></div> Tap to Record</div>
+        <div class="phone-ready-btn">Tap when ready</div>
       </div>
 
       <!-- Daily Convo -->
       <div class="phone-screen phone-content" data-mode="convo">
-        <div class="phone-mode-label">Daily Conversation</div>
-        <div class="phone-meta"><span>Level 2 &bull; Impromptu</span><span>1.5 min</span></div>
-        <div class="phone-question">"A colleague asks what you're working on. Explain your current project clearly in under a minute."</div>
+        <div class="phone-nav">
+          <div class="phone-nav-btn">← Cancel</div>
+          <div style="display:flex;gap:4px;align-items:center;">
+            <div class="phone-nav-pill" style="background:rgba(46,158,139,0.15);color:var(--teal);">💬 Daily Convo</div>
+            <div class="phone-nav-lvl">Lv 2</div>
+          </div>
+        </div>
+        <div style="text-align:center;font-size:0.6rem;color:#999;margin-bottom:10px;">Read the prompt, then tap to begin recording.</div>
+        <div class="phone-prompt-card" style="border-color:rgba(46,158,139,0.3);">
+          <div class="phone-prompt-badges"><span>Impromptu</span><span>⏱ 60s</span></div>
+          <div class="phone-question">"A colleague asks what you're working on. Explain your current project clearly in under a minute."</div>
+        </div>
+        <div class="phone-tips-header">Coaching Tips</div>
         <ul class="phone-tips">
-          <li>Start with the one-sentence summary</li>
-          <li>Avoid jargon — explain like they're from a different team</li>
-          <li>End with why it matters</li>
+          <li><div class="phone-tip-num" style="background:rgba(46,158,139,0.15);color:var(--teal);">1</div> Start with the one-sentence summary</li>
+          <li><div class="phone-tip-num" style="background:rgba(46,158,139,0.15);color:var(--teal);">2</div> Avoid jargon — explain like they're from a different team</li>
+          <li><div class="phone-tip-num" style="background:rgba(46,158,139,0.15);color:var(--teal);">3</div> End with why it matters</li>
         </ul>
-        <div class="phone-record-btn"><div class="dot"></div> Tap to Record</div>
+        <div class="phone-ready-btn">Tap when ready</div>
       </div>
     </div>
   </div>
@@ -860,59 +1061,109 @@
 
       <!-- Interview Feedback -->
       <div class="phone-screen feedback-content active feedback-screen" data-feedback="interview">
+        <div class="phone-nav">
+          <div class="phone-nav-btn">← Home</div>
+          <div class="phone-nav-pill" style="background:rgba(232,168,56,0.15);color:var(--gold);">💼 Interview</div>
+          <div class="phone-nav-btn" style="background:transparent;border:1px solid var(--app-border);color:#999;">↺ Retry</div>
+        </div>
         <div class="score-circle" id="score-interview">82</div>
-        <div class="score-label">Overall Score</div>
+        <div style="text-align:center;font-size:0.5rem;color:#666;margin-bottom:4px;">Your average: 74 <span style="background:rgba(59,181,160,0.15);color:var(--teal);padding:1px 5px;border-radius:8px;font-weight:700;font-size:0.45rem;">+8 from avg</span></div>
+        <div style="text-align:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:2px;">Strong performance.</div>
+        <div class="score-label">Level 3 · Emerging Orator · 1:24</div>
+        <div style="background:var(--app-card);border-radius:14px;padding:10px;margin-bottom:8px;border:1px solid var(--app-border);">
+          <div style="font-size:0.45rem;font-weight:700;color:#666;letter-spacing:1px;margin-bottom:4px;">YOU SPOKE ON</div>
+          <div style="font-size:0.55rem;color:#999;font-style:italic;line-height:1.4;">"Tell me about a time you had to lead a project with an unclear scope."</div>
+        </div>
+        <div class="ai-coach">
+          <div class="ai-coach-label">🤖 AI COACH FEEDBACK</div>
+          <p>Strong STAR structure. Your situation was specific and your action steps were clear. Tighten the result — quantify the impact. "Improved efficiency" is vague. Say "cut review time by 40%."</p>
+        </div>
+        <div class="transcript-mock">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <div class="transcript-label">YOUR RESPONSE</div>
+            <span style="font-size:0.45rem;font-weight:700;color:var(--red);background:rgba(224,90,78,0.15);padding:1px 5px;border-radius:8px;">3 fillers</span>
+          </div>
+          <div class="transcript-text">"So I took ownership of the project and <span class="filler-mark">um</span> started by mapping out every stakeholder's concern. I <span class="filler-mark">basically</span> created a framework that <span class="filler-mark">like</span> addressed each one..."</div>
+        </div>
+        <div style="display:flex;gap:6px;margin-top:8px;">
+          <div class="moment" style="flex:1;background:rgba(14,26,20,1);border:1px solid rgba(59,181,160,0.3);">
+            <div class="moment-label best">✅ BEST MOMENT</div>
+            <p>"...so I mapped every stakeholder's actual concern, not their stated objection..."</p>
+          </div>
+          <div class="moment" style="flex:1;background:rgba(26,14,14,1);border:1px solid rgba(224,90,78,0.3);">
+            <div class="moment-label worst">⚠️ WEAKEST MOMENT</div>
+            <p>"...and then we, um, basically just sort of improved things..."</p>
+          </div>
+        </div>
+        <div style="font-size:0.5rem;font-weight:500;color:#666;letter-spacing:1.2px;margin:10px 0 6px;">BREAKDOWN</div>
         <div id="metrics-interview">
           <div class="metric-row"><span class="metric-name">Fillers</span><div class="metric-bar"><div class="metric-fill" data-width="90%" style="background:var(--teal)"></div></div><span class="metric-val">9</span></div>
           <div class="metric-row"><span class="metric-name">Pace</span><div class="metric-bar"><div class="metric-fill" data-width="70%" style="background:var(--gold)"></div></div><span class="metric-val">7</span></div>
-          <div class="metric-row"><span class="metric-name">Clarity</span><div class="metric-bar"><div class="metric-fill" data-width="85%" style="background:var(--purple)"></div></div><span class="metric-val">8.5</span></div>
+          <div class="metric-row"><span class="metric-name">Clarity</span><div class="metric-bar"><div class="metric-fill" data-width="85%" style="background:var(--teal)"></div></div><span class="metric-val">8.5</span></div>
           <div class="metric-row"><span class="metric-name">Structure</span><div class="metric-bar"><div class="metric-fill" data-width="80%" style="background:var(--teal)"></div></div><span class="metric-val">8</span></div>
           <div class="metric-row"><span class="metric-name">Vocab</span><div class="metric-bar"><div class="metric-fill" data-width="75%" style="background:var(--gold)"></div></div><span class="metric-val">7.5</span></div>
         </div>
-        <div class="ai-coach">
-          <div class="ai-coach-label">AI Coach</div>
-          <p>Strong STAR structure. Your situation was specific and your action steps were clear. Tighten the result — quantify the impact. "Improved efficiency" is vague. Say "cut review time by 40%."</p>
-        </div>
-        <div class="moment">
-          <div class="moment-label best">Best Moment — 0:34</div>
-          <p>"...so I mapped every stakeholder's actual concern, not their stated objection..."</p>
-        </div>
-        <div class="moment">
-          <div class="moment-label worst">Work On — 1:12</div>
-          <p>"...and then we, um, basically just sort of improved things..."</p>
-        </div>
-        <div class="transcript-mock">
-          <div class="transcript-label">Transcript — Fillers Highlighted</div>
-          <div class="transcript-text">"So I took ownership of the project and <span class="filler-mark">um</span> started by mapping out every stakeholder's concern. I <span class="filler-mark">basically</span> created a framework that <span class="filler-mark">like</span> addressed each one..."</div>
+        <div style="background:var(--app-card);border-radius:14px;padding:10px;margin-top:10px;border:1px solid var(--app-border);display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+          <div style="width:32px;height:32px;border-radius:10px;background:rgba(232,168,56,0.2);display:flex;align-items:center;justify-content:center;font-size:0.9rem;">💼</div>
+          <div style="flex:1;">
+            <div style="font-size:0.6rem;font-weight:600;color:#fff;">Another Interview — Emerging Orator</div>
+            <div style="font-size:0.5rem;color:#666;">New question · +120 XP</div>
+          </div>
+          <div style="font-size:0.9rem;color:#666;">›</div>
         </div>
       </div>
 
       <!-- Pitch Feedback -->
       <div class="phone-screen feedback-content feedback-screen" data-feedback="pitch">
+        <div class="phone-nav">
+          <div class="phone-nav-btn">← Home</div>
+          <div class="phone-nav-pill" style="background:rgba(232,168,56,0.15);color:var(--gold);">🚀 Pitch</div>
+          <div class="phone-nav-btn" style="background:transparent;border:1px solid var(--app-border);color:#999;">↺ Retry</div>
+        </div>
         <div class="score-circle">76</div>
-        <div class="score-label">Overall Score</div>
+        <div style="text-align:center;font-size:0.5rem;color:#666;margin-bottom:4px;">Your average: 71 <span style="background:rgba(59,181,160,0.15);color:var(--teal);padding:1px 5px;border-radius:8px;font-weight:700;font-size:0.45rem;">+5 from avg</span></div>
+        <div style="text-align:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:2px;">Getting there.</div>
+        <div class="score-label">Level 4 · Emerging Orator · 0:58</div>
+        <div style="background:var(--app-card);border-radius:14px;padding:10px;margin-bottom:8px;border:1px solid var(--app-border);">
+          <div style="font-size:0.45rem;font-weight:700;color:#666;letter-spacing:1px;margin-bottom:4px;">YOU SPOKE ON</div>
+          <div style="font-size:0.55rem;color:#999;font-style:italic;line-height:1.4;">"You have 60 seconds. Convince an investor your product solves a real problem."</div>
+        </div>
+        <div class="ai-coach">
+          <div class="ai-coach-label">🤖 AI COACH FEEDBACK</div>
+          <p>Your hook was strong — leading with the pain point grabbed attention. But you buried the urgency. Move "the market is shifting now" to right after the problem statement. Your ask was clear but needs a specific number.</p>
+        </div>
+        <div class="transcript-mock">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <div class="transcript-label">YOUR RESPONSE</div>
+            <span style="font-size:0.45rem;font-weight:700;color:var(--red);background:rgba(224,90,78,0.15);padding:1px 5px;border-radius:8px;">3 fillers</span>
+          </div>
+          <div class="transcript-text">"Every sales team wastes 11 hours a week on calls that go nowhere. <span class="filler-mark">So</span> we built a tool that <span class="filler-mark">basically</span> tells you who's ready to buy before you <span class="filler-mark">like</span> pick up the phone..."</div>
+        </div>
+        <div style="display:flex;gap:6px;margin-top:8px;">
+          <div class="moment" style="flex:1;background:rgba(14,26,20,1);border:1px solid rgba(59,181,160,0.3);">
+            <div class="moment-label best">✅ BEST MOMENT</div>
+            <p>"Every sales team wastes 11 hours a week on calls that go nowhere..."</p>
+          </div>
+          <div class="moment" style="flex:1;background:rgba(26,14,14,1);border:1px solid rgba(224,90,78,0.3);">
+            <div class="moment-label worst">⚠️ WEAKEST MOMENT</div>
+            <p>"...so basically our solution is kind of like a smarter way to..."</p>
+          </div>
+        </div>
+        <div style="font-size:0.5rem;font-weight:500;color:#666;letter-spacing:1.2px;margin:10px 0 6px;">BREAKDOWN</div>
         <div id="metrics-pitch">
           <div class="metric-row"><span class="metric-name">Fillers</span><div class="metric-bar"><div class="metric-fill" data-width="80%" style="background:var(--teal)"></div></div><span class="metric-val">8</span></div>
           <div class="metric-row"><span class="metric-name">Pace</span><div class="metric-bar"><div class="metric-fill" data-width="65%" style="background:var(--gold)"></div></div><span class="metric-val">6.5</span></div>
-          <div class="metric-row"><span class="metric-name">Clarity</span><div class="metric-bar"><div class="metric-fill" data-width="75%" style="background:var(--purple)"></div></div><span class="metric-val">7.5</span></div>
-          <div class="metric-row"><span class="metric-name">Structure</span><div class="metric-bar"><div class="metric-fill" data-width="70%" style="background:var(--teal)"></div></div><span class="metric-val">7</span></div>
-          <div class="metric-row"><span class="metric-name">Vocab</span><div class="metric-bar"><div class="metric-fill" data-width="90%" style="background:var(--gold)"></div></div><span class="metric-val">9</span></div>
+          <div class="metric-row"><span class="metric-name">Clarity</span><div class="metric-bar"><div class="metric-fill" data-width="75%" style="background:var(--gold)"></div></div><span class="metric-val">7.5</span></div>
+          <div class="metric-row"><span class="metric-name">Structure</span><div class="metric-bar"><div class="metric-fill" data-width="70%" style="background:var(--gold)"></div></div><span class="metric-val">7</span></div>
+          <div class="metric-row"><span class="metric-name">Vocab</span><div class="metric-bar"><div class="metric-fill" data-width="90%" style="background:var(--teal)"></div></div><span class="metric-val">9</span></div>
         </div>
-        <div class="ai-coach">
-          <div class="ai-coach-label">AI Coach</div>
-          <p>Your hook was strong — leading with the pain point grabbed attention. But you buried the urgency. Move "the market is shifting now" to right after the problem statement. Your ask was clear but needs a specific number.</p>
-        </div>
-        <div class="moment">
-          <div class="moment-label best">Best Moment — 0:08</div>
-          <p>"Every sales team wastes 11 hours a week on calls that go nowhere..."</p>
-        </div>
-        <div class="moment">
-          <div class="moment-label worst">Work On — 0:52</div>
-          <p>"...so basically our solution is kind of like a smarter way to..."</p>
-        </div>
-        <div class="transcript-mock">
-          <div class="transcript-label">Transcript — Fillers Highlighted</div>
-          <div class="transcript-text">"Every sales team wastes 11 hours a week on calls that go nowhere. <span class="filler-mark">So</span> we built a tool that <span class="filler-mark">basically</span> tells you who's ready to buy before you <span class="filler-mark">like</span> pick up the phone..."</div>
+        <div style="background:var(--app-card);border-radius:14px;padding:10px;margin-top:10px;border:1px solid var(--app-border);display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+          <div style="width:32px;height:32px;border-radius:10px;background:rgba(232,168,56,0.2);display:flex;align-items:center;justify-content:center;font-size:0.9rem;">🚀</div>
+          <div style="flex:1;">
+            <div style="font-size:0.6rem;font-weight:600;color:#fff;">Another Pitch — Emerging Orator</div>
+            <div style="font-size:0.5rem;color:#666;">New question · +120 XP</div>
+          </div>
+          <div style="font-size:0.9rem;color:#666;">›</div>
         </div>
       </div>
     </div>
@@ -991,46 +1242,52 @@
   </div>
 </section>
 
-<!-- ==================== DIFFICULTY TIERS ==================== -->
+<!-- ==================== TRY A PROMPT ==================== -->
 <section id="tiers">
   <div class="container">
-    <div class="section-label fade-up">Difficulty System</div>
-    <h2 class="display section-title fade-up delay-1">It grows with you.</h2>
-    <p class="section-sub fade-up delay-2">Five tiers. Harder prompts, stricter scoring, and deeper AI feedback as you level up.</p>
+    <div class="section-label fade-up">Try It Yourself</div>
+    <h2 class="display section-title fade-up delay-1">400+ prompts. Pick your challenge.</h2>
+    <p class="section-sub fade-up delay-2">Choose a mode and difficulty. Every prompt comes with coaching tips — just like in the app.</p>
 
-    <div class="tiers-track fade-up delay-3">
-      <div class="tier-item">
-        <div class="tier-emoji">🌱</div>
-        <div class="tier-name">Starter</div>
-        <div class="tier-levels">Level 1–2</div>
-        <div class="tier-desc">Nervous Novice → First-Timer</div>
-      </div>
-      <div class="tier-item">
-        <div class="tier-emoji">📈</div>
-        <div class="tier-name">Developing</div>
-        <div class="tier-levels">Level 3–4</div>
-        <div class="tier-desc">Getting Warmed Up → Emerging Orator</div>
-      </div>
-      <div class="tier-item">
-        <div class="tier-emoji">💪</div>
-        <div class="tier-name">Confident</div>
-        <div class="tier-levels">Level 5–6</div>
-        <div class="tier-desc">Confident Communicator → Polished Speaker</div>
-      </div>
-      <div class="tier-item">
-        <div class="tier-emoji">🎯</div>
-        <div class="tier-name">Advanced</div>
-        <div class="tier-levels">Level 7–8</div>
-        <div class="tier-desc">Compelling Storyteller → Stage Commander</div>
-      </div>
-      <div class="tier-item">
-        <div class="tier-emoji">👑</div>
-        <div class="tier-name">Expert</div>
-        <div class="tier-levels">Level 9–10</div>
-        <div class="tier-desc">Master Presenter → Elite Orator</div>
-      </div>
+    <!-- Mode selector -->
+    <div class="prompt-mode-tabs fade-up delay-2">
+      <button class="prompt-mode-tab active" data-pmode="interview"><span>💼</span> Interview</button>
+      <button class="prompt-mode-tab" data-pmode="pitch"><span>🚀</span> Pitch</button>
+      <button class="prompt-mode-tab" data-pmode="keynote"><span>🎤</span> Keynote</button>
+      <button class="prompt-mode-tab" data-pmode="casual"><span>💬</span> Daily Convo</button>
+      <button class="prompt-mode-tab" data-pmode="debate"><span>⚔️</span> Debate</button>
+      <button class="prompt-mode-tab" data-pmode="storytelling"><span>📖</span> Storytelling</button>
+      <button class="prompt-mode-tab" data-pmode="explanation"><span>🔬</span> Explanation</button>
+      <button class="prompt-mode-tab" data-pmode="negotiation"><span>🤝</span> Negotiation</button>
+      <button class="prompt-mode-tab" data-pmode="impromptu"><span>⚡</span> Impromptu</button>
+      <button class="prompt-mode-tab" data-pmode="networking"><span>🌐</span> Networking</button>
     </div>
-    <div class="tier-progress-bar fade-up delay-4"><div class="tier-progress-fill" id="tier-fill"></div></div>
+
+    <!-- Difficulty selector -->
+    <div class="prompt-diff-tabs fade-up delay-3">
+      <button class="prompt-diff-tab active" data-pdiff="1-2">🌱 Starter</button>
+      <button class="prompt-diff-tab" data-pdiff="3-4">📈 Developing</button>
+      <button class="prompt-diff-tab" data-pdiff="5-6">💪 Confident</button>
+      <button class="prompt-diff-tab" data-pdiff="7-8">🎯 Advanced</button>
+      <button class="prompt-diff-tab" data-pdiff="9-10">👑 Expert</button>
+    </div>
+
+    <!-- Prompt display -->
+    <div class="prompt-display fade-up delay-3" id="prompt-display">
+      <div class="prompt-display-badges" id="prompt-badges">
+        <span class="prompt-badge-mode" id="prompt-badge-mode">💼 Interview</span>
+        <span class="prompt-badge-diff" id="prompt-badge-diff">Starter · Lv 1-2</span>
+        <span class="prompt-badge-dur" id="prompt-badge-dur">⏱ 60s</span>
+      </div>
+      <div class="prompt-display-question" id="prompt-question">"Tell me about yourself and your background."</div>
+      <div class="prompt-display-tips-header">COACHING TIPS</div>
+      <ul class="prompt-display-tips" id="prompt-tips">
+        <li><div class="prompt-tip-num">1</div> Keep it under 2 minutes</li>
+        <li><div class="prompt-tip-num">2</div> Focus on relevant experience</li>
+        <li><div class="prompt-tip-num">3</div> End with why you're excited about this role</li>
+      </ul>
+      <button class="prompt-shuffle-btn" id="prompt-shuffle">↻ New Prompt</button>
+    </div>
   </div>
 </section>
 
@@ -1144,9 +1401,9 @@
 
 <!-- ==================== PRIVACY ==================== -->
 <div class="privacy-strip fade-up">
-  <div class="privacy-item"><span class="priv-icon">🔒</span> <strong>No audio</strong> leaves your device</div>
-  <div class="privacy-item"><span class="priv-icon">📱</span> <strong>On-device</strong> transcription</div>
-  <div class="privacy-item"><span class="priv-icon">🗑️</span> <strong>Nothing stored</strong> after scoring</div>
+  <div class="privacy-card"><div class="priv-icon">🔒</div> <strong>No audio</strong>&nbsp;leaves your device</div>
+  <div class="privacy-card"><div class="priv-icon">📱</div> <strong>On-device</strong>&nbsp;transcription</div>
+  <div class="privacy-card"><div class="priv-icon">🗑️</div> <strong>Nothing stored</strong>&nbsp;after scoring</div>
 </div>
 
 <!-- ==================== CTA ==================== -->
@@ -1162,6 +1419,238 @@
 </section>
 
 <script>
+  // ---- Question Bank ----
+  const questions = [
+    {m:"interview",d:"1-2",q:"What are your salary expectations?",t:["Research market rates beforehand", "Give a range rather than a fixed number", "Express flexibility and focus on the role"],dur:60},
+    {m:"interview",d:"1-2",q:"Tell me about your educational background.",t:["Highlight relevant coursework or projects", "Connect education to career goals", "Mention any honors or achievements briefly"],dur:60},
+    {m:"interview",d:"1-2",q:"What do you know about our company?",t:["Mention specific products or initiatives", "Show you've done recent research", "Connect company values to yours"],dur:60},
+    {m:"interview",d:"1-2",q:"How would your friends describe you?",t:["Be authentic and specific", "Choose traits relevant to work", "Give a brief anecdote if possible"],dur:60},
+    {m:"interview",d:"1-2",q:"What is your communication style?",t:["Be self-aware and specific", "Give an example of effective communication", "Show adaptability to different audiences"],dur:60},
+    {m:"interview",d:"3-4",q:"Tell me about a mistake you made and what you learned.",t:["Be honest about the mistake", "Focus on the learning, not the blame", "Show how you applied the lesson"],dur:90},
+    {m:"interview",d:"3-4",q:"Describe a project you're most proud of.",t:["Set context for why it mattered", "Detail your specific role and actions", "Share measurable results or impact"],dur:90},
+    {m:"interview",d:"3-4",q:"Give an example of a goal you set and achieved.",t:["Make the goal specific and measurable", "Describe the steps you took", "Share what you learned"],dur:90},
+    {m:"interview",d:"3-4",q:"Describe a time you went above and beyond at work.",t:["Choose a specific, impactful example", "Explain your motivation", "Quantify the extra value you delivered"],dur:90},
+    {m:"interview",d:"3-4",q:"Give an example of creative problem-solving.",t:["Describe the constraint or obstacle", "Explain your creative approach", "Share the unconventional solution"],dur:90},
+    {m:"interview",d:"5-6",q:"How did you handle scope creep on a major project?",t:["Identify how scope expanded", "Describe your boundary-setting approach", "Share project outcome despite challenges"],dur:90},
+    {m:"interview",d:"5-6",q:"Tell me about negotiating resources for your team.",t:["Describe what your team needed", "Explain your business case", "Share the negotiation outcome"],dur:90},
+    {m:"interview",d:"5-6",q:"Describe managing competing stakeholder priorities.",t:["Identify the conflicting priorities", "Explain your negotiation approach", "Show how you found alignment"],dur:90},
+    {m:"interview",d:"5-6",q:"Tell me about building a team from scratch.",t:["Describe your hiring criteria and process", "Explain how you established team culture", "Share team performance metrics"],dur:90},
+    {m:"interview",d:"5-6",q:"How did you handle ethical concerns in a project?",t:["Describe the ethical dilemma", "Explain your decision process", "Share how you maintained integrity"],dur:90},
+    {m:"interview",d:"7-8",q:"How would you evaluate and enter a new market?",t:["Describe your market analysis framework", "Explain competitive positioning", "Walk through go-to-market strategy"],dur:120},
+    {m:"interview",d:"7-8",q:"How do you develop your leadership team?",t:["Describe your assessment approach", "Explain development programs", "Share team growth metrics"],dur:120},
+    {m:"interview",d:"7-8",q:"How do you balance short-term results with long-term strategy?",t:["Describe a specific tension point", "Explain your balancing framework", "Show outcomes on both time horizons"],dur:120},
+    {m:"interview",d:"7-8",q:"Tell me about managing through a company crisis.",t:["Describe the crisis and its scope", "Explain your crisis management approach", "Share stakeholder communication strategy"],dur:120},
+    {m:"interview",d:"7-8",q:"Describe managing a multi-million dollar budget.",t:["Explain your financial oversight approach", "Walk through trade-off decisions", "Share ROI achievements"],dur:120},
+    {m:"interview",d:"9-10",q:"Articulate how you would position a company for an IPO.",t:["Walk through IPO readiness criteria", "Explain narrative and positioning strategy", "Address governance and compliance requirements"],dur:120},
+    {m:"interview",d:"9-10",q:"Describe your philosophy on corporate social responsibility.",t:["Connect CSR to business strategy", "Present measurable impact goals", "Address stakeholder expectations"],dur:120},
+    {m:"interview",d:"9-10",q:"Describe rebuilding a company's reputation after a scandal.",t:["Acknowledge the damage honestly", "Present a phased reputation recovery plan", "Address systemic changes to prevent recurrence"],dur:120},
+    {m:"interview",d:"9-10",q:"How do you balance innovation investment against profitability?",t:["Present your innovation portfolio framework", "Explain risk-adjusted return thinking", "Share how you've navigated this tension before"],dur:120},
+    {m:"interview",d:"9-10",q:"How would you manage a activist investor situation?",t:["Understand the activist's thesis", "Present proactive engagement strategy", "Balance long-term vision with short-term pressure"],dur:120},
+    {m:"pitch",d:"1-2",q:"Explain why someone should switch to your product.",t:["Acknowledge what they currently use", "Name the specific improvement", "Make switching sound easy"],dur:60},
+    {m:"pitch",d:"1-2",q:"What inspired you to create this product?",t:["Share a brief personal story", "Connect the story to the problem", "Show genuine passion"],dur:60},
+    {m:"pitch",d:"1-2",q:"Describe the value your service provides.",t:["Lead with the outcome, not features", "Use a concrete example or scenario", "Quantify the value if possible"],dur:60},
+    {m:"pitch",d:"1-2",q:"Pitch your favorite app to a friend.",t:["Start with why you love it", "Describe one killer feature", "Explain how it changed your routine"],dur:60},
+    {m:"pitch",d:"1-2",q:"How would you introduce your product at a meetup?",t:["Start with a relatable problem", "Share your solution casually", "Invite questions or feedback"],dur:60},
+    {m:"pitch",d:"3-4",q:"Present customer testimonial evidence to a prospect.",t:["Choose a testimonial from a similar customer", "Quote specific results and metrics", "Connect their success to the prospect's situation"],dur:90},
+    {m:"pitch",d:"3-4",q:"Handle the objection: 'We need to think about it.'",t:["Ask what specifically needs consideration", "Offer to address specific concerns now", "Propose a concrete next step with timeline"],dur:90},
+    {m:"pitch",d:"3-4",q:"Handle the objection: 'This seems too expensive.'",t:["Reframe price as investment", "Compare to cost of not solving the problem", "Offer a proof point or guarantee"],dur:90},
+    {m:"pitch",d:"3-4",q:"Pitch your product's roadmap for the next year.",t:["Start with current strengths", "Highlight 3 key upcoming features", "Connect roadmap to customer needs"],dur:90},
+    {m:"pitch",d:"3-4",q:"Pitch your team's expertise alongside the product.",t:["Highlight relevant team credentials", "Connect expertise to product quality", "Share a team-driven customer success story"],dur:90},
+    {m:"pitch",d:"5-6",q:"Handle multiple objections in a single meeting.",t:["Prioritize the most critical objection", "Address each concisely with evidence", "Redirect to shared goals and next steps"],dur:90},
+    {m:"pitch",d:"5-6",q:"Present your go-to-market strategy to investors.",t:["Define target segments clearly", "Walk through acquisition channels", "Show unit economics and CAC/LTV"],dur:90},
+    {m:"pitch",d:"5-6",q:"Deliver a product demo that tells a story.",t:["Build a narrative around a real use case", "Show the problem before the solution", "End with the transformation moment"],dur:90},
+    {m:"pitch",d:"5-6",q:"Pitch your product to a C-suite audience.",t:["Lead with business impact, not features", "Use their KPIs and language", "Keep it to 3 key points max"],dur:90},
+    {m:"pitch",d:"5-6",q:"Pitch your product to a non-English speaking market.",t:["Research cultural business norms", "Simplify language and use visuals", "Address localization capabilities"],dur:90},
+    {m:"pitch",d:"7-8",q:"Handle objections from a 10-person buying committee.",t:["Identify each stakeholder's priority", "Address concerns systematically by role", "Build consensus toward a champion"],dur:120},
+    {m:"pitch",d:"7-8",q:"Present your international expansion strategy to the board.",t:["Show market research by region", "Explain localization and compliance approach", "Present financial projections and milestones"],dur:120},
+    {m:"pitch",d:"7-8",q:"Deliver a pitch at a major industry conference.",t:["Open with a provocative industry insight", "Connect the insight to your solution", "End with a memorable call to action"],dur:120},
+    {m:"pitch",d:"7-8",q:"Pitch a platform play to existing point-solution customers.",t:["Show the platform vision and roadmap", "Demonstrate integration benefits", "Present migration path and incentives"],dur:120},
+    {m:"pitch",d:"7-8",q:"Pitch a joint venture to a competing company.",t:["Identify the shared opportunity", "Explain how collaboration beats competition here", "Propose governance and IP terms"],dur:120},
+    {m:"pitch",d:"9-10",q:"Pitch a merger of equals to both company's boards.",t:["Show 1+1=3 value creation", "Address cultural integration honestly", "Present governance structure for the combined entity"],dur:120},
+    {m:"pitch",d:"9-10",q:"Pitch a market-creating product to skeptical analysts.",t:["Define the new market with clear boundaries", "Present demand evidence from adjacent markets", "Show your first-mover advantage strategy"],dur:120},
+    {m:"pitch",d:"9-10",q:"Pitch a moonshot initiative to your board.",t:["Ground the vision in achievable milestones", "Present risk-reward analysis transparently", "Show why incremental approaches will fail"],dur:120},
+    {m:"pitch",d:"9-10",q:"Deliver a pitch that changes how the audience sees an industry.",t:["Start with a counterintuitive insight", "Build the case with irrefutable evidence", "End with a bold call to action"],dur:120},
+    {m:"pitch",d:"9-10",q:"Handle due diligence concerns about team depth.",t:["Acknowledge the concern and your plan", "Present hiring pipeline and advisory board", "Show team's track record of attracting talent"],dur:120},
+    {m:"keynote",d:"1-2",q:"Thank volunteers at a community event.",t:["Acknowledge specific contributions", "Share the impact of their work", "Express sincere gratitude"],dur:60},
+    {m:"keynote",d:"1-2",q:"Announce a change at a team standup.",t:["State the change simply", "Explain the reason briefly", "Address immediate concerns"],dur:60},
+    {m:"keynote",d:"1-2",q:"Give a one-minute update on a project.",t:["State progress in 2-3 bullet points", "Highlight one win", "Mention next steps briefly"],dur:60},
+    {m:"keynote",d:"1-2",q:"Introduce a speaker at a small event.",t:["State the speaker's name and credentials", "Share why they're relevant to this audience", "Generate anticipation for their talk"],dur:60},
+    {m:"keynote",d:"1-2",q:"Give a brief farewell to a departing colleague.",t:["Share a specific positive memory", "Acknowledge their contribution", "Wish them well on their next chapter"],dur:60},
+    {m:"keynote",d:"3-4",q:"Present a charity case to potential donors.",t:["Share a compelling beneficiary story", "Present the need with clear data", "Make the ask specific and actionable"],dur:90},
+    {m:"keynote",d:"3-4",q:"Give a retirement speech for a mentor.",t:["Share your personal connection", "Highlight their professional legacy", "Inspire the audience with their example"],dur:90},
+    {m:"keynote",d:"3-4",q:"Deliver a motivational talk to a sports team.",t:["Acknowledge recent challenges", "Remind them of their strengths", "End with a rallying call to action"],dur:90},
+    {m:"keynote",d:"3-4",q:"Give a lightning talk at a tech meetup.",t:["Open with a provocative question", "Deliver 3 key insights quickly", "End with a memorable one-liner"],dur:90},
+    {m:"keynote",d:"3-4",q:"Host a Q&A session after a company announcement.",t:["Summarize the announcement briefly", "Invite questions warmly", "Handle difficult questions with transparency"],dur:90},
+    {m:"keynote",d:"5-6",q:"Present research findings to a mixed audience.",t:["Make complex data accessible", "Use analogies for technical concepts", "Highlight practical implications"],dur:90},
+    {m:"keynote",d:"5-6",q:"Give an impromptu speech when asked to speak unexpectedly.",t:["Take a breath and organize 3 quick points", "Use a personal anecdote as your anchor", "Close with a clear, concise message"],dur:90},
+    {m:"keynote",d:"5-6",q:"Deliver a town hall address during organizational change.",t:["Acknowledge uncertainty and emotions", "Present the change rationale clearly", "Provide a timeline and answer questions"],dur:90},
+    {m:"keynote",d:"5-6",q:"Give a graduation speech at a local school.",t:["Connect with the graduates' experience", "Share wisdom without being preachy", "End with an inspiring forward-looking message"],dur:90},
+    {m:"keynote",d:"5-6",q:"Present a controversial recommendation to leadership.",t:["Lay out the evidence methodically", "Acknowledge risks and alternatives considered", "Make the recommendation with conviction"],dur:90},
+    {m:"keynote",d:"7-8",q:"Deliver a provocative industry speech that shifts perspective.",t:["Challenge a widely-held industry belief", "Present evidence that demands a new lens", "Propose a new paradigm with actionable steps"],dur:120},
+    {m:"keynote",d:"7-8",q:"Present a manifesto for change in your field.",t:["State your thesis boldly and clearly", "Build the case with undeniable evidence", "Call the audience to specific action"],dur:120},
+    {m:"keynote",d:"7-8",q:"Deliver a speech that turns a crisis into a rallying moment.",t:["Acknowledge the gravity of the situation", "Reframe the crisis as an opportunity", "Unite the audience around a common purpose"],dur:120},
+    {m:"keynote",d:"7-8",q:"Give a book launch talk that sells the ideas, not just the book.",t:["Share the insight that drove you to write", "Deliver your most powerful chapter as a speech", "Leave the audience wanting the rest of the story"],dur:120},
+    {m:"keynote",d:"7-8",q:"Deliver a product vision keynote like a tech CEO.",t:["Open with the user's transformation story", "Reveal product innovations with drama and purpose", "Close with the bigger picture of what this means"],dur:120},
+    {m:"keynote",d:"9-10",q:"Give a speech in a second language to a foreign audience.",t:["Show respect for the audience's culture", "Use simplicity as a strength, not a limitation", "Connect through universal human experiences"],dur:120},
+    {m:"keynote",d:"9-10",q:"Present a new scientific paradigm to a skeptical audience.",t:["Acknowledge the power of the existing paradigm", "Present anomalies that the old paradigm can't explain", "Reveal how the new paradigm resolves every anomaly"],dur:120},
+    {m:"keynote",d:"9-10",q:"Give the closing keynote that ties together an entire conference.",t:["Synthesize themes from multiple sessions", "Reveal a pattern the audience hasn't seen", "Send everyone home with a single powerful takeaway"],dur:120},
+    {m:"keynote",d:"9-10",q:"Deliver a masterclass in storytelling from stage.",t:["Layer stories within stories for depth", "Use pacing, pause, and vocal variety as instruments", "Build to a revelation that changes the room's energy"],dur:120},
+    {m:"keynote",d:"9-10",q:"Deliver the final keynote of your career.",t:["Distill a career's worth of wisdom into core truths", "Share the moments that taught you the most", "Pass the torch with grace and generosity"],dur:120},
+    {m:"casual",d:"1-2",q:"Describe your ideal weekend.",t:["Paint a vivid picture of activities", "Include who you'd spend it with", "Explain what makes it ideal for you"],dur:60},
+    {m:"casual",d:"1-2",q:"Describe your favorite season and why.",t:["Use sensory details about the weather", "Share what you love doing in that season", "Connect it to a favorite memory"],dur:60},
+    {m:"casual",d:"1-2",q:"Describe the best day you've had this year.",t:["Set the scene with specifics", "Describe how it made you feel", "End with why it was meaningful"],dur:60},
+    {m:"casual",d:"1-2",q:"Explain why you chose your current career path.",t:["Share the moment you decided", "Explain what attracted you to it", "Describe what you enjoy most now"],dur:60},
+    {m:"casual",d:"1-2",q:"Explain how to get to your favorite local spot.",t:["Give landmarks, not just street names", "Describe what they'll find when they arrive", "Share why it's worth the trip"],dur:60},
+    {m:"casual",d:"3-4",q:"Explain why a specific skill is underrated.",t:["Name the skill and define it", "Give examples of when it's valuable", "Explain why people overlook it"],dur:90},
+    {m:"casual",d:"3-4",q:"Explain a conspiracy theory and why people believe it.",t:["Present the theory factually", "Analyze the psychological appeal", "Distinguish belief from evidence"],dur:90},
+    {m:"casual",d:"3-4",q:"Describe a time you changed your mind about something.",t:["Explain your original belief", "Describe what changed your perspective", "Reflect on what you learned"],dur:90},
+    {m:"casual",d:"3-4",q:"Argue whether college is still worth the investment.",t:["State your position with a reason", "Support with data or experience", "Address the strongest objection"],dur:90},
+    {m:"casual",d:"3-4",q:"Debate: Are books better than movies?",t:["Compare as forms of storytelling", "Give specific examples for your side", "Acknowledge what the other medium does better"],dur:90},
+    {m:"casual",d:"5-6",q:"Explain why empathy is a competitive advantage in business.",t:["Define what empathy looks like in practice", "Give 2-3 business case examples", "Counter the 'soft skill' dismissal"],dur:90},
+    {m:"casual",d:"5-6",q:"Explain a geopolitical conflict to someone unfamiliar with the region.",t:["Give essential historical context concisely", "Present multiple perspectives fairly", "Avoid taking sides while being clear"],dur:90},
+    {m:"casual",d:"5-6",q:"Explain blockchain to a skeptic without using jargon.",t:["Start with the problem it solves", "Use a physical-world analogy", "Address common skepticisms fairly"],dur:90},
+    {m:"casual",d:"5-6",q:"Argue for or against genetic engineering in food.",t:["Present the science accurately and simply", "Build your case with health and environmental evidence", "Address safety and ethical concerns"],dur:90},
+    {m:"casual",d:"5-6",q:"Debate: Is meritocracy achievable?",t:["Define meritocracy precisely", "Present evidence for and against its achievability", "Address systemic factors thoughtfully"],dur:90},
+    {m:"casual",d:"7-8",q:"Argue for a radical change to the education system.",t:["Identify the specific failure you'd address", "Present your alternative with evidence", "Address implementation and transition challenges"],dur:120},
+    {m:"casual",d:"7-8",q:"Debate: Should we colonize Mars?",t:["Present the scientific and existential case", "Address resource allocation concerns", "Balance aspiration with practical analysis"],dur:120},
+    {m:"casual",d:"7-8",q:"Debate: Is economic growth compatible with environmental sustainability?",t:["Present the tension clearly with evidence", "Argue your position with specific solutions", "Address the strongest counterpoint"],dur:120},
+    {m:"casual",d:"7-8",q:"Explain how misinformation spreads and how to combat it.",t:["Describe the psychology of belief formation", "Explain algorithmic amplification simply", "Provide actionable media literacy strategies"],dur:120},
+    {m:"casual",d:"7-8",q:"Explain the trolley problem variants and their implications.",t:["Present escalating dilemmas clearly", "Show how each variant reveals different moral intuitions", "Connect to real-world ethical decisions"],dur:120},
+    {m:"casual",d:"9-10",q:"Explain the concept of emergence to illuminate how simple rules create complex systems.",t:["Use vivid examples from nature", "Show emergence in human society", "Explain why it matters for understanding the world"],dur:120},
+    {m:"casual",d:"9-10",q:"Explain the Fermi Paradox and what it means for humanity.",t:["Present the paradox dramatically", "Walk through major proposed solutions", "Share what you think the answer reveals about us"],dur:120},
+    {m:"casual",d:"9-10",q:"Explain the ship of Theseus and its implications for identity.",t:["Present the paradox clearly and engagingly", "Explore multiple philosophical responses", "Connect to modern identity questions"],dur:120},
+    {m:"casual",d:"9-10",q:"Debate: Should we try to achieve immortality?",t:["Address the medical and ethical dimensions", "Present philosophical arguments about mortality's role", "Consider societal implications deeply"],dur:120},
+    {m:"casual",d:"9-10",q:"Argue for or against the simulation hypothesis.",t:["Present the logical argument clearly", "Address the evidence for and against", "Explore the implications if true or false"],dur:120},
+    {m:"debate",d:"1-2",q:"Is it better to work from home or in an office? Pick a side and argue it.",t:["Choose one side firmly", "Use your own experience as evidence", "Anticipate one counterpoint"],dur:45},
+    {m:"debate",d:"1-2",q:"Should tipping be mandatory at restaurants? Defend your position.",t:["Open with a clear stance", "Support with a practical reason", "Keep your tone conversational"],dur:45},
+    {m:"debate",d:"1-2",q:"Should schools require students to wear uniforms? Argue for one side.",t:["State your position clearly upfront", "Give one strong reason with an example", "Keep it simple and direct"],dur:45},
+    {m:"debate",d:"3-4",q:"Is a college degree still worth the cost? Make your argument.",t:["Use data or examples to support your claim", "Acknowledge the other side briefly", "End with a strong closing statement"],dur:60},
+    {m:"debate",d:"3-4",q:"Should governments ban single-use plastics entirely? Defend your position.",t:["Frame the problem before your solution", "Use cause-and-effect reasoning", "Propose a realistic implementation"],dur:60},
+    {m:"debate",d:"3-4",q:"Should social media platforms be held responsible for misinformation? Argue your case.",t:["Define what 'responsible' means in your argument", "Give a specific example", "Address the strongest counterargument"],dur:60},
+    {m:"debate",d:"5-6",q:"Should AI-generated art be eligible for copyright protection? Take a position.",t:["Define what makes something 'creative work'", "Address both artist and technology perspectives", "Build your argument logically"],dur:75},
+    {m:"debate",d:"5-6",q:"Is space exploration a good use of public funding when there are problems on Earth? Argue your side.",t:["Acknowledge the tension directly", "Use specific examples of benefits or opportunity costs", "Build toward a compelling conclusion"],dur:75},
+    {m:"debate",d:"5-6",q:"Is universal basic income a viable economic policy? Argue for or against.",t:["Lead with your strongest economic argument", "Address feasibility concerns", "Use real-world examples from pilot programs"],dur:75},
+    {m:"debate",d:"7-8",q:"Should there be limits on free speech to prevent hate speech? Build a rigorous argument.",t:["Define your terms precisely", "Distinguish between legal and moral arguments", "Steelman the opposing view before dismantling it"],dur:90},
+    {m:"debate",d:"7-8",q:"Is economic growth fundamentally incompatible with environmental sustainability? Make your case.",t:["Use specific data points", "Address green growth vs. degrowth frameworks", "Conclude with a synthesis, not just a side"],dur:90},
+    {m:"debate",d:"7-8",q:"Should democratic nations intervene militarily to protect human rights abroad? Defend your position with specific examples.",t:["Establish a clear ethical framework first", "Use historical examples precisely", "Address the sovereignty counterargument head-on"],dur:90},
+    {m:"debate",d:"9-10",q:"Is surveillance justified if it demonstrably reduces crime? Present a complete argument addressing ethics, efficacy, and civil liberties.",t:["Separate empirical claims from value claims", "Address the slippery slope argument explicitly", "Use real-world case studies as evidence"],dur:120},
+    {m:"debate",d:"9-10",q:"Should billionaires exist? Build a complete argument that addresses economic, moral, and systemic dimensions.",t:["Define your moral framework explicitly", "Use data on wealth inequality", "Address both incentive structures and systemic effects"],dur:120},
+    {m:"debate",d:"9-10",q:"Should we grant legal personhood to advanced AI systems? Construct a formal argument with rebuttals to the top three counterpoints.",t:["Build a philosophical framework for personhood", "Anticipate and dismantle objections systematically", "Close with the implications of your position"],dur:120},
+    {m:"storytelling",d:"1-2",q:"Describe a memorable meal you've had. What made it special?",t:["Use sensory details like taste and smell", "Include the people or place", "Explain why it stuck with you"],dur:45},
+    {m:"storytelling",d:"1-2",q:"Tell a story about a pet or animal you've encountered.",t:["Paint a picture of the animal", "Describe what happened", "Share how it made you feel"],dur:45},
+    {m:"storytelling",d:"1-2",q:"Tell a story about a time you learned something new for the first time.",t:["Set the scene briefly", "Describe what happened step by step", "End with what you learned"],dur:45},
+    {m:"storytelling",d:"3-4",q:"Describe a day that didn't go as planned but turned out okay.",t:["Set up the expectation first", "Use contrast between plan and reality", "Find the silver lining naturally"],dur:60},
+    {m:"storytelling",d:"3-4",q:"Tell the story of how you met someone who became important in your life.",t:["Start with the first impression", "Build toward the turning point", "Explain why the relationship matters"],dur:60},
+    {m:"storytelling",d:"3-4",q:"Tell a story about a time you stepped outside your comfort zone.",t:["Build tension around the decision", "Describe the emotions you felt", "Reveal how it changed you"],dur:60},
+    {m:"storytelling",d:"5-6",q:"Describe a moment when you witnessed something that changed your perspective on the world.",t:["Set the scene vividly", "Show the before and after of your thinking", "Make the listener feel the shift"],dur:75},
+    {m:"storytelling",d:"5-6",q:"Tell a story about a time you had to make a difficult decision with no clear right answer.",t:["Present the dilemma clearly", "Walk through your reasoning", "Share the outcome and whether you'd decide differently now"],dur:75},
+    {m:"storytelling",d:"5-6",q:"Tell a story about a failure that taught you something valuable.",t:["Don't shy away from the failure itself", "Show the internal shift that happened", "Connect the lesson to who you are now"],dur:75},
+    {m:"storytelling",d:"7-8",q:"Tell a story that illustrates the concept of resilience, drawn from your own life.",t:["Choose a story with real adversity", "Show the process, not just the result", "Use pacing to build emotional impact"],dur:90},
+    {m:"storytelling",d:"7-8",q:"Tell a story about a time you stood up for something you believed in, even when it was unpopular.",t:["Build the stakes before the confrontation", "Show internal conflict, not just external", "Land on the meaning, not just the outcome"],dur:90},
+    {m:"storytelling",d:"9-10",q:"Tell a story that begins with an ending. Use reverse chronology to reveal meaning.",t:["Open with the conclusion to hook the listener", "Peel back layers as you go backwards", "Make the origin the most powerful moment"],dur:120},
+    {m:"storytelling",d:"9-10",q:"Tell a story about a moment of profound connection with a stranger. Make the listener feel what you felt.",t:["Use micro-details to create intimacy", "Control pacing for emotional beats", "End with resonance, not resolution"],dur:120},
+    {m:"explanation",d:"1-2",q:"Explain why the sky is blue to a curious 8-year-old.",t:["Use language a child would understand", "Use a comparison they can visualize", "Keep it under a minute"],dur:45},
+    {m:"explanation",d:"1-2",q:"Explain what a budget is and why it matters to someone just starting their first job.",t:["Define it in one sentence", "Give a practical example", "Explain the benefit of having one"],dur:45},
+    {m:"explanation",d:"1-2",q:"Explain how a search engine works to someone who has never used the internet.",t:["Start with what problem it solves", "Use a simple analogy", "Avoid jargon completely"],dur:45},
+    {m:"explanation",d:"3-4",q:"Explain how compound interest works and why it matters for saving money.",t:["Start with simple interest, then build up", "Use a concrete number example", "Show the long-term impact"],dur:60},
+    {m:"explanation",d:"3-4",q:"Explain how GPS navigation works on your phone.",t:["Start with satellites as the key idea", "Explain triangulation simply", "Connect it to the user experience"],dur:60},
+    {m:"explanation",d:"3-4",q:"Explain the difference between a virus and a bacteria to someone with no science background.",t:["Use a comparison to make it tangible", "Cover size, behavior, and treatment differences", "Avoid medical jargon"],dur:60},
+    {m:"explanation",d:"5-6",q:"Explain how machine learning is different from traditional programming to a non-technical manager.",t:["Contrast rules-based vs. pattern-based approaches", "Use a concrete business example", "Avoid all technical jargon"],dur:75},
+    {m:"explanation",d:"5-6",q:"Explain the concept of natural selection to someone who thinks evolution means 'survival of the strongest.'",t:["Correct the misconception gently", "Use a specific animal example", "Emphasize adaptation over strength"],dur:75},
+    {m:"explanation",d:"5-6",q:"Explain the concept of inflation to a smart teenager. Include why it happens and why it matters.",t:["Use a real-world price example", "Explain supply and demand simply", "Connect to their daily life"],dur:75},
+    {m:"explanation",d:"7-8",q:"Explain how vaccines work, including mRNA vaccines, to someone who is hesitant about getting vaccinated.",t:["Build trust before delivering information", "Use the immune system analogy progressively", "Address concerns without being dismissive"],dur:90},
+    {m:"explanation",d:"7-8",q:"Explain blockchain technology to a skeptical business executive who thinks it's just hype.",t:["Start with the problem it solves, not the technology", "Use a supply chain or finance analogy", "Address the skepticism directly"],dur:90},
+    {m:"explanation",d:"9-10",q:"Explain the concept of consciousness to a group of AI researchers and philosophers. Address why it's hard to define and what we do and don't know.",t:["Acknowledge the hard problem explicitly", "Distinguish subjective experience from behavior", "Present multiple frameworks without settling on one"],dur:120},
+    {m:"explanation",d:"9-10",q:"Explain quantum computing to a room of investors who need to understand why it matters for their portfolio, without using the word 'quantum.'",t:["Frame entirely around business impact", "Use layered analogies that build on each other", "Make the abstract tangible through financial implications"],dur:120},
+    {m:"negotiation",d:"1-2",q:"Ask your roommate to take over a chore you usually do this week because you have a big deadline.",t:["Be direct about what you need", "Offer something in return", "Be respectful of their time too"],dur:45},
+    {m:"negotiation",d:"1-2",q:"You received a job offer but want an extra week before your start date. Make the request.",t:["Express enthusiasm for the role first", "Give a reasonable reason for the delay", "Frame it as a small ask"],dur:45},
+    {m:"negotiation",d:"1-2",q:"You're buying a used car and the seller is asking $8,000. You want to pay $6,500. Negotiate.",t:["Start by showing interest in the car", "Name your price confidently", "Give a reason for your offer"],dur:45},
+    {m:"negotiation",d:"3-4",q:"Your landlord wants to raise your rent by 15%. Negotiate a lower increase.",t:["Acknowledge their costs have gone up", "Present yourself as a reliable tenant", "Propose an alternative number with reasoning"],dur:60},
+    {m:"negotiation",d:"3-4",q:"Your team wants to push a product launch back by 2 weeks. Convince your manager this is the right call.",t:["Lead with the risk of launching early", "Propose a specific new timeline", "Show what the extra time buys"],dur:60},
+    {m:"negotiation",d:"3-4",q:"You're negotiating your salary for a new job. They offered $75,000 but you want $85,000. Make your case.",t:["Lead with your value, not your needs", "Use market data as leverage", "Be ready with a compromise position"],dur:60},
+    {m:"negotiation",d:"5-6",q:"Two departments in your company both want the same budget allocation. You represent one side. Make your case while keeping the relationship intact.",t:["Acknowledge the other team's needs genuinely", "Frame your ask in terms of company-wide impact", "Propose a creative split or phased approach"],dur:75},
+    {m:"negotiation",d:"5-6",q:"You're a freelancer and a client wants to cut your rate by 20% for a long-term contract. Negotiate terms that work for both sides.",t:["Reframe from rate to total value", "Offer scope or timeline flexibility instead of rate cuts", "Find the client's real constraint"],dur:75},
+    {m:"negotiation",d:"7-8",q:"A key employee wants to leave for a competitor. You have budget for a raise but not as much as the competing offer. Negotiate their retention.",t:["Understand their real motivation beyond money", "Offer non-monetary benefits strategically", "Make them feel valued, not trapped"],dur:90},
+    {m:"negotiation",d:"7-8",q:"You're negotiating a partnership deal where your startup provides technology and the other company provides distribution. They want 60/40 revenue split in their favor. Counter-propose.",t:["Quantify the value of your technology contribution", "Use comparables from similar deals", "Propose milestone-based adjustments"],dur:90},
+    {m:"negotiation",d:"9-10",q:"You represent a small country negotiating a trade agreement with a much larger economy. They want tariff-free access to your market. Negotiate terms that protect your interests.",t:["Identify your unique leverage points", "Use phased implementation as a tool", "Frame concessions as mutual gains"],dur:120},
+    {m:"negotiation",d:"9-10",q:"You're mediating a dispute between two co-founders about the company's strategic direction. One wants to focus on enterprise, the other on consumer. Find a resolution.",t:["Identify shared goals before addressing differences", "Propose a framework for the decision, not just a compromise", "Address the emotional undercurrent directly"],dur:120},
+    {m:"impromptu",d:"1-2",q:"If you could have dinner with any person, living or dead, who would it be and why?",t:["Name the person immediately", "Explain what you'd want to talk about", "Keep it under a minute"],dur:30},
+    {m:"impromptu",d:"1-2",q:"What's the most useful app on your phone and why?",t:["Name it right away", "Give a specific use case", "Explain why it beats alternatives"],dur:30},
+    {m:"impromptu",d:"1-2",q:"What's the best season of the year and why?",t:["Pick one and commit", "Give 2-3 specific reasons", "Keep it light and personal"],dur:30},
+    {m:"impromptu",d:"3-4",q:"If you had to teach a class on any subject, what would it be and how would you start the first lesson?",t:["Name the subject immediately", "Describe how you'd hook students", "Show passion for the topic"],dur:45},
+    {m:"impromptu",d:"3-4",q:"What's a common piece of advice that you think is actually wrong? Explain why.",t:["State the conventional wisdom first", "Give your contrarian take clearly", "Back it up with experience or reasoning"],dur:45},
+    {m:"impromptu",d:"3-4",q:"You have 60 seconds. Convince someone to visit your hometown.",t:["Open with a hook about what makes it unique", "Hit 2-3 specific highlights", "End with emotional appeal"],dur:45},
+    {m:"impromptu",d:"5-6",q:"A friend says 'luck matters more than hard work.' Do you agree? You have 60 seconds to respond.",t:["Take a clear position immediately", "Use a specific example to illustrate", "Acknowledge nuance without waffling"],dur:60},
+    {m:"impromptu",d:"5-6",q:"Describe the color blue to someone who has never seen it.",t:["Use sensory analogies beyond sight", "Connect it to emotions and experiences", "Be creative and specific"],dur:60},
+    {m:"impromptu",d:"5-6",q:"You just became CEO of a major airline. What's the first thing you change and why?",t:["Pick one specific change", "Explain the current problem it solves", "Describe the expected impact"],dur:60},
+    {m:"impromptu",d:"7-8",q:"If you could eliminate one invention from history, what would it be? Defend your choice.",t:["Choose something non-obvious", "Think through second-order effects", "Build a compelling case quickly"],dur:75},
+    {m:"impromptu",d:"7-8",q:"You're asked to give a 90-second toast at a colleague's farewell party. You barely know them. Go.",t:["Open with a universal workplace truth", "Pivot to something specific about the person", "End with a genuine wish for their future"],dur:75},
+    {m:"impromptu",d:"9-10",q:"You have 90 seconds to explain why the person listening to you should care about a topic you just made up on the spot. Pick any topic and go.",t:["Commit to your topic in the first 3 seconds", "Use the rule of three for structure", "End with a call to action or provocative question"],dur:90},
+    {m:"impromptu",d:"9-10",q:"You're given a random word: 'bridge.' Give a 2-minute speech that turns this word into a meaningful message.",t:["Use the first 5 seconds to find your angle", "Build from literal to metaphorical", "Land on a universal truth"],dur:90},
+    {m:"networking",d:"1-2",q:"Introduce yourself to someone at a coffee shop who's working on their laptop. Start a conversation naturally.",t:["Open with an observation, not a question about their work", "Share something about yourself briefly", "Be warm and not pushy"],dur:30},
+    {m:"networking",d:"1-2",q:"You just joined a new team. Introduce yourself in the group chat or standup meeting.",t:["Name, role, and one fun fact", "Mention what you're excited to work on", "Keep it brief and friendly"],dur:30},
+    {m:"networking",d:"1-2",q:"You're at a meetup and someone asks 'So, what do you do?' Give your answer.",t:["Keep it to 2-3 sentences", "Say what you do and why you enjoy it", "End with something that invites follow-up"],dur:30},
+    {m:"networking",d:"3-4",q:"Deliver your 30-second elevator pitch: who you are, what you do, and what you're looking for.",t:["Lead with the problem you solve, not your title", "Make it specific enough to be memorable", "End with a clear ask or next step"],dur:45},
+    {m:"networking",d:"3-4",q:"You're reconnecting with a former colleague you haven't spoken to in 2 years. Reach out and re-establish the connection.",t:["Reference something specific from when you worked together", "Update them briefly on what you're doing now", "Suggest a concrete next step to catch up"],dur:45},
+    {m:"networking",d:"3-4",q:"You're at a conference and spot someone whose work you admire. Introduce yourself and start a meaningful conversation.",t:["Reference their specific work, not just their title", "Share your relevant connection to the topic", "Ask a thoughtful question, not just compliments"],dur:45},
+    {m:"networking",d:"5-6",q:"You want to ask someone in your network for an introduction to a specific person at their company. Make the ask.",t:["Explain why you want the introduction specifically", "Make it easy for them to say yes", "Offer to draft the intro email for them"],dur:60},
+    {m:"networking",d:"5-6",q:"You're at an industry dinner and seated next to a potential mentor. Build rapport over the course of a conversation.",t:["Ask about their journey, not just achievements", "Find genuine common ground", "Share your own story authentically"],dur:60},
+    {m:"networking",d:"7-8",q:"You're introducing two people in your network who you think would benefit from knowing each other. Make the introduction compelling for both.",t:["Explain why each person would value the connection", "Highlight specific overlaps or complementary skills", "Set up a concrete reason for them to follow up"],dur:75},
+    {m:"networking",d:"7-8",q:"You're at a networking event with people from a completely different industry. Find common ground and make yourself memorable.",t:["Ask about their challenges, not their job titles", "Draw parallels between your industries", "Share a unique perspective they won't hear elsewhere"],dur:75},
+    {m:"networking",d:"9-10",q:"You disagree with a senior leader's opinion at a networking dinner. Express your view respectfully while maintaining the relationship and your credibility.",t:["Validate their perspective before presenting yours", "Use questions to guide them to your reasoning", "Leave them with something to think about, not a debate to win"],dur:90},
+    {m:"networking",d:"9-10",q:"You have 2 minutes at a podium to introduce yourself to a room of 200 people at a conference. Make them want to talk to you afterwards.",t:["Open with a hook that creates curiosity", "Share one specific story that reveals your expertise", "Close with an invitation that makes approaching you easy"],dur:90}
+  ];
+
+  const modeEmojis = {interview:"💼",pitch:"🚀",keynote:"🎤",casual:"💬",debate:"⚔️",storytelling:"📖",explanation:"🔬",negotiation:"🤝",impromptu:"⚡",networking:"🌐"};
+  const modeNames = {interview:"Interview",pitch:"Pitch",keynote:"Keynote",casual:"Daily Convo",debate:"Debate",storytelling:"Storytelling",explanation:"Explanation",negotiation:"Negotiation",impromptu:"Impromptu",networking:"Networking"};
+  const diffNames = {"1-2":"Starter · Lv 1-2","3-4":"Developing · Lv 3-4","5-6":"Confident · Lv 5-6","7-8":"Advanced · Lv 7-8","9-10":"Expert · Lv 9-10"};
+
+  let curMode = "interview", curDiff = "1-2";
+
+  function showPrompt() {
+    const pool = questions.filter(q => q.m === curMode && q.d === curDiff);
+    if (!pool.length) return;
+    const q = pool[Math.floor(Math.random() * pool.length)];
+    document.getElementById('prompt-badge-mode').textContent = modeEmojis[curMode] + ' ' + modeNames[curMode];
+    document.getElementById('prompt-badge-diff').textContent = diffNames[curDiff];
+    document.getElementById('prompt-badge-dur').textContent = '⏱ ' + (q.dur >= 60 ? (q.dur/60)+'m' : q.dur+'s');
+    document.getElementById('prompt-question').textContent = '"' + q.q + '"';
+    const tipsList = document.getElementById('prompt-tips');
+    tipsList.innerHTML = q.t.map((tip, i) =>
+      '<li><div class="prompt-tip-num">'+(i+1)+'</div> '+tip+'</li>'
+    ).join('');
+    // Subtle animation
+    const display = document.getElementById('prompt-display');
+    display.style.opacity = '0';
+    display.style.transform = 'translateY(8px)';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        display.style.opacity = '1';
+        display.style.transform = 'translateY(0)';
+      });
+    });
+  }
+
+  document.querySelectorAll('.prompt-mode-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.prompt-mode-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      curMode = tab.dataset.pmode;
+      showPrompt();
+    });
+  });
+
+  document.querySelectorAll('.prompt-diff-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.prompt-diff-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      curDiff = tab.dataset.pdiff;
+      showPrompt();
+    });
+  });
+
+  document.getElementById('prompt-shuffle').addEventListener('click', showPrompt);
+
   // ---- Mode Card Tap Toggle ----
   document.querySelectorAll('.mode-card').forEach(card => {
     card.addEventListener('click', () => card.classList.toggle('flipped'));
@@ -1251,10 +1740,6 @@
             fill.style.width = fill.dataset.width;
           });
         }
-        // Tier progress bar
-        if (entry.target.id === 'tier-fill') {
-          entry.target.style.width = '100%';
-        }
         // XP bar
         if (entry.target.id === 'xp-fill') {
           entry.target.style.width = '72%';
@@ -1282,7 +1767,7 @@
 
   // Observe all animated elements
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-  ['mini-scores', 'metrics-interview', 'metrics-pitch', 'ba-before', 'ba-after', 'tier-fill', 'xp-fill', 'streak-num', 'badges'].forEach(id => {
+  ['mini-scores', 'metrics-interview', 'metrics-pitch', 'ba-before', 'ba-after', 'xp-fill', 'streak-num', 'badges'].forEach(id => {
     const el = document.getElementById(id);
     if (el) observer.observe(el);
   });
