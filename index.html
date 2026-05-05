@@ -6,7 +6,7 @@
   <title>Parlance — Your AI Speech Coach</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -31,7 +31,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
@@ -39,7 +39,7 @@
     }
 
     /* ---- Typography ---- */
-    .display { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; }
+    .display { font-family: 'Fraunces', Georgia, serif; font-weight: 700; }
     .section-label {
       font-size: 0.75rem;
       letter-spacing: 3px;
@@ -64,7 +64,7 @@
       padding: 0.9rem 1.5rem;
       display: flex; align-items: center; justify-content: space-between;
     }
-    nav .logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--text); }
+    nav .logo { font-family: 'Fraunces', serif; font-size: 1.25rem; font-weight: 700; color: var(--text); }
     nav .logo span { color: var(--gold); }
     .nav-cta {
       background: var(--text); color: #fff;
@@ -100,7 +100,7 @@
     }
 
     .hero-wordmark {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-size: clamp(1.5rem, 3vw, 2rem);
       font-weight: 700;
       margin-bottom: 0.25rem;
@@ -135,7 +135,7 @@
       padding: 48px 14px 16px;
       overflow-y: auto; overflow-x: hidden;
       color: #fff;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', sans-serif;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
     }
@@ -198,7 +198,7 @@
       background: var(--app-border); color: #666;
     }
     .phone-question {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Fraunces', serif;
       font-size: 0.9rem; line-height: 1.4; color: #fff;
     }
 
@@ -210,15 +210,13 @@
     }
     .phone-tips { list-style: none; margin-bottom: 12px; }
     .phone-tips li {
-      font-size: 0.6rem; color: #999; padding: 4px 0;
-      display: flex; align-items: baseline; gap: 6px;
+      font-size: 0.6rem; color: #999; padding: 3px 0;
+      display: flex; align-items: flex-start; gap: 8px;
     }
-    .phone-tip-num {
-      width: 16px; height: 16px; border-radius: 50%;
-      background: rgba(232, 168, 56, 0.15); color: var(--gold);
-      font-size: 0.5rem; font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
+    /* Small accent square dot — matches app's RoundedRectangle(cornerRadius:1).fill(accentColor).frame(4,4) */
+    .phone-tip-dot {
+      width: 4px; height: 4px; border-radius: 1px;
+      flex-shrink: 0; margin-top: 5px;
     }
 
     /* Mic button area */
@@ -268,7 +266,7 @@
 
     /* Timer */
     .phone-timer {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Fraunces', serif;
       font-size: 1.5rem; font-weight: 700; color: var(--gold);
       margin-bottom: 4px;
     }
@@ -324,12 +322,16 @@
     .mini-modes-grid {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;
     }
-    .mini-mode {
+    /* mini mode card — matches actual ModeGridView card: emoji, accent bar, name, description */
+    .mini-mode-card {
       background: var(--app-card); border-radius: 8px;
-      padding: 8px; font-size: 0.6rem; color: #999;
-      text-align: center; border: 1px solid var(--app-border);
+      overflow: hidden; border: 1px solid var(--app-border);
     }
-    .mini-mode .icon { font-size: 1rem; margin-bottom: 2px; }
+    .mini-mode-card .mm-top { padding: 7px 8px 5px; }
+    .mini-mode-card .mm-top .icon { font-size: 0.95rem; }
+    .mini-mode-bar { height: 2px; }
+    .mini-mode-name { font-size: 0.55rem; font-weight: 600; color: #fff; padding: 4px 8px 1px; }
+    .mini-mode-desc { font-size: 0.45rem; color: #666; padding: 0 8px 6px; line-height: 1.3; }
 
     /* Waveform */
     .waveform {
@@ -370,40 +372,43 @@
       padding: 0.6rem 1.5rem; font-size: 0.85rem; font-weight: 600;
       border: none; background: transparent; cursor: pointer;
       color: var(--sub); transition: all 0.25s;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', sans-serif;
     }
     .feedback-toggle button.active { background: var(--gold); color: var(--text); }
 
     .feedback-phone { width: 300px; height: 620px; }
 
-    .score-circle {
-      width: 80px; height: 80px; border-radius: 50%;
-      border: 4px solid var(--gold);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem; font-weight: 700; color: var(--gold);
-      margin: 0 auto 1rem;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .score-label { font-size: 0.6rem; color: #666; margin-bottom: 1rem; text-align: center; }
+    .score-ring { display: block; margin: 0 auto 6px; }
+    .score-label { font-size: 0.6rem; color: #666; margin-bottom: 8px; text-align: center; }
 
-    .metric-row {
-      display: flex; align-items: center; gap: 8px;
-      margin-bottom: 8px; font-size: 0.65rem;
+    /* Metric cards — match MetricCardView layout */
+    .metric-card {
+      background: var(--app-card); border-radius: 14px;
+      padding: 10px 11px; margin-bottom: 7px;
+      border: 1px solid var(--app-border);
     }
-    .metric-name { width: 65px; color: #999; text-align: left; flex-shrink: 0; }
+    .metric-card-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 6px;
+    }
+    .metric-card-name {
+      font-size: 0.6rem; font-weight: 600; color: #fff; margin-bottom: 1px;
+    }
+    .metric-card-desc { font-size: 0.5rem; color: #666; }
+    .metric-card-score { font-size: 0.6rem; font-weight: 700; flex-shrink: 0; }
     .metric-bar {
-      flex: 1; height: 7px; background: var(--app-border); border-radius: 4px; overflow: hidden;
+      height: 3px; background: var(--app-border); border-radius: 2px; overflow: hidden;
     }
     .metric-fill {
-      height: 100%; border-radius: 4px; width: 0;
+      height: 100%; border-radius: 2px; width: 0;
       transition: width 1s ease-out;
     }
-    .metric-val { width: 18px; text-align: right; font-weight: 700; color: #fff; }
+    .metric-tip { font-size: 0.5rem; color: #666; line-height: 1.4; margin-top: 4px; }
 
     .ai-coach {
-      background: var(--app-card); border-radius: 12px;
-      padding: 10px; margin-top: 12px;
-      border: 1px solid var(--app-border); text-align: left;
+      background: #13120E; border-radius: 12px;
+      padding: 10px; margin-top: 10px;
+      border: 1px solid rgba(232,168,56,0.25); text-align: left;
     }
     .ai-coach-label { font-size: 0.6rem; color: var(--gold); font-weight: 700; margin-bottom: 4px; }
     .ai-coach p { font-size: 0.6rem; color: #ccc; line-height: 1.5; }
@@ -484,7 +489,7 @@
     }
     .streak-num {
       font-size: 2.5rem; font-weight: 700; color: var(--gold);
-      font-family: 'Playfair Display', serif;
+      font-family: 'Fraunces', serif;
     }
     .streak-text { font-size: 0.85rem; color: var(--sub); }
     .streak-text strong { color: var(--text); }
@@ -544,7 +549,7 @@
     }
     .stat-item { text-align: center; }
     .stat-num {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Fraunces', serif;
       font-size: clamp(2rem, 4vw, 2.75rem);
       font-weight: 700; color: var(--text);
     }
@@ -587,7 +592,7 @@
     .ba-card.before .ba-label { color: var(--dim); }
     .ba-card.after .ba-label { color: var(--gold); }
     .ba-score-big {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Fraunces', serif;
       font-size: 3rem; font-weight: 700; line-height: 1;
       margin-bottom: 0.75rem;
     }
@@ -665,7 +670,7 @@
       font-size: 0.8rem; font-weight: 600;
       background: var(--card); border: 2px solid var(--border);
       cursor: pointer; transition: all 0.25s;
-      color: var(--sub); font-family: 'DM Sans', sans-serif;
+      color: var(--sub); font-family: 'Inter', sans-serif;
       display: flex; align-items: center; gap: 0.35rem;
       white-space: nowrap; flex-shrink: 0;
     }
@@ -682,7 +687,7 @@
       font-size: 0.75rem; font-weight: 600;
       background: transparent; border: 1px solid var(--border);
       cursor: pointer; transition: all 0.25s;
-      color: var(--dim); font-family: 'DM Sans', sans-serif;
+      color: var(--dim); font-family: 'Inter', sans-serif;
     }
     .prompt-diff-tab:hover { border-color: var(--gold); color: var(--text); }
     .prompt-diff-tab.active { background: var(--gold); color: var(--text); border-color: var(--gold); }
@@ -710,7 +715,7 @@
       border-radius: 10px; background: var(--card2); color: var(--sub);
     }
     .prompt-display-question {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Fraunces', serif;
       font-size: 1.35rem; line-height: 1.4; margin-bottom: 1.25rem;
       color: var(--text); min-height: 3.8rem;
     }
@@ -738,7 +743,7 @@
       font-size: 0.9rem; font-weight: 700;
       background: var(--text); color: #fff; border: none;
       cursor: pointer; transition: all 0.2s;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', sans-serif;
     }
     .prompt-shuffle-btn:hover { opacity: 0.85; transform: translateY(-1px); }
     .prompt-shuffle-btn:active { transform: scale(0.98); }
@@ -752,7 +757,7 @@
       padding: 0.3rem 0.8rem; font-size: 0.7rem; font-weight: 600;
       border: none; background: transparent; cursor: pointer;
       color: var(--sub); transition: all 0.2s;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', sans-serif;
     }
     .league-toggle button.active { background: var(--gold); color: var(--text); border-radius: 8px; }
 
@@ -832,93 +837,165 @@
       <!-- Interview -->
       <div class="phone-screen phone-content active" data-mode="interview">
         <div class="phone-nav">
-          <div class="phone-nav-btn">← Cancel</div>
+          <div class="phone-nav-btn">← Back</div>
           <div style="display:flex;gap:4px;align-items:center;">
             <div class="phone-nav-pill" style="background:rgba(232,168,56,0.15);color:var(--gold);">💼 Interview</div>
             <div class="phone-nav-lvl">Lv 3</div>
           </div>
+          <div style="width:56px"></div>
         </div>
-        <div style="text-align:center;font-size:0.6rem;color:#999;margin-bottom:10px;">Read the prompt, then tap to begin recording.</div>
         <div class="phone-prompt-card">
-          <div class="phone-prompt-badges"><span>Behavioral</span><span>⏱ 90s</span></div>
+          <div class="phone-prompt-badges">
+            <span style="font-size:0.5rem;font-weight:600;padding:2px 7px;border-radius:10px;background:#2E2E2E;color:#666;">Starter</span>
+            <span style="font-size:0.5rem;font-weight:700;padding:2px 7px;border-radius:10px;background:rgba(232,168,56,0.15);color:var(--gold);">⏱ 90s</span>
+          </div>
           <div class="phone-question">"Tell me about a time you had to lead a project with an unclear scope."</div>
         </div>
-        <div class="phone-tips-header">Coaching Tips</div>
+        <div class="phone-tips-header">COACHING TIPS</div>
         <ul class="phone-tips">
-          <li><div class="phone-tip-num">1</div> Use the STAR framework — Situation, Task, Action, Result</li>
-          <li><div class="phone-tip-num">2</div> Keep your answer under 90 seconds</li>
-          <li><div class="phone-tip-num">3</div> End with a measurable outcome</li>
+          <li><div class="phone-tip-dot" style="background:var(--gold)"></div>Use the STAR framework — Situation, Task, Action, Result</li>
+          <li><div class="phone-tip-dot" style="background:var(--gold)"></div>Keep your answer under 90 seconds</li>
+          <li><div class="phone-tip-dot" style="background:var(--gold)"></div>End with a measurable outcome</li>
         </ul>
-        <div class="phone-ready-btn">Tap when ready</div>
+        <div class="phone-mic-area">
+          <div class="phone-waveform" id="waveform-interview"></div>
+          <div class="phone-timer">0:42</div>
+          <div style="display:flex;align-items:center;gap:4px;margin-bottom:8px;opacity:0.8;">
+            <div class="phone-rec-dot"></div>
+            <span style="font-size:0.5rem;font-weight:700;color:var(--gold);letter-spacing:1px;">RECORDING</span>
+          </div>
+          <div class="phone-mic-btn">
+            <div class="phone-mic-outer"></div>
+            <div class="phone-mic-inner" style="background:var(--red);">
+              <div style="width:18px;height:18px;border-radius:3px;background:#fff;"></div>
+            </div>
+          </div>
+          <div style="font-size:0.45rem;color:#666;margin-top:4px;">Target: 90s</div>
+          <div style="font-size:0.5rem;color:#666;margin-top:2px;">Tap to finish &amp; analyze</div>
+        </div>
       </div>
 
       <!-- Pitch -->
       <div class="phone-screen phone-content" data-mode="pitch">
         <div class="phone-nav">
-          <div class="phone-nav-btn">← Cancel</div>
+          <div class="phone-nav-btn">← Back</div>
           <div style="display:flex;gap:4px;align-items:center;">
-            <div class="phone-nav-pill" style="background:rgba(232,168,56,0.15);color:var(--gold);">🚀 Pitch</div>
+            <div class="phone-nav-pill" style="background:rgba(224,90,78,0.15);color:var(--red);">🚀 Pitch / Sales</div>
             <div class="phone-nav-lvl">Lv 4</div>
           </div>
+          <div style="width:56px"></div>
         </div>
-        <div style="text-align:center;font-size:0.6rem;color:#999;margin-bottom:10px;">Read the prompt, then tap to begin recording.</div>
-        <div class="phone-prompt-card">
-          <div class="phone-prompt-badges"><span>Investor Pitch</span><span>⏱ 60s</span></div>
+        <div class="phone-prompt-card" style="border-color:rgba(224,90,78,0.3);">
+          <div class="phone-prompt-badges">
+            <span style="font-size:0.5rem;font-weight:600;padding:2px 7px;border-radius:10px;background:#2E2E2E;color:#666;">Developing</span>
+            <span style="font-size:0.5rem;font-weight:700;padding:2px 7px;border-radius:10px;background:rgba(224,90,78,0.15);color:var(--red);">⏱ 60s</span>
+          </div>
           <div class="phone-question">"You have 60 seconds. Convince an investor your product solves a real problem."</div>
         </div>
-        <div class="phone-tips-header">Coaching Tips</div>
+        <div class="phone-tips-header">COACHING TIPS</div>
         <ul class="phone-tips">
-          <li><div class="phone-tip-num">1</div> Lead with the problem, not the product</li>
-          <li><div class="phone-tip-num">2</div> Create urgency — why now?</li>
-          <li><div class="phone-tip-num">3</div> End with a clear ask</li>
+          <li><div class="phone-tip-dot" style="background:var(--red)"></div>Lead with the problem, not the product</li>
+          <li><div class="phone-tip-dot" style="background:var(--red)"></div>Create urgency — why now?</li>
+          <li><div class="phone-tip-dot" style="background:var(--red)"></div>End with a clear ask</li>
         </ul>
-        <div class="phone-ready-btn">Tap when ready</div>
+        <div class="phone-mic-area">
+          <div class="phone-waveform" id="waveform-pitch"></div>
+          <div class="phone-timer">0:31</div>
+          <div style="display:flex;align-items:center;gap:4px;margin-bottom:8px;opacity:0.8;">
+            <div class="phone-rec-dot" style="background:var(--red)"></div>
+            <span style="font-size:0.5rem;font-weight:700;color:var(--red);letter-spacing:1px;">RECORDING</span>
+          </div>
+          <div class="phone-mic-btn">
+            <div class="phone-mic-outer"></div>
+            <div class="phone-mic-inner" style="background:var(--red);">
+              <div style="width:18px;height:18px;border-radius:3px;background:#fff;"></div>
+            </div>
+          </div>
+          <div style="font-size:0.45rem;color:#666;margin-top:4px;">Target: 60s</div>
+          <div style="font-size:0.5rem;color:#666;margin-top:2px;">Tap to finish &amp; analyze</div>
+        </div>
       </div>
 
       <!-- Keynote -->
       <div class="phone-screen phone-content" data-mode="keynote">
         <div class="phone-nav">
-          <div class="phone-nav-btn">← Cancel</div>
+          <div class="phone-nav-btn">← Back</div>
           <div style="display:flex;gap:4px;align-items:center;">
-            <div class="phone-nav-pill" style="background:rgba(106,88,221,0.15);color:var(--purple);">🎤 Keynote</div>
+            <div class="phone-nav-pill" style="background:rgba(106,88,221,0.15);color:var(--purple);">🎤 Keynote / Talk</div>
             <div class="phone-nav-lvl">Lv 5</div>
           </div>
+          <div style="width:56px"></div>
         </div>
-        <div style="text-align:center;font-size:0.6rem;color:#999;margin-bottom:10px;">Read the prompt, then tap to begin recording.</div>
         <div class="phone-prompt-card" style="border-color:rgba(106,88,221,0.3);">
-          <div class="phone-prompt-badges"><span>Conference</span><span>⏱ 2m</span></div>
+          <div class="phone-prompt-badges">
+            <span style="font-size:0.5rem;font-weight:600;padding:2px 7px;border-radius:10px;background:#2E2E2E;color:#666;">Confident</span>
+            <span style="font-size:0.5rem;font-weight:700;padding:2px 7px;border-radius:10px;background:rgba(106,88,221,0.15);color:var(--purple);">⏱ 2m</span>
+          </div>
           <div class="phone-question">"Open a talk about why most teams fail at remote work — hook the audience in 30 seconds."</div>
         </div>
-        <div class="phone-tips-header">Coaching Tips</div>
+        <div class="phone-tips-header">COACHING TIPS</div>
         <ul class="phone-tips">
-          <li><div class="phone-tip-num" style="background:rgba(106,88,221,0.15);color:var(--purple);">1</div> Start with a bold claim or question, not "Hi, my name is..."</li>
-          <li><div class="phone-tip-num" style="background:rgba(106,88,221,0.15);color:var(--purple);">2</div> Paint a vivid picture with a specific detail</li>
-          <li><div class="phone-tip-num" style="background:rgba(106,88,221,0.15);color:var(--purple);">3</div> Set up tension — promise the audience a resolution</li>
+          <li><div class="phone-tip-dot" style="background:var(--purple)"></div>Start with a bold claim or question, not "Hi, my name is..."</li>
+          <li><div class="phone-tip-dot" style="background:var(--purple)"></div>Paint a vivid picture with a specific detail</li>
+          <li><div class="phone-tip-dot" style="background:var(--purple)"></div>Set up tension — promise the audience a resolution</li>
         </ul>
-        <div class="phone-ready-btn">Tap when ready</div>
+        <div class="phone-mic-area">
+          <div class="phone-waveform" id="waveform-keynote"></div>
+          <div class="phone-timer">1:12</div>
+          <div style="display:flex;align-items:center;gap:4px;margin-bottom:8px;opacity:0.8;">
+            <div class="phone-rec-dot" style="background:var(--purple)"></div>
+            <span style="font-size:0.5rem;font-weight:700;color:var(--purple);letter-spacing:1px;">RECORDING</span>
+          </div>
+          <div class="phone-mic-btn">
+            <div class="phone-mic-outer"></div>
+            <div class="phone-mic-inner" style="background:var(--red);">
+              <div style="width:18px;height:18px;border-radius:3px;background:#fff;"></div>
+            </div>
+          </div>
+          <div style="font-size:0.45rem;color:#666;margin-top:4px;">Target: 2m</div>
+          <div style="font-size:0.5rem;color:#666;margin-top:2px;">Tap to finish &amp; analyze</div>
+        </div>
       </div>
 
       <!-- Daily Convo -->
       <div class="phone-screen phone-content" data-mode="convo">
         <div class="phone-nav">
-          <div class="phone-nav-btn">← Cancel</div>
+          <div class="phone-nav-btn">← Back</div>
           <div style="display:flex;gap:4px;align-items:center;">
             <div class="phone-nav-pill" style="background:rgba(46,158,139,0.15);color:var(--teal);">💬 Daily Convo</div>
             <div class="phone-nav-lvl">Lv 2</div>
           </div>
+          <div style="width:56px"></div>
         </div>
-        <div style="text-align:center;font-size:0.6rem;color:#999;margin-bottom:10px;">Read the prompt, then tap to begin recording.</div>
         <div class="phone-prompt-card" style="border-color:rgba(46,158,139,0.3);">
-          <div class="phone-prompt-badges"><span>Impromptu</span><span>⏱ 60s</span></div>
+          <div class="phone-prompt-badges">
+            <span style="font-size:0.5rem;font-weight:600;padding:2px 7px;border-radius:10px;background:#2E2E2E;color:#666;">Starter</span>
+            <span style="font-size:0.5rem;font-weight:700;padding:2px 7px;border-radius:10px;background:rgba(46,158,139,0.15);color:var(--teal);">⏱ 60s</span>
+          </div>
           <div class="phone-question">"A colleague asks what you're working on. Explain your current project clearly in under a minute."</div>
         </div>
-        <div class="phone-tips-header">Coaching Tips</div>
+        <div class="phone-tips-header">COACHING TIPS</div>
         <ul class="phone-tips">
-          <li><div class="phone-tip-num" style="background:rgba(46,158,139,0.15);color:var(--teal);">1</div> Start with the one-sentence summary</li>
-          <li><div class="phone-tip-num" style="background:rgba(46,158,139,0.15);color:var(--teal);">2</div> Avoid jargon — explain like they're from a different team</li>
-          <li><div class="phone-tip-num" style="background:rgba(46,158,139,0.15);color:var(--teal);">3</div> End with why it matters</li>
+          <li><div class="phone-tip-dot" style="background:var(--teal)"></div>Start with the one-sentence summary</li>
+          <li><div class="phone-tip-dot" style="background:var(--teal)"></div>Avoid jargon — explain like they're from a different team</li>
+          <li><div class="phone-tip-dot" style="background:var(--teal)"></div>End with why it matters</li>
         </ul>
-        <div class="phone-ready-btn">Tap when ready</div>
+        <div class="phone-mic-area">
+          <div class="phone-waveform" id="waveform-convo"></div>
+          <div class="phone-timer">0:19</div>
+          <div style="display:flex;align-items:center;gap:4px;margin-bottom:8px;opacity:0.8;">
+            <div class="phone-rec-dot" style="background:var(--teal)"></div>
+            <span style="font-size:0.5rem;font-weight:700;color:var(--teal);letter-spacing:1px;">RECORDING</span>
+          </div>
+          <div class="phone-mic-btn">
+            <div class="phone-mic-outer"></div>
+            <div class="phone-mic-inner" style="background:var(--red);">
+              <div style="width:18px;height:18px;border-radius:3px;background:#fff;"></div>
+            </div>
+          </div>
+          <div style="font-size:0.45rem;color:#666;margin-top:4px;">Target: 60s</div>
+          <div style="font-size:0.5rem;color:#666;margin-top:2px;">Tap to finish &amp; analyze</div>
+        </div>
       </div>
     </div>
   </div>
@@ -959,10 +1036,30 @@
         <p>Interview, pitch, keynote, negotiation — 10 modes built for real situations.</p>
         <div class="mini-phone">
           <div class="mini-modes-grid">
-            <div class="mini-mode"><div class="icon">💼</div>Interview</div>
-            <div class="mini-mode"><div class="icon">🚀</div>Pitch</div>
-            <div class="mini-mode"><div class="icon">🎤</div>Keynote</div>
-            <div class="mini-mode"><div class="icon">🤝</div>Negotiate</div>
+            <div class="mini-mode-card">
+              <div class="mm-top"><div class="icon">💼</div></div>
+              <div class="mini-mode-bar" style="background:var(--gold)"></div>
+              <div class="mini-mode-name">Job Interview</div>
+              <div class="mini-mode-desc">Answer with confidence.</div>
+            </div>
+            <div class="mini-mode-card">
+              <div class="mm-top"><div class="icon">🚀</div></div>
+              <div class="mini-mode-bar" style="background:var(--red)"></div>
+              <div class="mini-mode-name">Pitch / Sales</div>
+              <div class="mini-mode-desc">Hooks, urgency, persuasion.</div>
+            </div>
+            <div class="mini-mode-card">
+              <div class="mm-top"><div class="icon">⚡</div></div>
+              <div class="mini-mode-bar" style="background:#1ABC9C"></div>
+              <div class="mini-mode-name">Impromptu</div>
+              <div class="mini-mode-desc">Think fast. No prep.</div>
+            </div>
+            <div class="mini-mode-card">
+              <div class="mm-top"><div class="icon">🧠</div></div>
+              <div class="mini-mode-bar" style="background:#3498DB"></div>
+              <div class="mini-mode-name">Explain a Topic</div>
+              <div class="mini-mode-desc">Break down ideas simply.</div>
+            </div>
           </div>
         </div>
       </div>
@@ -987,27 +1084,32 @@
         <h3>Get AI Feedback</h3>
         <p>Scores, coaching tips, and your best & worst moments — instantly.</p>
         <div class="mini-phone">
-          <div style="text-align:center;color:var(--gold);font-weight:700;font-size:1.1rem;margin-bottom:8px;">82<span style="font-size:0.6rem;color:#666">/100</span></div>
+          <div style="text-align:center;color:var(--teal);font-weight:700;font-size:1.1rem;margin-bottom:8px;font-family:'Fraunces',serif;">82<span style="font-size:0.6rem;color:#666">/100</span></div>
           <div class="mini-scores" id="mini-scores">
             <div class="mini-score-row">
-              <span style="width:50px">Filler</span>
+              <span style="width:52px">Fillers</span>
               <div class="mini-score-bar"><div class="mini-score-fill" data-width="90%" style="background:var(--teal)"></div></div>
-              <div class="mini-score-val">9</div>
+              <div class="mini-score-val" style="color:var(--teal)">9</div>
             </div>
             <div class="mini-score-row">
-              <span style="width:50px">Pace</span>
+              <span style="width:52px">Pace</span>
               <div class="mini-score-bar"><div class="mini-score-fill" data-width="70%" style="background:var(--gold)"></div></div>
-              <div class="mini-score-val">7</div>
+              <div class="mini-score-val" style="color:var(--gold)">7</div>
             </div>
             <div class="mini-score-row">
-              <span style="width:50px">Clarity</span>
-              <div class="mini-score-bar"><div class="mini-score-fill" data-width="80%" style="background:var(--purple)"></div></div>
-              <div class="mini-score-val">8</div>
+              <span style="width:52px">Clarity</span>
+              <div class="mini-score-bar"><div class="mini-score-fill" data-width="80%" style="background:var(--teal)"></div></div>
+              <div class="mini-score-val" style="color:var(--teal)">8</div>
             </div>
             <div class="mini-score-row">
-              <span style="width:50px">Structure</span>
-              <div class="mini-score-bar"><div class="mini-score-fill" data-width="85%" style="background:var(--teal)"></div></div>
-              <div class="mini-score-val">8.5</div>
+              <span style="width:52px">Structure</span>
+              <div class="mini-score-bar"><div class="mini-score-fill" data-width="90%" style="background:var(--teal)"></div></div>
+              <div class="mini-score-val" style="color:var(--teal)">9</div>
+            </div>
+            <div class="mini-score-row">
+              <span style="width:52px">Vocab</span>
+              <div class="mini-score-bar"><div class="mini-score-fill" data-width="80%" style="background:var(--teal)"></div></div>
+              <div class="mini-score-val" style="color:var(--teal)">8</div>
             </div>
           </div>
         </div>
@@ -1075,13 +1177,20 @@
       <!-- Interview Feedback -->
       <div class="phone-screen feedback-content active feedback-screen" data-feedback="interview">
         <div class="phone-nav">
-          <div class="phone-nav-btn">← Home</div>
+          <div class="phone-nav-btn" style="display:flex;align-items:center;gap:3px;"><span style="font-size:0.6rem">‹</span> Home</div>
           <div class="phone-nav-pill" style="background:rgba(232,168,56,0.15);color:var(--gold);">💼 Interview</div>
-          <div class="phone-nav-btn" style="background:transparent;border:1px solid var(--app-border);color:#999;">↺ Retry</div>
+          <div class="phone-nav-btn" style="background:transparent;border:1px solid var(--app-border);color:#999;display:flex;align-items:center;gap:3px;"><span style="font-size:0.55rem">↺</span> Retry</div>
         </div>
-        <div class="score-circle" id="score-interview">82</div>
+        <svg class="score-ring" viewBox="0 0 80 80" width="80" height="80" id="score-interview">
+          <circle cx="40" cy="40" r="33" stroke="#2A2A2A" stroke-width="8" fill="none"/>
+          <circle cx="40" cy="40" r="33" stroke="#3BB5A0" stroke-width="8" fill="none"
+                  stroke-linecap="round" stroke-dasharray="207.3" stroke-dashoffset="37.3"
+                  transform="rotate(-90 40 40)"/>
+          <text x="40" y="40" font-family="'Fraunces',serif" font-size="22" font-weight="700"
+                fill="#3BB5A0" text-anchor="middle" dominant-baseline="central">82</text>
+        </svg>
         <div style="text-align:center;font-size:0.5rem;color:#666;margin-bottom:4px;">Your average: 74 <span style="background:rgba(59,181,160,0.15);color:var(--teal);padding:1px 5px;border-radius:8px;font-weight:700;font-size:0.45rem;">+8 from avg</span></div>
-        <div style="text-align:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:2px;">Strong performance.</div>
+        <div style="text-align:center;font-family:'Fraunces',serif;font-size:1rem;font-weight:700;margin-bottom:2px;">Strong performance.</div>
         <div class="score-label">Level 3 · Emerging Orator · 1:24</div>
         <div style="background:var(--app-card);border-radius:14px;padding:10px;margin-bottom:8px;border:1px solid var(--app-border);">
           <div style="font-size:0.45rem;font-weight:700;color:#666;letter-spacing:1px;margin-bottom:4px;">YOU SPOKE ON</div>
@@ -1108,13 +1217,48 @@
             <p>"...and then we, um, basically just sort of improved things..."</p>
           </div>
         </div>
-        <div style="font-size:0.5rem;font-weight:500;color:#666;letter-spacing:1.2px;margin:10px 0 6px;">BREAKDOWN</div>
+        <div style="font-size:0.5rem;font-weight:700;color:#666;letter-spacing:1.2px;margin:10px 0 6px;">BREAKDOWN</div>
         <div id="metrics-interview">
-          <div class="metric-row"><span class="metric-name">Fillers</span><div class="metric-bar"><div class="metric-fill" data-width="90%" style="background:var(--teal)"></div></div><span class="metric-val">9</span></div>
-          <div class="metric-row"><span class="metric-name">Pace</span><div class="metric-bar"><div class="metric-fill" data-width="70%" style="background:var(--gold)"></div></div><span class="metric-val">7</span></div>
-          <div class="metric-row"><span class="metric-name">Clarity</span><div class="metric-bar"><div class="metric-fill" data-width="85%" style="background:var(--teal)"></div></div><span class="metric-val">8.5</span></div>
-          <div class="metric-row"><span class="metric-name">Structure</span><div class="metric-bar"><div class="metric-fill" data-width="80%" style="background:var(--teal)"></div></div><span class="metric-val">8</span></div>
-          <div class="metric-row"><span class="metric-name">Vocab</span><div class="metric-bar"><div class="metric-fill" data-width="75%" style="background:var(--gold)"></div></div><span class="metric-val">7.5</span></div>
+          <div class="metric-card">
+            <div class="metric-card-header">
+              <div><div class="metric-card-name">Filler Words</div><div class="metric-card-desc">Ums, uhs, verbal crutches</div></div>
+              <div class="metric-card-score" style="color:#3BB5A0;">90%</div>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" data-width="90%" style="background:#3BB5A0;"></div></div>
+            <div class="metric-tip">Clean delivery — use this confidence on higher-stakes prompts.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-header">
+              <div><div class="metric-card-name">Pace</div><div class="metric-card-desc">Speaking speed and rhythm</div></div>
+              <div class="metric-card-score" style="color:var(--gold);">70%</div>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" data-width="70%" style="background:var(--gold);"></div></div>
+            <div class="metric-tip">A deliberate pause before key points would add authority.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-header">
+              <div><div class="metric-card-name">Clarity</div><div class="metric-card-desc">How easy your words are to follow</div></div>
+              <div class="metric-card-score" style="color:#3BB5A0;">80%</div>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" data-width="80%" style="background:#3BB5A0;"></div></div>
+            <div class="metric-tip">Clear structure — shorter sentences would add punch.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-header">
+              <div><div class="metric-card-name">Structure</div><div class="metric-card-desc">Opening, body, and closing flow</div></div>
+              <div class="metric-card-score" style="color:#3BB5A0;">90%</div>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" data-width="90%" style="background:#3BB5A0;"></div></div>
+            <div class="metric-tip">STAR came through clearly — strong quantified close.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-header">
+              <div><div class="metric-card-name">Vocabulary</div><div class="metric-card-desc">Word choice strength and variety</div></div>
+              <div class="metric-card-score" style="color:#3BB5A0;">80%</div>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" data-width="80%" style="background:#3BB5A0;"></div></div>
+            <div class="metric-tip">Replace "basically" with specific action verbs next time.</div>
+          </div>
         </div>
         <div style="background:var(--app-card);border-radius:14px;padding:10px;margin-top:10px;border:1px solid var(--app-border);display:flex;align-items:center;gap:8px;margin-bottom:16px;">
           <div style="width:32px;height:32px;border-radius:10px;background:rgba(232,168,56,0.2);display:flex;align-items:center;justify-content:center;font-size:0.9rem;">💼</div>
@@ -1129,13 +1273,20 @@
       <!-- Pitch Feedback -->
       <div class="phone-screen feedback-content feedback-screen" data-feedback="pitch">
         <div class="phone-nav">
-          <div class="phone-nav-btn">← Home</div>
-          <div class="phone-nav-pill" style="background:rgba(232,168,56,0.15);color:var(--gold);">🚀 Pitch</div>
-          <div class="phone-nav-btn" style="background:transparent;border:1px solid var(--app-border);color:#999;">↺ Retry</div>
+          <div class="phone-nav-btn" style="display:flex;align-items:center;gap:3px;"><span style="font-size:0.6rem">‹</span> Home</div>
+          <div class="phone-nav-pill" style="background:rgba(224,90,78,0.15);color:var(--red);">🚀 Pitch / Sales</div>
+          <div class="phone-nav-btn" style="background:transparent;border:1px solid var(--app-border);color:#999;display:flex;align-items:center;gap:3px;"><span style="font-size:0.55rem">↺</span> Retry</div>
         </div>
-        <div class="score-circle">76</div>
+        <svg class="score-ring" viewBox="0 0 80 80" width="80" height="80">
+          <circle cx="40" cy="40" r="33" stroke="#2A2A2A" stroke-width="8" fill="none"/>
+          <circle cx="40" cy="40" r="33" stroke="#E8A838" stroke-width="8" fill="none"
+                  stroke-linecap="round" stroke-dasharray="207.3" stroke-dashoffset="49.8"
+                  transform="rotate(-90 40 40)"/>
+          <text x="40" y="40" font-family="'Fraunces',serif" font-size="22" font-weight="700"
+                fill="#E8A838" text-anchor="middle" dominant-baseline="central">76</text>
+        </svg>
         <div style="text-align:center;font-size:0.5rem;color:#666;margin-bottom:4px;">Your average: 71 <span style="background:rgba(59,181,160,0.15);color:var(--teal);padding:1px 5px;border-radius:8px;font-weight:700;font-size:0.45rem;">+5 from avg</span></div>
-        <div style="text-align:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:2px;">Getting there.</div>
+        <div style="text-align:center;font-family:'Fraunces',serif;font-size:1rem;font-weight:700;margin-bottom:2px;">Getting there.</div>
         <div class="score-label">Level 4 · Emerging Orator · 0:58</div>
         <div style="background:var(--app-card);border-radius:14px;padding:10px;margin-bottom:8px;border:1px solid var(--app-border);">
           <div style="font-size:0.45rem;font-weight:700;color:#666;letter-spacing:1px;margin-bottom:4px;">YOU SPOKE ON</div>
@@ -1162,18 +1313,53 @@
             <p>"...so basically our solution is kind of like a smarter way to..."</p>
           </div>
         </div>
-        <div style="font-size:0.5rem;font-weight:500;color:#666;letter-spacing:1.2px;margin:10px 0 6px;">BREAKDOWN</div>
+        <div style="font-size:0.5rem;font-weight:700;color:#666;letter-spacing:1.2px;margin:10px 0 6px;">BREAKDOWN</div>
         <div id="metrics-pitch">
-          <div class="metric-row"><span class="metric-name">Fillers</span><div class="metric-bar"><div class="metric-fill" data-width="80%" style="background:var(--teal)"></div></div><span class="metric-val">8</span></div>
-          <div class="metric-row"><span class="metric-name">Pace</span><div class="metric-bar"><div class="metric-fill" data-width="65%" style="background:var(--gold)"></div></div><span class="metric-val">6.5</span></div>
-          <div class="metric-row"><span class="metric-name">Clarity</span><div class="metric-bar"><div class="metric-fill" data-width="75%" style="background:var(--gold)"></div></div><span class="metric-val">7.5</span></div>
-          <div class="metric-row"><span class="metric-name">Structure</span><div class="metric-bar"><div class="metric-fill" data-width="70%" style="background:var(--gold)"></div></div><span class="metric-val">7</span></div>
-          <div class="metric-row"><span class="metric-name">Vocab</span><div class="metric-bar"><div class="metric-fill" data-width="90%" style="background:var(--teal)"></div></div><span class="metric-val">9</span></div>
+          <div class="metric-card">
+            <div class="metric-card-header">
+              <div><div class="metric-card-name">Filler Words</div><div class="metric-card-desc">Ums, uhs, verbal crutches</div></div>
+              <div class="metric-card-score" style="color:#3BB5A0;">80%</div>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" data-width="80%" style="background:#3BB5A0;"></div></div>
+            <div class="metric-tip">Solid filler control — stay deliberate on the close.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-header">
+              <div><div class="metric-card-name">Pace</div><div class="metric-card-desc">Speaking speed and rhythm</div></div>
+              <div class="metric-card-score" style="color:var(--gold);">60%</div>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" data-width="60%" style="background:var(--gold);"></div></div>
+            <div class="metric-tip">Slow down after your hook — let the problem land before pivoting.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-header">
+              <div><div class="metric-card-name">Clarity</div><div class="metric-card-desc">How easy your words are to follow</div></div>
+              <div class="metric-card-score" style="color:var(--gold);">70%</div>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" data-width="70%" style="background:var(--gold);"></div></div>
+            <div class="metric-tip">Your solution description got vague mid-pitch — be explicit.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-header">
+              <div><div class="metric-card-name">Structure</div><div class="metric-card-desc">Opening, body, and closing flow</div></div>
+              <div class="metric-card-score" style="color:#3BB5A0;">80%</div>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" data-width="80%" style="background:#3BB5A0;"></div></div>
+            <div class="metric-tip">Move the urgency point earlier — right after the problem.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-header">
+              <div><div class="metric-card-name">Vocabulary</div><div class="metric-card-desc">Word choice strength and variety</div></div>
+              <div class="metric-card-score" style="color:#3BB5A0;">90%</div>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" data-width="90%" style="background:#3BB5A0;"></div></div>
+            <div class="metric-tip">Strong word choice — "wastes" and "ready to buy" were precise.</div>
+          </div>
         </div>
         <div style="background:var(--app-card);border-radius:14px;padding:10px;margin-top:10px;border:1px solid var(--app-border);display:flex;align-items:center;gap:8px;margin-bottom:16px;">
-          <div style="width:32px;height:32px;border-radius:10px;background:rgba(232,168,56,0.2);display:flex;align-items:center;justify-content:center;font-size:0.9rem;">🚀</div>
+          <div style="width:32px;height:32px;border-radius:10px;background:rgba(224,90,78,0.2);display:flex;align-items:center;justify-content:center;font-size:0.9rem;">🚀</div>
           <div style="flex:1;">
-            <div style="font-size:0.6rem;font-weight:600;color:#fff;">Another Pitch — Emerging Orator</div>
+            <div style="font-size:0.6rem;font-weight:600;color:#fff;">Another Pitch / Sales — Emerging Orator</div>
             <div style="font-size:0.5rem;color:#666;">New question · +120 XP</div>
           </div>
           <div style="font-size:0.9rem;color:#666;">›</div>
@@ -1216,8 +1402,8 @@
         <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Explain what you do for a living to someone outside your field."</div></div>
       </div>
       <div class="mode-card fade-up delay-3">
-        <div class="mode-icon">⚔️</div>
-        <h4>Debate</h4>
+        <div class="mode-icon">🗣️</div>
+        <h4>Debate / Argue</h4>
         <div class="mode-focus">Argument flow, rebuttal</div>
         <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Argue for or against: remote work makes teams more productive."</div></div>
       </div>
@@ -1228,8 +1414,8 @@
         <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Tell the story of a risk you took that changed your career."</div></div>
       </div>
       <div class="mode-card fade-up delay-3">
-        <div class="mode-icon">🔬</div>
-        <h4>Explanation</h4>
+        <div class="mode-icon">🧠</div>
+        <h4>Explain a Topic</h4>
         <div class="mode-focus">Clarity, simplification</div>
         <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Explain blockchain to a curious 10-year-old."</div></div>
       </div>
@@ -1268,9 +1454,9 @@
       <button class="prompt-mode-tab" data-pmode="pitch"><span>🚀</span> Pitch</button>
       <button class="prompt-mode-tab" data-pmode="keynote"><span>🎤</span> Keynote</button>
       <button class="prompt-mode-tab" data-pmode="casual"><span>💬</span> Daily Convo</button>
-      <button class="prompt-mode-tab" data-pmode="debate"><span>⚔️</span> Debate</button>
+      <button class="prompt-mode-tab" data-pmode="debate"><span>🗣️</span> Debate</button>
       <button class="prompt-mode-tab" data-pmode="storytelling"><span>📖</span> Storytelling</button>
-      <button class="prompt-mode-tab" data-pmode="explanation"><span>🔬</span> Explanation</button>
+      <button class="prompt-mode-tab" data-pmode="explanation"><span>🧠</span> Explanation</button>
       <button class="prompt-mode-tab" data-pmode="negotiation"><span>🤝</span> Negotiation</button>
       <button class="prompt-mode-tab" data-pmode="impromptu"><span>⚡</span> Impromptu</button>
       <button class="prompt-mode-tab" data-pmode="networking"><span>🌐</span> Networking</button>
@@ -1334,9 +1520,9 @@
         <div class="ba-score-label">Overall Score</div>
         <div class="ba-metrics" id="ba-after">
           <div class="ba-metric"><span class="ba-metric-name">Fillers</span><div class="ba-metric-bar"><div class="ba-metric-fill" data-width="90%"></div></div><span class="ba-metric-val">9</span></div>
-          <div class="ba-metric"><span class="ba-metric-name">Pace</span><div class="ba-metric-bar"><div class="ba-metric-fill" data-width="85%"></div></div><span class="ba-metric-val">8.5</span></div>
+          <div class="ba-metric"><span class="ba-metric-name">Pace</span><div class="ba-metric-bar"><div class="ba-metric-fill" data-width="90%"></div></div><span class="ba-metric-val">9</span></div>
           <div class="ba-metric"><span class="ba-metric-name">Clarity</span><div class="ba-metric-bar"><div class="ba-metric-fill" data-width="90%"></div></div><span class="ba-metric-val">9</span></div>
-          <div class="ba-metric"><span class="ba-metric-name">Structure</span><div class="ba-metric-bar"><div class="ba-metric-fill" data-width="85%"></div></div><span class="ba-metric-val">8.5</span></div>
+          <div class="ba-metric"><span class="ba-metric-name">Structure</span><div class="ba-metric-bar"><div class="ba-metric-fill" data-width="80%"></div></div><span class="ba-metric-val">8</span></div>
           <div class="ba-metric"><span class="ba-metric-name">Vocab</span><div class="ba-metric-bar"><div class="ba-metric-fill" data-width="90%"></div></div><span class="ba-metric-val">9</span></div>
         </div>
         <div class="ba-detail"><strong>1 filler word</strong> &bull; Perfect pacing &bull; Clean STAR structure</div>
@@ -1357,7 +1543,7 @@
       <div class="game-card fade-up delay-1">
         <h4>⭐ XP Progress</h4>
         <div class="xp-bar-track"><div class="xp-bar-fill" id="xp-fill"></div></div>
-        <div class="xp-label"><span>Level 5 — Confident Communicator</span><span style="color:var(--gold);font-weight:700;">2,840 XP</span></div>
+        <div class="xp-label"><span>Level 5 — Rhetorician</span><span style="color:var(--gold);font-weight:700;">4,840 XP</span></div>
       </div>
 
       <!-- Streak -->
@@ -1623,7 +1809,7 @@
     {m:"networking",d:"9-10",q:"You have 2 minutes at a podium to introduce yourself to a room of 200 people at a conference. Make them want to talk to you afterwards.",t:["Open with a hook that creates curiosity", "Share one specific story that reveals your expertise", "Close with an invitation that makes approaching you easy"],dur:90}
   ];
 
-  const modeEmojis = {interview:"💼",pitch:"🚀",keynote:"🎤",casual:"💬",debate:"⚔️",storytelling:"📖",explanation:"🔬",negotiation:"🤝",impromptu:"⚡",networking:"🌐"};
+  const modeEmojis = {interview:"💼",pitch:"🚀",keynote:"🎤",casual:"💬",debate:"🗣️",storytelling:"📖",explanation:"🧠",negotiation:"🤝",impromptu:"⚡",networking:"🌐"};
   const modeNames = {interview:"Interview",pitch:"Pitch",keynote:"Keynote",casual:"Daily Convo",debate:"Debate",storytelling:"Storytelling",explanation:"Explanation",negotiation:"Negotiation",impromptu:"Impromptu",networking:"Networking"};
   const diffNames = {"1-2":"Starter · Lv 1-2","3-4":"Developing · Lv 3-4","5-6":"Confident · Lv 5-6","7-8":"Advanced · Lv 7-8","9-10":"Expert · Lv 9-10"};
 
@@ -1722,15 +1908,24 @@
   });
 
   // ---- Waveform Bars ----
-  const waveContainer = document.getElementById('waveform-mini');
-  for (let i = 0; i < 20; i++) {
-    const bar = document.createElement('div');
-    bar.className = 'wave-bar';
-    const h = 10 + Math.random() * 30;
-    bar.style.setProperty('--h', h + 'px');
-    bar.style.animationDelay = (i * 0.06) + 's';
-    waveContainer.appendChild(bar);
+  function buildWaveform(id, barClass, count, maxH, accentColor) {
+    const c = document.getElementById(id);
+    if (!c) return;
+    for (let i = 0; i < count; i++) {
+      const bar = document.createElement('div');
+      bar.className = barClass;
+      const h = 6 + Math.random() * maxH;
+      bar.style.setProperty('--h', h + 'px');
+      bar.style.animationDelay = (i * 0.06) + 's';
+      if (accentColor) bar.style.background = accentColor;
+      c.appendChild(bar);
+    }
   }
+  buildWaveform('waveform-mini', 'wave-bar', 20, 30, null);
+  buildWaveform('waveform-interview', 'phone-wave-bar', 16, 18, '#E8A838');
+  buildWaveform('waveform-pitch',     'phone-wave-bar', 16, 18, '#E05A4E');
+  buildWaveform('waveform-keynote',   'phone-wave-bar', 16, 18, '#7B68EE');
+  buildWaveform('waveform-convo',     'phone-wave-bar', 16, 18, '#3BB5A0');
 
   // ---- Scroll Animations ----
   function animateMetrics(container) {
