@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support — Parlance</title>
+  <meta name="description" content="Get help with Parlance — AI Speech Coach. FAQ and contact information.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #F5F3EF;
+      --card: #FFFFFF;
+      --card2: #F0EDE8;
+      --border: #E0DDD8;
+      --text: #1A1A1A;
+      --sub: #666666;
+      --dim: #999999;
+      --gold: #E8A838;
+      --radius: 18px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .display { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; }
+
+    /* ---- Nav ---- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(245, 243, 239, 0.85);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700;
+      color: var(--text); text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-home {
+      color: var(--sub); font-size: 0.85rem; font-weight: 600;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-home:hover { color: var(--text); }
+
+    /* ---- Page Header ---- */
+    .page-header {
+      padding: 8rem 1.5rem 3rem;
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 0.85rem;
+    }
+    .page-header p {
+      font-size: 1rem;
+      color: var(--sub);
+    }
+
+    /* ---- Content ---- */
+    .content {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 0;
+    }
+
+    /* ---- Accordion ---- */
+    .faq-list {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--card);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item:last-child { border-bottom: none; }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      transition: background 0.2s;
+    }
+    .faq-question:hover { background: var(--card2); }
+    .faq-item.active .faq-question { color: var(--text); }
+
+    .faq-chevron {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      color: var(--gold);
+      transition: transform 0.3s ease;
+    }
+    .faq-item.active .faq-chevron { transform: rotate(180deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .faq-item.active .faq-answer { max-height: 500px; }
+
+    .faq-answer-inner {
+      padding: 0 1.4rem 1.2rem;
+      font-size: 0.9rem;
+      color: var(--sub);
+      line-height: 1.75;
+    }
+    .faq-answer-inner a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .faq-answer-inner a:hover { text-decoration: underline; }
+    .faq-answer-inner strong { color: var(--text); font-weight: 600; }
+
+    /* ---- Contact Strip ---- */
+    .contact-strip {
+      max-width: 480px;
+      margin: 2.5rem auto 5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.75rem;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .contact-strip:hover { border-color: var(--gold); }
+    .contact-strip h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .contact-strip p {
+      font-size: 0.9rem;
+      color: var(--sub);
+      margin-bottom: 1.1rem;
+    }
+    .contact-email {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--text);
+      font-size: 0.875rem;
+      font-weight: 700;
+      padding: 0.65rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .contact-email:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    /* ---- Footer ---- */
+    .site-footer {
+      text-align: center;
+      padding: 1.75rem 1.5rem;
+      font-size: 0.8rem;
+      color: var(--dim);
+      border-top: 1px solid var(--border);
+    }
+    .site-footer a { color: var(--sub); text-decoration: none; transition: color 0.2s; }
+    .site-footer a:hover { color: var(--text); }
+    .site-footer .sep { margin: 0 0.5rem; }
+
+    /* ---- Fade up ---- */
+    .fade-up {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+    .fade-up.delay-3 { transition-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Parlance<span>.</span></a>
+  <a href="index.html" class="nav-home">← Home</a>
+</nav>
+
+<div class="page-header fade-up">
+  <h1 class="display">Support</h1>
+  <p class="fade-up delay-1">Get help with Parlance — AI Speech Coach</p>
+</div>
+
+<div class="content">
+
+  <div class="faq-list fade-up delay-2">
+
+    <div class="faq-item active">
+      <button class="faq-question">
+        How does AI scoring work?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          After each session, your speech transcript and metrics (speaking rate, pitch variance, filler word count, and pacing) are sent to Claude AI (Anthropic). Claude analyzes your response against the prompt and coaching tips, then returns a score and written feedback. Pro subscribers also receive a vocal tone score powered by Hume AI, which analyzes confidence, nervousness, and enthusiasm in your voice. All scores are for practice purposes only.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        What's included in Pro?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Pro unlocks vocal emotion analysis. Hume AI listens to your actual audio and scores your tone across dimensions like confidence, nervousness, and enthusiasm. Free users receive text-based AI coaching from Claude; Pro adds this layer of vocal intelligence on top. Pro also unlocks access to higher-difficulty prompts and additional practice modes.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Does Parlance work offline?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          You can browse practice prompts and review past sessions offline. Generating AI feedback requires an internet connection: your transcript is sent to our AI providers once per completed session. If you're offline when a session ends, the app will retry when connectivity is restored.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Why does the app need microphone access?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Parlance records your voice during practice sessions to generate a transcript and measure speech metrics (rate, pauses, filler words). Free users' audio is transcribed on-device and never uploaded. Pro subscribers' audio is briefly sent to Hume AI for vocal tone analysis, then discarded. It is not stored on any server.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        How do streaks work?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Complete at least one practice session per day to maintain your streak. Streaks reset at midnight in your local timezone if you miss a day. Your streak count is stored locally on your device and is not synced across devices or backed up to a server.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Is my audio stored anywhere?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          No. Audio recordings are deleted from your device immediately after processing. For free users, transcription happens on-device and no audio ever leaves your phone. For Pro subscribers, audio is sent to Hume AI solely for real-time tone analysis and is not retained by them under our agreement. See our <a href="privacy.html">Privacy Policy</a> for full details.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        How do I delete my data?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Go to <strong>Profile → Settings → Reset All Data</strong>. This permanently deletes your session history, scores, transcripts, XP, achievements, and profile from your device. Because all data is stored locally, this action is immediate and irreversible. We do not hold a server-side copy.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        The app isn't responding — what should I do?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Try force-quitting and relaunching the app. If the issue persists, check your internet connection, as AI feedback requires connectivity. If the problem continues after restarting, email us at <a href="mailto:parlance.app@gmail.com">parlance.app@gmail.com</a> with your device model and iOS version and we'll look into it.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="contact-strip fade-up delay-3">
+    <h2>Still need help?</h2>
+    <p>Email us and we'll get back to you.</p>
+    <a href="mailto:parlance.app@gmail.com" class="contact-email">parlance.app@gmail.com</a>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <span>© 2026 Parlance</span>
+  <span class="sep">·</span>
+  <a href="privacy.html">Privacy Policy</a>
+  <span class="sep">·</span>
+  <span>Terms of Service</span>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.faq-item').classList.toggle('active');
+    });
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px 40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  setTimeout(() => {
+    document.querySelectorAll('.fade-up:not(.visible)').forEach(el => el.classList.add('visible'));
+  }, 2000);
+</script>
+
+</body>
+</html>
