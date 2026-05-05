@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Parlance</title>
+  <meta name="description" content="How Parlance handles your voice data, AI processing, and session history">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #F5F3EF;
+      --card: #FFFFFF;
+      --card2: #F0EDE8;
+      --border: #E0DDD8;
+      --text: #1A1A1A;
+      --sub: #666666;
+      --dim: #999999;
+      --gold: #E8A838;
+      --radius: 18px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .display { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; }
+
+    /* ---- Nav ---- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(245, 243, 239, 0.85);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700;
+      color: var(--text); text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-home {
+      color: var(--sub); font-size: 0.85rem; font-weight: 600;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-home:hover { color: var(--text); }
+
+    /* ---- Page Header ---- */
+    .page-header {
+      padding: 8rem 1.5rem 3rem;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+    .page-meta {
+      font-size: 0.875rem;
+      color: var(--sub);
+      line-height: 2;
+    }
+    .page-meta a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .page-meta a:hover { text-decoration: underline; }
+
+    /* ---- Content ---- */
+    .content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .content h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      border-left: 3px solid var(--gold);
+      padding-left: 0.75rem;
+      margin: 2.5rem 0 0.85rem;
+    }
+
+    .content p {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--sub);
+      margin-bottom: 0.75rem;
+    }
+
+    .content strong { color: var(--text); font-weight: 600; }
+
+    .content a { color: var(--gold); text-decoration: none; font-weight: 600; }
+    .content a:hover { text-decoration: underline; }
+
+    .content ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0.75rem;
+    }
+    .content ul li {
+      font-size: 0.95rem;
+      color: var(--sub);
+      line-height: 1.75;
+      padding: 0.2rem 0 0.2rem 1.25rem;
+      position: relative;
+    }
+    .content ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* Sub-groups inside "What We Collect" */
+    .sub-group { margin: 1rem 0 0.25rem; }
+    .sub-group-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.75px;
+      color: var(--text);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    /* ---- Service Cards ---- */
+    .service-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    @media (max-width: 600px) {
+      .service-cards { grid-template-columns: 1fr; }
+    }
+    .service-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .service-card:hover { transform: translateY(-2px); border-color: var(--gold); }
+    .service-card strong {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+    .service-card p {
+      font-size: 0.8rem;
+      color: var(--sub);
+      margin-bottom: 0.65rem;
+    }
+    .service-card a {
+      font-size: 0.75rem;
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .service-card a:hover { text-decoration: underline; }
+
+    /* ---- Footer ---- */
+    .site-footer {
+      text-align: center;
+      padding: 1.75rem 1.5rem;
+      font-size: 0.8rem;
+      color: var(--dim);
+      border-top: 1px solid var(--border);
+    }
+    .site-footer a { color: var(--sub); text-decoration: none; transition: color 0.2s; }
+    .site-footer a:hover { color: var(--text); }
+    .site-footer .sep { margin: 0 0.5rem; }
+
+    /* ---- Fade up ---- */
+    .fade-up {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Parlance<span>.</span></a>
+  <a href="index.html" class="nav-home">← Home</a>
+</nav>
+
+<div class="page-header fade-up">
+  <h1 class="display">Privacy Policy</h1>
+  <div class="page-meta fade-up delay-1">
+    Effective date: May 5, 2026<br>
+    App: Parlance — AI Speech Coach<br>
+    Questions? <a href="mailto:parlance.app@gmail.com">parlance.app@gmail.com</a>
+  </div>
+</div>
+
+<div class="content">
+
+  <h2 class="fade-up">What We Collect</h2>
+
+  <div class="sub-group fade-up">
+    <div class="sub-group-label">On your device (never leaves unless noted below)</div>
+    <ul>
+      <li>Your display name, username, and avatar — stored locally in SwiftData</li>
+      <li>Your session history — scores, transcripts, XP, achievements, streaks</li>
+      <li>App preferences — theme, notification settings, sound effects</li>
+    </ul>
+  </div>
+
+  <div class="sub-group fade-up">
+    <div class="sub-group-label">Transmitted to our servers</div>
+    <ul>
+      <li>Your speech transcript and session metrics (speaking rate, pitch, filler count) are sent to our AI provider to generate coaching feedback. This happens once per completed session.</li>
+    </ul>
+  </div>
+
+  <div class="sub-group fade-up">
+    <div class="sub-group-label">Transmitted for Pro subscribers only</div>
+    <ul>
+      <li>Your audio recording is briefly uploaded to our AI emotion analysis provider to detect vocal tone (confidence, nervousness, enthusiasm). The audio is analyzed immediately and is not stored.</li>
+    </ul>
+  </div>
+
+  <h2 class="fade-up">How We Use It</h2>
+  <ul class="fade-up">
+    <li>To generate personalized AI coaching feedback after each session</li>
+    <li>To track your progress, streaks, and achievements locally</li>
+    <li>To display your stats in the weekly league and on your profile</li>
+    <li>We do not sell your data, use it for advertising, or share it with third parties beyond the AI processing services described above</li>
+  </ul>
+
+  <h2 class="fade-up">AI Processing</h2>
+  <p class="fade-up">Parlance uses Claude AI (Anthropic) to generate session feedback. For Pro subscribers, we also use Hume AI for vocal emotion analysis. Both services process your data solely to generate your coaching results and do not store or use your data for their own model training under our agreements with them.</p>
+  <p class="fade-up">All AI-generated scores and coaching feedback are for practice purposes only. They are not professional coaching, psychological assessment, or any form of certified evaluation.</p>
+
+  <h2 class="fade-up">Data Storage &amp; Security</h2>
+  <ul class="fade-up">
+    <li>Session data, transcripts, and your profile are stored on your device only using Apple's SwiftData framework</li>
+    <li>Data is transmitted over encrypted HTTPS connections</li>
+    <li>Audio recordings are deleted from your device immediately after processing</li>
+  </ul>
+
+  <h2 class="fade-up">Your Rights</h2>
+  <ul class="fade-up">
+    <li><strong>Delete your data:</strong> Go to Profile → Settings → Reset All Data to permanently delete everything stored on your device</li>
+    <li><strong>Access:</strong> All your data is on your device — you can view it within the app at any time</li>
+    <li><strong>Portability:</strong> Your data stays on your device. We do not hold a copy to export</li>
+  </ul>
+
+  <h2 class="fade-up">Third-Party Services</h2>
+  <div class="service-cards fade-up">
+    <div class="service-card">
+      <strong>Anthropic (Claude)</strong>
+      <p>AI coaching feedback</p>
+      <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener">anthropic.com/privacy ↗</a>
+    </div>
+    <div class="service-card">
+      <strong>Hume AI</strong>
+      <p>Vocal emotion analysis (Pro)</p>
+      <a href="https://www.hume.ai/privacy" target="_blank" rel="noopener">hume.ai/privacy ↗</a>
+    </div>
+    <div class="service-card">
+      <strong>Cloudflare Workers</strong>
+      <p>Secure API proxy</p>
+      <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy ↗</a>
+    </div>
+  </div>
+
+  <h2 class="fade-up">Children</h2>
+  <p class="fade-up">Parlance is not directed at children under 13. We do not knowingly collect data from children.</p>
+
+  <h2 class="fade-up">Changes</h2>
+  <p class="fade-up">We will update this page when our practices change and revise the effective date. Continued use of the app after changes constitutes acceptance.</p>
+
+  <h2 class="fade-up">Contact</h2>
+  <p class="fade-up">
+    Questions about this policy? Email: <a href="mailto:parlance.app@gmail.com">parlance.app@gmail.com</a><br>
+    Or visit: <a href="support.html">parlance.app/support</a>
+  </p>
+
+</div>
+
+<footer class="site-footer">
+  <span>© 2026 Parlance</span>
+  <span class="sep">·</span>
+  <a href="privacy.html">Privacy Policy</a>
+  <span class="sep">·</span>
+  <span>Terms of Service</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px 40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  setTimeout(() => {
+    document.querySelectorAll('.fade-up:not(.visible)').forEach(el => el.classList.add('visible'));
+  }, 2000);
+</script>
+
+</body>
+</html>
