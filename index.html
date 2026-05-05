@@ -118,12 +118,12 @@
     .phone {
       width: 280px; height: 580px;
       background: var(--app-bg);
-      border-radius: 40px;
-      border: 4px solid #2A2A2A;
+      border-radius: 46px;
+      border: 1.5px solid #2a2a2d;
       position: relative;
       overflow: hidden;
       margin: 0 auto;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(0,0,0,0.05);
     }
     .phone-notch {
       position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
@@ -136,6 +136,7 @@
       overflow-y: auto; overflow-x: hidden;
       color: #fff;
       font-family: 'Inter', sans-serif;
+      text-align: left;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
     }
@@ -171,16 +172,17 @@
       margin-bottom: 12px;
     }
     .phone-nav-btn {
-      font-size: 0.6rem; color: #fff; background: var(--app-card);
-      padding: 4px 8px; border-radius: 8px;
+      font-size: 0.5rem; color: #fff; background: var(--app-card);
+      padding: 2px 6px; border-radius: 5px; line-height: 1;
     }
     .phone-nav-pill {
-      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.5px;
-      padding: 3px 8px; border-radius: 10px;
+      font-size: 0.48rem; font-weight: 700; letter-spacing: 0.3px;
+      padding: 2px 5px; border-radius: 20px; border: none; line-height: 1;
     }
     .phone-nav-lvl {
-      font-size: 0.55rem; font-weight: 600; color: #666;
-      background: var(--app-card); padding: 3px 6px; border-radius: 8px;
+      font-size: 0.48rem; font-weight: 600; color: #666;
+      background: var(--app-card); padding: 2px 5px; border-radius: 20px;
+      border: none; line-height: 1;
     }
 
     /* Prompt card */
@@ -199,7 +201,8 @@
     }
     .phone-question {
       font-family: 'Fraunces', serif;
-      font-size: 0.9rem; line-height: 1.4; color: #fff;
+      font-size: 0.82rem; line-height: 1.42; color: #fff;
+      font-variation-settings: 'opsz' 72;
     }
 
     /* Coaching tips */
@@ -219,76 +222,75 @@
       flex-shrink: 0; margin-top: 5px;
     }
 
-    /* Mic button area */
+
+    /* Start recording button (LoadingView bottom CTA) */
+    .phone-start-btn {
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      background: var(--gold); color: #121212;
+      padding: 10px; border-radius: 12px;
+      font-size: 0.72rem; font-weight: 700;
+      margin-top: auto; flex-shrink: 0;
+    }
+
+    /* Pre-recording: "Read the prompt…" subtitle */
+    .phone-subtitle {
+      font-size: 0.52rem; color: #777;
+      text-align: center; padding: 5px 0 9px;
+    }
+
+    /* FOCUS AREAS divider row */
+    .phone-focus-divider {
+      display: flex; align-items: center; gap: 8px;
+      margin: 10px 0 12px;
+    }
+    .phone-focus-line { flex: 1; height: 1px; background: #2A2A2A; }
+    .phone-focus-label {
+      font-size: 0.44rem; font-weight: 700; color: #555;
+      letter-spacing: 1.3px; text-transform: uppercase; white-space: nowrap;
+    }
+
+    /* Numbered focus items */
+    .phone-focus-items { display: flex; flex-direction: column; gap: 11px; }
+    .phone-focus-item { display: flex; align-items: baseline; gap: 10px; }
+    .phone-focus-num {
+      font-family: 'Fraunces', serif; font-size: 0.9rem; font-weight: 700;
+      font-variation-settings: 'opsz' 72;
+      width: 12px; flex-shrink: 0; line-height: 1;
+    }
+    .phone-focus-text {
+      font-size: 0.6rem; color: rgba(255,255,255,0.88); line-height: 1.45;
+    }
+
+    /* ---- Recording state elements ---- */
     .phone-mic-area {
       display: flex; flex-direction: column; align-items: center;
-      margin-top: auto; padding-top: 8px;
+      margin-top: auto; padding-top: 4px;
     }
-    .phone-mic-btn {
-      width: 72px; height: 72px; border-radius: 50%;
-      position: relative; margin-bottom: 6px;
-    }
-    .phone-mic-outer {
-      position: absolute; inset: 0; border-radius: 50%;
-      border: 3px solid var(--app-border);
-    }
-    .phone-mic-progress {
-      position: absolute; inset: 0;
-      border-radius: 50%;
-      border: 3px solid transparent;
-      border-top-color: var(--gold);
-      border-right-color: var(--gold);
-      transform: rotate(-90deg);
-    }
-    .phone-mic-inner {
-      position: absolute; inset: 8px; border-radius: 50%;
-      background: var(--gold);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem;
-    }
-    .phone-mic-status {
-      font-size: 0.5rem; font-weight: 700; color: var(--gold);
-      letter-spacing: 1px; margin-bottom: 2px;
-    }
-    .phone-mic-label {
-      font-size: 0.55rem; color: #666;
-    }
-
-    /* Waveform in mic area */
     .phone-waveform {
       display: flex; align-items: center; justify-content: center;
-      gap: 2px; height: 30px; margin-bottom: 6px;
+      gap: 2px; height: 40px; margin-bottom: 10px; width: 180px;
     }
     .phone-wave-bar {
-      width: 3px; border-radius: 1.5px; background: var(--gold);
-      animation: wave 1.2s ease-in-out infinite;
+      flex: 1; border-radius: 2px;
+      transform-origin: center;
+      animation: phone-wave ease-in-out infinite;
     }
-
-    /* Timer */
+    @keyframes phone-wave {
+      0%, 100% { transform: scaleY(0.12); }
+      50%       { transform: scaleY(1); }
+    }
     .phone-timer {
-      font-family: 'Fraunces', serif;
-      font-size: 1.5rem; font-weight: 700; color: var(--gold);
-      margin-bottom: 4px;
+      font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700;
+      color: var(--gold); margin-bottom: 2px; text-align: center;
     }
-
-    /* Recording indicator */
     .phone-rec-dot {
       width: 6px; height: 6px; background: var(--gold);
       border-radius: 50%; display: inline-block;
       animation: pulse-dot 1.5s infinite;
     }
     @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.3); }
-    }
-
-    /* Ready button (loading screen style) */
-    .phone-ready-btn {
-      display: flex; align-items: center; justify-content: center;
-      background: var(--gold); color: var(--app-bg);
-      padding: 10px; border-radius: 14px;
-      font-size: 0.75rem; font-weight: 700;
-      margin-top: auto;
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
     }
 
     /* ---- How It Works ---- */
@@ -378,8 +380,9 @@
 
     .feedback-phone { width: 300px; height: 620px; }
 
-    .score-ring { display: block; margin: 0 auto 6px; }
-    .score-label { font-size: 0.6rem; color: #666; margin-bottom: 8px; text-align: center; }
+    .score-ring { display: block; margin: 0 auto 4px; }
+    .score-label { font-size: 0.55rem; color: #666; margin-bottom: 6px; text-align: center; }
+    .score-xp { text-align: center; font-size: 0.65rem; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
 
     /* Metric cards — match MetricCardView layout */
     .metric-card {
@@ -834,7 +837,7 @@
     <div class="phone fade-up delay-4" style="margin-top:0.5rem">
       <div class="phone-notch"></div>
 
-      <!-- Interview -->
+      <!-- Interview — recording state -->
       <div class="phone-screen phone-content active" data-mode="interview">
         <div class="phone-nav">
           <div class="phone-nav-btn">← Back</div>
@@ -851,31 +854,47 @@
           </div>
           <div class="phone-question">"Tell me about a time you had to lead a project with an unclear scope."</div>
         </div>
-        <div class="phone-tips-header">COACHING TIPS</div>
-        <ul class="phone-tips">
-          <li><div class="phone-tip-dot" style="background:var(--gold)"></div>Use the STAR framework — Situation, Task, Action, Result</li>
-          <li><div class="phone-tip-dot" style="background:var(--gold)"></div>Keep your answer under 90 seconds</li>
-          <li><div class="phone-tip-dot" style="background:var(--gold)"></div>End with a measurable outcome</li>
-        </ul>
+        <div class="phone-focus-divider">
+          <div class="phone-focus-line"></div>
+          <span class="phone-focus-label">Focus Areas</span>
+          <div class="phone-focus-line"></div>
+        </div>
+        <div class="phone-focus-items">
+          <div class="phone-focus-item">
+            <span class="phone-focus-num" style="color:var(--gold);">1</span>
+            <span class="phone-focus-text">Use the STAR framework — Situation, Task, Action, Result</span>
+          </div>
+          <div class="phone-focus-item">
+            <span class="phone-focus-num" style="color:var(--gold);">2</span>
+            <span class="phone-focus-text">Keep your answer under 90 seconds</span>
+          </div>
+          <div class="phone-focus-item">
+            <span class="phone-focus-num" style="color:var(--gold);">3</span>
+            <span class="phone-focus-text">End with a measurable outcome</span>
+          </div>
+        </div>
         <div class="phone-mic-area">
           <div class="phone-waveform" id="waveform-interview"></div>
           <div class="phone-timer">0:42</div>
-          <div style="display:flex;align-items:center;gap:4px;margin-bottom:8px;opacity:0.8;">
+          <div style="display:flex;align-items:center;gap:4px;margin-bottom:8px;opacity:0.9;">
             <div class="phone-rec-dot"></div>
             <span style="font-size:0.5rem;font-weight:700;color:var(--gold);letter-spacing:1px;">RECORDING</span>
           </div>
-          <div class="phone-mic-btn">
-            <div class="phone-mic-outer"></div>
-            <div class="phone-mic-inner" style="background:var(--red);">
-              <div style="width:18px;height:18px;border-radius:3px;background:#fff;"></div>
-            </div>
-          </div>
+          <svg width="80" height="80" viewBox="0 0 80 80" style="display:block;">
+            <circle cx="40" cy="40" r="37" stroke="#2A2A2A" stroke-width="3" fill="none"/>
+            <circle cx="40" cy="40" r="37" stroke="#E8A838" stroke-width="3" fill="none"
+              stroke-linecap="round" stroke-dasharray="232.5" stroke-dashoffset="124"
+              transform="rotate(-90 40 40)"/>
+            <circle cx="40" cy="40" r="34" fill="rgba(224,90,78,0.12)"/>
+            <circle cx="40" cy="40" r="27" fill="#E05A4E"/>
+            <rect x="32" y="32" width="16" height="16" rx="3" fill="white"/>
+          </svg>
           <div style="font-size:0.45rem;color:#666;margin-top:4px;">Target: 90s</div>
-          <div style="font-size:0.5rem;color:#666;margin-top:2px;">Tap to finish &amp; analyze</div>
+          <div style="font-size:0.5rem;color:#666;margin-top:2px;padding-bottom:16px;">Tap to finish &amp; analyze</div>
         </div>
       </div>
 
-      <!-- Pitch -->
+      <!-- Pitch — recording state -->
       <div class="phone-screen phone-content" data-mode="pitch">
         <div class="phone-nav">
           <div class="phone-nav-btn">← Back</div>
@@ -892,31 +911,47 @@
           </div>
           <div class="phone-question">"You have 60 seconds. Convince an investor your product solves a real problem."</div>
         </div>
-        <div class="phone-tips-header">COACHING TIPS</div>
-        <ul class="phone-tips">
-          <li><div class="phone-tip-dot" style="background:var(--red)"></div>Lead with the problem, not the product</li>
-          <li><div class="phone-tip-dot" style="background:var(--red)"></div>Create urgency — why now?</li>
-          <li><div class="phone-tip-dot" style="background:var(--red)"></div>End with a clear ask</li>
-        </ul>
+        <div class="phone-focus-divider">
+          <div class="phone-focus-line"></div>
+          <span class="phone-focus-label">Focus Areas</span>
+          <div class="phone-focus-line"></div>
+        </div>
+        <div class="phone-focus-items">
+          <div class="phone-focus-item">
+            <span class="phone-focus-num" style="color:var(--red);">1</span>
+            <span class="phone-focus-text">Lead with the problem, not the product</span>
+          </div>
+          <div class="phone-focus-item">
+            <span class="phone-focus-num" style="color:var(--red);">2</span>
+            <span class="phone-focus-text">Create urgency — why now?</span>
+          </div>
+          <div class="phone-focus-item">
+            <span class="phone-focus-num" style="color:var(--red);">3</span>
+            <span class="phone-focus-text">End with a clear ask</span>
+          </div>
+        </div>
         <div class="phone-mic-area">
           <div class="phone-waveform" id="waveform-pitch"></div>
           <div class="phone-timer">0:31</div>
-          <div style="display:flex;align-items:center;gap:4px;margin-bottom:8px;opacity:0.8;">
-            <div class="phone-rec-dot" style="background:var(--red)"></div>
-            <span style="font-size:0.5rem;font-weight:700;color:var(--red);letter-spacing:1px;">RECORDING</span>
+          <div style="display:flex;align-items:center;gap:4px;margin-bottom:8px;opacity:0.9;">
+            <div class="phone-rec-dot"></div>
+            <span style="font-size:0.5rem;font-weight:700;color:var(--gold);letter-spacing:1px;">RECORDING</span>
           </div>
-          <div class="phone-mic-btn">
-            <div class="phone-mic-outer"></div>
-            <div class="phone-mic-inner" style="background:var(--red);">
-              <div style="width:18px;height:18px;border-radius:3px;background:#fff;"></div>
-            </div>
-          </div>
+          <svg width="80" height="80" viewBox="0 0 80 80" style="display:block;">
+            <circle cx="40" cy="40" r="37" stroke="#2A2A2A" stroke-width="3" fill="none"/>
+            <circle cx="40" cy="40" r="37" stroke="#E8A838" stroke-width="3" fill="none"
+              stroke-linecap="round" stroke-dasharray="232.5" stroke-dashoffset="112"
+              transform="rotate(-90 40 40)"/>
+            <circle cx="40" cy="40" r="34" fill="rgba(224,90,78,0.12)"/>
+            <circle cx="40" cy="40" r="27" fill="#E05A4E"/>
+            <rect x="32" y="32" width="16" height="16" rx="3" fill="white"/>
+          </svg>
           <div style="font-size:0.45rem;color:#666;margin-top:4px;">Target: 60s</div>
-          <div style="font-size:0.5rem;color:#666;margin-top:2px;">Tap to finish &amp; analyze</div>
+          <div style="font-size:0.5rem;color:#666;margin-top:2px;padding-bottom:16px;">Tap to finish &amp; analyze</div>
         </div>
       </div>
 
-      <!-- Keynote -->
+      <!-- Keynote — recording state -->
       <div class="phone-screen phone-content" data-mode="keynote">
         <div class="phone-nav">
           <div class="phone-nav-btn">← Back</div>
@@ -933,68 +968,100 @@
           </div>
           <div class="phone-question">"Open a talk about why most teams fail at remote work — hook the audience in 30 seconds."</div>
         </div>
-        <div class="phone-tips-header">COACHING TIPS</div>
-        <ul class="phone-tips">
-          <li><div class="phone-tip-dot" style="background:var(--purple)"></div>Start with a bold claim or question, not "Hi, my name is..."</li>
-          <li><div class="phone-tip-dot" style="background:var(--purple)"></div>Paint a vivid picture with a specific detail</li>
-          <li><div class="phone-tip-dot" style="background:var(--purple)"></div>Set up tension — promise the audience a resolution</li>
-        </ul>
+        <div class="phone-focus-divider">
+          <div class="phone-focus-line"></div>
+          <span class="phone-focus-label">Focus Areas</span>
+          <div class="phone-focus-line"></div>
+        </div>
+        <div class="phone-focus-items">
+          <div class="phone-focus-item">
+            <span class="phone-focus-num" style="color:var(--purple);">1</span>
+            <span class="phone-focus-text">Start with a bold claim, not "Hi, my name is..."</span>
+          </div>
+          <div class="phone-focus-item">
+            <span class="phone-focus-num" style="color:var(--purple);">2</span>
+            <span class="phone-focus-text">Paint a vivid picture with a specific detail</span>
+          </div>
+          <div class="phone-focus-item">
+            <span class="phone-focus-num" style="color:var(--purple);">3</span>
+            <span class="phone-focus-text">Set up tension — promise a resolution</span>
+          </div>
+        </div>
         <div class="phone-mic-area">
           <div class="phone-waveform" id="waveform-keynote"></div>
           <div class="phone-timer">1:12</div>
-          <div style="display:flex;align-items:center;gap:4px;margin-bottom:8px;opacity:0.8;">
-            <div class="phone-rec-dot" style="background:var(--purple)"></div>
-            <span style="font-size:0.5rem;font-weight:700;color:var(--purple);letter-spacing:1px;">RECORDING</span>
+          <div style="display:flex;align-items:center;gap:4px;margin-bottom:8px;opacity:0.9;">
+            <div class="phone-rec-dot"></div>
+            <span style="font-size:0.5rem;font-weight:700;color:var(--gold);letter-spacing:1px;">RECORDING</span>
           </div>
-          <div class="phone-mic-btn">
-            <div class="phone-mic-outer"></div>
-            <div class="phone-mic-inner" style="background:var(--red);">
-              <div style="width:18px;height:18px;border-radius:3px;background:#fff;"></div>
-            </div>
-          </div>
+          <svg width="80" height="80" viewBox="0 0 80 80" style="display:block;">
+            <circle cx="40" cy="40" r="37" stroke="#2A2A2A" stroke-width="3" fill="none"/>
+            <circle cx="40" cy="40" r="37" stroke="#E8A838" stroke-width="3" fill="none"
+              stroke-linecap="round" stroke-dasharray="232.5" stroke-dashoffset="93"
+              transform="rotate(-90 40 40)"/>
+            <circle cx="40" cy="40" r="34" fill="rgba(224,90,78,0.12)"/>
+            <circle cx="40" cy="40" r="27" fill="#E05A4E"/>
+            <rect x="32" y="32" width="16" height="16" rx="3" fill="white"/>
+          </svg>
           <div style="font-size:0.45rem;color:#666;margin-top:4px;">Target: 2m</div>
-          <div style="font-size:0.5rem;color:#666;margin-top:2px;">Tap to finish &amp; analyze</div>
+          <div style="font-size:0.5rem;color:#666;margin-top:2px;padding-bottom:16px;">Tap to finish &amp; analyze</div>
         </div>
       </div>
 
-      <!-- Daily Convo -->
+      <!-- Daily Convo — recording state -->
       <div class="phone-screen phone-content" data-mode="convo">
         <div class="phone-nav">
           <div class="phone-nav-btn">← Back</div>
           <div style="display:flex;gap:4px;align-items:center;">
             <div class="phone-nav-pill" style="background:rgba(46,158,139,0.15);color:var(--teal);">💬 Daily Convo</div>
-            <div class="phone-nav-lvl">Lv 2</div>
+            <div class="phone-nav-lvl">Lv 3</div>
           </div>
           <div style="width:56px"></div>
         </div>
         <div class="phone-prompt-card" style="border-color:rgba(46,158,139,0.3);">
           <div class="phone-prompt-badges">
-            <span style="font-size:0.5rem;font-weight:600;padding:2px 7px;border-radius:10px;background:#2E2E2E;color:#666;">Starter</span>
-            <span style="font-size:0.5rem;font-weight:700;padding:2px 7px;border-radius:10px;background:rgba(46,158,139,0.15);color:var(--teal);">⏱ 60s</span>
+            <span style="font-size:0.5rem;font-weight:600;padding:2px 7px;border-radius:10px;background:#2E2E2E;color:#666;">Developing</span>
+            <span style="font-size:0.5rem;font-weight:700;padding:2px 7px;border-radius:10px;background:rgba(46,158,139,0.15);color:var(--teal);">⏱ 90s</span>
           </div>
-          <div class="phone-question">"A colleague asks what you're working on. Explain your current project clearly in under a minute."</div>
+          <div class="phone-question">"Argue whether college is still worth the investment."</div>
         </div>
-        <div class="phone-tips-header">COACHING TIPS</div>
-        <ul class="phone-tips">
-          <li><div class="phone-tip-dot" style="background:var(--teal)"></div>Start with the one-sentence summary</li>
-          <li><div class="phone-tip-dot" style="background:var(--teal)"></div>Avoid jargon — explain like they're from a different team</li>
-          <li><div class="phone-tip-dot" style="background:var(--teal)"></div>End with why it matters</li>
-        </ul>
+        <div class="phone-focus-divider">
+          <div class="phone-focus-line"></div>
+          <span class="phone-focus-label">Focus Areas</span>
+          <div class="phone-focus-line"></div>
+        </div>
+        <div class="phone-focus-items">
+          <div class="phone-focus-item">
+            <span class="phone-focus-num" style="color:var(--teal);">1</span>
+            <span class="phone-focus-text">State your position with a reason</span>
+          </div>
+          <div class="phone-focus-item">
+            <span class="phone-focus-num" style="color:var(--teal);">2</span>
+            <span class="phone-focus-text">Support with data or experience</span>
+          </div>
+          <div class="phone-focus-item">
+            <span class="phone-focus-num" style="color:var(--teal);">3</span>
+            <span class="phone-focus-text">Address the strongest objection</span>
+          </div>
+        </div>
         <div class="phone-mic-area">
           <div class="phone-waveform" id="waveform-convo"></div>
-          <div class="phone-timer">0:19</div>
-          <div style="display:flex;align-items:center;gap:4px;margin-bottom:8px;opacity:0.8;">
-            <div class="phone-rec-dot" style="background:var(--teal)"></div>
-            <span style="font-size:0.5rem;font-weight:700;color:var(--teal);letter-spacing:1px;">RECORDING</span>
+          <div class="phone-timer">0:35</div>
+          <div style="display:flex;align-items:center;gap:4px;margin-bottom:8px;opacity:0.9;">
+            <div class="phone-rec-dot"></div>
+            <span style="font-size:0.5rem;font-weight:700;color:var(--gold);letter-spacing:1px;">RECORDING</span>
           </div>
-          <div class="phone-mic-btn">
-            <div class="phone-mic-outer"></div>
-            <div class="phone-mic-inner" style="background:var(--red);">
-              <div style="width:18px;height:18px;border-radius:3px;background:#fff;"></div>
-            </div>
-          </div>
-          <div style="font-size:0.45rem;color:#666;margin-top:4px;">Target: 60s</div>
-          <div style="font-size:0.5rem;color:#666;margin-top:2px;">Tap to finish &amp; analyze</div>
+          <svg width="80" height="80" viewBox="0 0 80 80" style="display:block;">
+            <circle cx="40" cy="40" r="37" stroke="#2A2A2A" stroke-width="3" fill="none"/>
+            <circle cx="40" cy="40" r="37" stroke="#E8A838" stroke-width="3" fill="none"
+              stroke-linecap="round" stroke-dasharray="232.5" stroke-dashoffset="142"
+              transform="rotate(-90 40 40)"/>
+            <circle cx="40" cy="40" r="34" fill="rgba(224,90,78,0.12)"/>
+            <circle cx="40" cy="40" r="27" fill="#E05A4E"/>
+            <rect x="32" y="32" width="16" height="16" rx="3" fill="white"/>
+          </svg>
+          <div style="font-size:0.45rem;color:#666;margin-top:4px;">Target: 90s</div>
+          <div style="font-size:0.5rem;color:#666;margin-top:2px;padding-bottom:16px;">Tap to finish &amp; analyze</div>
         </div>
       </div>
     </div>
@@ -1181,16 +1248,17 @@
           <div class="phone-nav-pill" style="background:rgba(232,168,56,0.15);color:var(--gold);">💼 Interview</div>
           <div class="phone-nav-btn" style="background:transparent;border:1px solid var(--app-border);color:#999;display:flex;align-items:center;gap:3px;"><span style="font-size:0.55rem">↺</span> Retry</div>
         </div>
-        <svg class="score-ring" viewBox="0 0 80 80" width="80" height="80" id="score-interview">
-          <circle cx="40" cy="40" r="33" stroke="#2A2A2A" stroke-width="8" fill="none"/>
-          <circle cx="40" cy="40" r="33" stroke="#3BB5A0" stroke-width="8" fill="none"
-                  stroke-linecap="round" stroke-dasharray="207.3" stroke-dashoffset="37.3"
-                  transform="rotate(-90 40 40)"/>
-          <text x="40" y="40" font-family="'Fraunces',serif" font-size="22" font-weight="700"
+        <svg class="score-ring" viewBox="0 0 100 100" width="100" height="100" id="score-interview">
+          <circle cx="50" cy="50" r="42" stroke="#2A2A2A" stroke-width="8" fill="none"/>
+          <circle cx="50" cy="50" r="42" stroke="#3BB5A0" stroke-width="8" fill="none"
+                  stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="47.5"
+                  transform="rotate(-90 50 50)"/>
+          <text x="50" y="50" font-family="'Fraunces',serif" font-size="26" font-weight="700"
                 fill="#3BB5A0" text-anchor="middle" dominant-baseline="central">82</text>
         </svg>
-        <div style="text-align:center;font-size:0.5rem;color:#666;margin-bottom:4px;">Your average: 74 <span style="background:rgba(59,181,160,0.15);color:var(--teal);padding:1px 5px;border-radius:8px;font-weight:700;font-size:0.45rem;">+8 from avg</span></div>
-        <div style="text-align:center;font-family:'Fraunces',serif;font-size:1rem;font-weight:700;margin-bottom:2px;">Strong performance.</div>
+        <div style="text-align:center;font-family:'Fraunces',serif;font-size:0.95rem;font-weight:700;margin-bottom:2px;color:#fff;">Strong performance.</div>
+        <div style="text-align:center;font-size:0.5rem;color:#666;margin-bottom:3px;">Your average: 74 <span style="background:rgba(59,181,160,0.15);color:var(--teal);padding:1px 5px;border-radius:8px;font-weight:700;font-size:0.45rem;">+8 from avg</span></div>
+        <div class="score-xp">⭐ +120 XP</div>
         <div class="score-label">Level 3 · Emerging Orator · 1:24</div>
         <div style="background:var(--app-card);border-radius:14px;padding:10px;margin-bottom:8px;border:1px solid var(--app-border);">
           <div style="font-size:0.45rem;font-weight:700;color:#666;letter-spacing:1px;margin-bottom:4px;">YOU SPOKE ON</div>
@@ -1277,16 +1345,17 @@
           <div class="phone-nav-pill" style="background:rgba(224,90,78,0.15);color:var(--red);">🚀 Pitch / Sales</div>
           <div class="phone-nav-btn" style="background:transparent;border:1px solid var(--app-border);color:#999;display:flex;align-items:center;gap:3px;"><span style="font-size:0.55rem">↺</span> Retry</div>
         </div>
-        <svg class="score-ring" viewBox="0 0 80 80" width="80" height="80">
-          <circle cx="40" cy="40" r="33" stroke="#2A2A2A" stroke-width="8" fill="none"/>
-          <circle cx="40" cy="40" r="33" stroke="#E8A838" stroke-width="8" fill="none"
-                  stroke-linecap="round" stroke-dasharray="207.3" stroke-dashoffset="49.8"
-                  transform="rotate(-90 40 40)"/>
-          <text x="40" y="40" font-family="'Fraunces',serif" font-size="22" font-weight="700"
+        <svg class="score-ring" viewBox="0 0 100 100" width="100" height="100">
+          <circle cx="50" cy="50" r="42" stroke="#2A2A2A" stroke-width="8" fill="none"/>
+          <circle cx="50" cy="50" r="42" stroke="#E8A838" stroke-width="8" fill="none"
+                  stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="63.3"
+                  transform="rotate(-90 50 50)"/>
+          <text x="50" y="50" font-family="'Fraunces',serif" font-size="26" font-weight="700"
                 fill="#E8A838" text-anchor="middle" dominant-baseline="central">76</text>
         </svg>
-        <div style="text-align:center;font-size:0.5rem;color:#666;margin-bottom:4px;">Your average: 71 <span style="background:rgba(59,181,160,0.15);color:var(--teal);padding:1px 5px;border-radius:8px;font-weight:700;font-size:0.45rem;">+5 from avg</span></div>
-        <div style="text-align:center;font-family:'Fraunces',serif;font-size:1rem;font-weight:700;margin-bottom:2px;">Getting there.</div>
+        <div style="text-align:center;font-family:'Fraunces',serif;font-size:0.95rem;font-weight:700;margin-bottom:2px;color:#fff;">Getting there.</div>
+        <div style="text-align:center;font-size:0.5rem;color:#666;margin-bottom:3px;">Your average: 71 <span style="background:rgba(59,181,160,0.15);color:var(--teal);padding:1px 5px;border-radius:8px;font-weight:700;font-size:0.45rem;">+5 from avg</span></div>
+        <div class="score-xp">⭐ +120 XP</div>
         <div class="score-label">Level 4 · Emerging Orator · 0:58</div>
         <div style="background:var(--app-card);border-radius:14px;padding:10px;margin-bottom:8px;border:1px solid var(--app-border);">
           <div style="font-size:0.45rem;font-weight:700;color:#666;letter-spacing:1px;margin-bottom:4px;">YOU SPOKE ON</div>
@@ -1907,25 +1976,31 @@
     });
   });
 
-  // ---- Waveform Bars ----
+  // ---- Waveform Builder ----
   function buildWaveform(id, barClass, count, maxH, accentColor) {
     const c = document.getElementById(id);
     if (!c) return;
     for (let i = 0; i < count; i++) {
-      const bar = document.createElement('div');
-      bar.className = barClass;
-      const h = 6 + Math.random() * maxH;
-      bar.style.setProperty('--h', h + 'px');
-      bar.style.animationDelay = (i * 0.06) + 's';
-      if (accentColor) bar.style.background = accentColor;
-      c.appendChild(bar);
+      const el = document.createElement('div');
+      el.className = barClass;
+      if (maxH > 0) el.style.height = (8 + Math.random() * maxH) + 'px';
+      el.style.animationDuration = (0.7 + Math.random() * 0.8).toFixed(2) + 's';
+      el.style.animationDelay = '-' + (Math.random() * 1.5).toFixed(2) + 's';
+      if (accentColor) el.style.background = accentColor;
+      // Fade right edge
+      if (i >= count * 0.65) {
+        el.style.opacity = (1 - ((i - count * 0.65) / (count * 0.35)) * 0.55).toFixed(2);
+      }
+      c.appendChild(el);
     }
   }
+  // How It Works step 2
   buildWaveform('waveform-mini', 'wave-bar', 20, 30, null);
-  buildWaveform('waveform-interview', 'phone-wave-bar', 16, 18, '#E8A838');
-  buildWaveform('waveform-pitch',     'phone-wave-bar', 16, 18, '#E05A4E');
-  buildWaveform('waveform-keynote',   'phone-wave-bar', 16, 18, '#7B68EE');
-  buildWaveform('waveform-convo',     'phone-wave-bar', 16, 18, '#3BB5A0');
+  // Hero phone waveforms
+  buildWaveform('waveform-interview', 'phone-wave-bar', 38, 28, '#E8A838');
+  buildWaveform('waveform-pitch',     'phone-wave-bar', 38, 28, '#E05A4E');
+  buildWaveform('waveform-keynote',   'phone-wave-bar', 38, 28, '#6A58DD');
+  buildWaveform('waveform-convo',     'phone-wave-bar', 38, 28, '#2E9E8B');
 
   // ---- Scroll Animations ----
   function animateMetrics(container) {
