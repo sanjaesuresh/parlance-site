@@ -142,7 +142,7 @@
     /* ---- Service Cards ---- */
     .service-cards {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
       margin-top: 1rem;
     }
@@ -208,7 +208,7 @@
 <div class="page-header fade-up">
   <h1 class="display">Privacy Policy</h1>
   <div class="page-meta fade-up delay-1">
-    Effective date: May 5, 2026<br>
+    Effective date: May 11, 2026<br>
     App: Parlance — AI Speech Coach<br>
     Questions? <a href="mailto:parlance.app@gmail.com">parlance.app@gmail.com</a>
   </div>
@@ -219,60 +219,108 @@
   <h2 class="fade-up">What We Collect</h2>
 
   <div class="sub-group fade-up">
-    <div class="sub-group-label">On your device (never leaves unless noted below)</div>
+    <div class="sub-group-label">Account information (stored on our servers)</div>
     <ul>
-      <li>Your display name, username, and avatar — stored locally in SwiftData</li>
-      <li>Your session history — scores, transcripts, XP, achievements, streaks</li>
-      <li>App preferences — theme, notification settings, sound effects</li>
+      <li>Your email address or Apple ID — used to create and authenticate your account via Supabase Auth</li>
+      <li>Your display name, username, and avatar emoji — shown on your profile and in leaderboards</li>
+      <li>Optional: your location and occupation — provided during onboarding, used for profile display only</li>
     </ul>
   </div>
 
   <div class="sub-group fade-up">
-    <div class="sub-group-label">Transmitted to our servers</div>
+    <div class="sub-group-label">Progress data synced to our servers</div>
     <ul>
-      <li>Your speech transcript and session metrics (speaking rate, pitch, filler count) are sent to our AI provider to generate coaching feedback. This happens once per completed session.</li>
+      <li>Your XP, weekly XP, current streak, longest streak, average score, and total session count — used to power the weekly league and your public profile stats</li>
+      <li>Session scores (overall score, practice mode, difficulty level) — used for the global and friends leaderboards</li>
+      <li>Friend connections — stored to enable the friends leaderboard feature</li>
+      <li>Notification preference (daily reminder on/off) — synced across your account</li>
     </ul>
   </div>
 
   <div class="sub-group fade-up">
-    <div class="sub-group-label">Transmitted for Pro subscribers only</div>
+    <div class="sub-group-label">On your device only (never synced)</div>
     <ul>
-      <li>Your audio recording is briefly uploaded to our AI emotion analysis provider to detect vocal tone (confidence, nervousness, enthusiasm). The audio is analyzed immediately and is not stored.</li>
+      <li>Full session transcripts and detailed session history — stored locally in SwiftData</li>
+      <li>Achievements and milestone data</li>
+      <li>App preferences — theme, sound effects</li>
+    </ul>
+  </div>
+
+  <div class="sub-group fade-up">
+    <div class="sub-group-label">Transmitted to AI providers (once per completed session)</div>
+    <ul>
+      <li>Your speech transcript and session metrics (speaking rate, pitch variance, filler word count) are sent to <strong>Google Gemini</strong> via our Cloudflare Workers proxy to generate coaching feedback</li>
+    </ul>
+  </div>
+
+  <div class="sub-group fade-up">
+    <div class="sub-group-label">Speech recognition</div>
+    <ul>
+      <li>Your microphone audio is transcribed using <strong>Apple's Speech Recognition framework</strong>. Depending on your device and language, this may run entirely on-device or be processed by Apple's servers per Apple's privacy practices</li>
+    </ul>
+  </div>
+
+  <div class="sub-group fade-up">
+    <div class="sub-group-label">Pro subscribers only</div>
+    <ul>
+      <li>Your audio recording is briefly sent to our AI emotion analysis provider to detect vocal tone (confidence, nervousness, enthusiasm). The audio is analyzed in real time and is not retained</li>
+    </ul>
+  </div>
+
+  <div class="sub-group fade-up">
+    <div class="sub-group-label">Anonymized analytics</div>
+    <ul>
+      <li>Session events (practice mode, difficulty level, session score, duration) are sent to TelemetryDeck to help us understand how the app is used. These events contain no personally identifiable information</li>
     </ul>
   </div>
 
   <h2 class="fade-up">How We Use It</h2>
   <ul class="fade-up">
+    <li>To create and manage your account and authenticate you securely</li>
     <li>To generate personalized AI coaching feedback after each session</li>
-    <li>To track your progress, streaks, and achievements locally</li>
-    <li>To display your stats in the weekly league and on your profile</li>
-    <li>We do not sell your data, use it for advertising, or share it with third parties beyond the AI processing services described above</li>
+    <li>To display your stats and rank in the weekly global and friends leaderboards</li>
+    <li>To enable the friends and social features (search, add, and compete with friends)</li>
+    <li>To send you daily practice reminders if you opt in to push notifications</li>
+    <li>To improve the app through anonymized usage analytics</li>
+    <li>We do not sell your data, use it for advertising, or share it with third parties beyond the services described in this policy</li>
   </ul>
 
   <h2 class="fade-up">AI Processing</h2>
-  <p class="fade-up">Parlance uses Claude AI (Anthropic) to generate session feedback. For Pro subscribers, we also use Hume AI for vocal emotion analysis. Both services process your data solely to generate your coaching results and do not store or use your data for their own model training under our agreements with them.</p>
+  <p class="fade-up">Parlance uses <strong>Google Gemini</strong> (Google's generative AI service) to generate session feedback. Requests are routed through our <strong>Cloudflare Workers</strong> proxy so that API credentials stay on our infrastructure. For Pro subscribers, we also use <strong>Hume AI</strong> for vocal emotion analysis. Speech-to-text transcription is performed by <strong>Apple's Speech Recognition framework</strong> on your device (and, depending on your device and language, may be processed by Apple's servers). Each provider processes your data solely to deliver the feature described and does not use your content to train its own foundation models under our configuration.</p>
   <p class="fade-up">All AI-generated scores and coaching feedback are for practice purposes only. They are not professional coaching, psychological assessment, or any form of certified evaluation.</p>
 
   <h2 class="fade-up">Data Storage &amp; Security</h2>
   <ul class="fade-up">
-    <li>Session data, transcripts, and your profile are stored on your device only using Apple's SwiftData framework</li>
-    <li>Data is transmitted over encrypted HTTPS connections</li>
-    <li>Audio recordings are deleted from your device immediately after processing</li>
+    <li>Your account, profile, and league stats are stored in Supabase (our database provider), hosted in the United States</li>
+    <li>Detailed session transcripts and local progress data are stored on your device using Apple's SwiftData framework</li>
+    <li>All data is transmitted over encrypted HTTPS connections</li>
+    <li>Audio recordings are deleted from your device immediately after processing and are not stored on any server</li>
   </ul>
 
   <h2 class="fade-up">Your Rights</h2>
   <ul class="fade-up">
-    <li><strong>Delete your data:</strong> Go to Profile → Settings → Reset All Data to permanently delete everything stored on your device</li>
-    <li><strong>Access:</strong> All your data is on your device — you can view it within the app at any time</li>
-    <li><strong>Portability:</strong> Your data stays on your device. We do not hold a copy to export</li>
+    <li><strong>Delete your account:</strong> Go to Profile → Settings → Delete Account to permanently delete your account and all associated server-side data (profile, stats, friend connections)</li>
+    <li><strong>Delete local data:</strong> Go to Profile → Settings → Reset All Data to permanently delete your session history, transcripts, achievements, and preferences from your device</li>
+    <li><strong>Access:</strong> Your local session data is viewable in the app at any time. Your profile and stats are visible on your profile screen</li>
+    <li><strong>Opt out of notifications:</strong> Disable daily reminders in Profile → Settings at any time</li>
   </ul>
 
   <h2 class="fade-up">Third-Party Services</h2>
   <div class="service-cards fade-up">
     <div class="service-card">
-      <strong>Anthropic (Claude)</strong>
+      <strong>Supabase</strong>
+      <p>Account auth, profile, and league data storage</p>
+      <a href="https://supabase.com/privacy" target="_blank" rel="noopener">supabase.com/privacy ↗</a>
+    </div>
+    <div class="service-card">
+      <strong>Google (Gemini)</strong>
       <p>AI coaching feedback</p>
-      <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener">anthropic.com/privacy ↗</a>
+      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy ↗</a>
+    </div>
+    <div class="service-card">
+      <strong>Apple Speech Recognition</strong>
+      <p>Voice-to-text transcription</p>
+      <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">apple.com/legal/privacy ↗</a>
     </div>
     <div class="service-card">
       <strong>Hume AI</strong>
@@ -281,8 +329,13 @@
     </div>
     <div class="service-card">
       <strong>Cloudflare Workers</strong>
-      <p>Secure API proxy</p>
+      <p>Secure AI API proxy</p>
       <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy ↗</a>
+    </div>
+    <div class="service-card">
+      <strong>TelemetryDeck</strong>
+      <p>Anonymized usage analytics</p>
+      <a href="https://telemetrydeck.com/privacy/" target="_blank" rel="noopener">telemetrydeck.com/privacy ↗</a>
     </div>
   </div>
 
