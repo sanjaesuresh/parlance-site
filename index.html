@@ -329,11 +329,71 @@
       background: var(--app-card); border-radius: 8px;
       overflow: hidden; border: 1px solid var(--app-border);
     }
-    .mini-mode-card .mm-top { padding: 7px 8px 5px; }
+    .mini-mode-card .mm-top { padding: 7px 8px 5px; display: flex; align-items: center; justify-content: space-between; }
     .mini-mode-card .mm-top .icon { font-size: 0.95rem; }
+    .mini-mode-card .mm-pro {
+      font-size: 0.42rem; font-weight: 700; letter-spacing: 0.5px;
+      color: #1A1108; background: linear-gradient(135deg, #F2B547, #E8A838);
+      padding: 1px 5px; border-radius: 6px;
+    }
     .mini-mode-bar { height: 2px; }
     .mini-mode-name { font-size: 0.55rem; font-weight: 600; color: #fff; padding: 4px 8px 1px; }
     .mini-mode-desc { font-size: 0.45rem; color: #666; padding: 0 8px 6px; line-height: 1.3; }
+
+    /* Mini recording-screen mock (Step 2) */
+    .mini-rec-pill {
+      display: inline-block; font-size: 0.5rem; font-weight: 700;
+      background: rgba(232,168,56,0.15); color: var(--gold);
+      padding: 3px 7px; border-radius: 8px; margin-bottom: 6px;
+    }
+    .mini-rec-prompt {
+      font-family: 'Fraunces', serif; font-size: 0.62rem; line-height: 1.35;
+      color: #fff; padding: 6px 0; border-top: 1px solid var(--app-border);
+      border-bottom: 1px solid var(--app-border); margin-bottom: 6px;
+    }
+    .mini-rec-tips { display: flex; flex-direction: column; gap: 3px; margin-bottom: 4px; }
+    .mini-rec-tip { display: flex; align-items: center; gap: 5px; font-size: 0.48rem; color: #aaa; }
+    .mini-rec-tip-num {
+      width: 10px; height: 10px; border-radius: 3px;
+      background: rgba(232,168,56,0.2); color: var(--gold);
+      font-size: 0.4rem; font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .mini-rec-waveform { padding: 0; }
+    .mini-rec-waveform .waveform { height: 28px; margin: 4px 0; gap: 2px; }
+    .mini-rec-waveform .wave-bar { background: var(--red); width: 3px; }
+    .mini-rec-footer {
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      font-size: 0.55rem; color: #999;
+    }
+    .mini-rec-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--red);
+      animation: rec-blink 1.2s ease-in-out infinite;
+    }
+    .mini-rec-time { font-weight: 700; color: var(--red); font-family: 'Fraunces', serif; font-size: 0.65rem; }
+    .mini-rec-rec { font-size: 0.42rem; font-weight: 700; color: var(--red); letter-spacing: 1px; }
+    @keyframes rec-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    /* Mini feedback header (Step 3) */
+    .mini-fb-head { text-align: center; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--app-border); }
+    .mini-fb-score { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.4rem; color: var(--teal); line-height: 1; }
+    .mini-fb-score span { font-size: 0.55rem; color: #666; font-weight: 500; }
+    .mini-fb-verdict { font-family: 'Fraunces', serif; font-size: 0.55rem; font-weight: 700; color: #fff; margin-top: 2px; }
+
+    /* Mini tone-analysis pill in feedback mock */
+    .mini-fb-tone {
+      display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
+      margin-top: 8px; padding: 5px 7px;
+      background: rgba(106,88,221,0.12); border: 1px solid rgba(106,88,221,0.3);
+      border-radius: 6px;
+    }
+    .mini-fb-tone-label { font-size: 0.42rem; font-weight: 700; letter-spacing: 1px; color: var(--purple); }
+    .mini-fb-tone-pro {
+      font-size: 0.4rem; font-weight: 700; letter-spacing: 0.5px;
+      color: #1A1108; background: linear-gradient(135deg, #F2B547, #E8A838);
+      padding: 1px 5px; border-radius: 6px;
+    }
+    .mini-fb-tone-val { font-size: 0.5rem; font-weight: 600; color: #fff; margin-left: auto; }
 
     /* Waveform */
     .waveform {
@@ -429,6 +489,32 @@
     .feedback-content { display: none; }
     .feedback-content.active { display: block; }
 
+    /* Tone Analysis card mock (inside feedback phone) */
+    .tone-card-mock {
+      background: linear-gradient(180deg, rgba(106,88,221,0.10), rgba(106,88,221,0.04));
+      border: 1px solid rgba(106,88,221,0.35);
+      border-radius: 14px; padding: 10px; margin-top: 10px;
+      text-align: left;
+    }
+    .tone-card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .tone-card-label { font-size: 0.5rem; font-weight: 700; letter-spacing: 1.5px; color: var(--purple); }
+    .tone-card-pro {
+      font-size: 0.42rem; font-weight: 700; letter-spacing: 0.5px;
+      color: #1A1108; background: linear-gradient(135deg, #F2B547, #E8A838);
+      padding: 2px 6px; border-radius: 8px;
+    }
+    .tone-card-signal { font-size: 0.42rem; font-weight: 700; letter-spacing: 1.5px; color: #888; margin-bottom: 3px; }
+    .tone-card-emotion { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 3px; }
+    .tone-card-pct { font-size: 0.55rem; color: #fff; font-weight: 600; margin-bottom: 10px; }
+    .tone-card-pct span { color: #888; font-weight: 400; }
+    .tone-bars { display: flex; flex-direction: column; gap: 5px; padding: 8px 0; border-top: 1px solid rgba(106,88,221,0.2); border-bottom: 1px solid rgba(106,88,221,0.2); }
+    .tone-bar-row { display: flex; align-items: center; gap: 6px; font-size: 0.5rem; color: #ccc; }
+    .tone-bar-name { width: 64px; }
+    .tone-bar { flex: 1; height: 5px; background: var(--app-border); border-radius: 3px; overflow: hidden; }
+    .tone-bar-fill { height: 100%; width: 0; transition: width 1.2s ease-out; border-radius: 3px; }
+    .tone-bar-val { width: 20px; text-align: right; font-weight: 700; font-size: 0.55rem; }
+    .tone-card-arc { font-size: 0.5rem; color: #aaa; margin-top: 8px; }
+
     /* ---- Modes Grid ---- */
     .modes-grid {
       display: grid; grid-template-columns: repeat(5, 1fr);
@@ -464,6 +550,186 @@
     .mode-card .mode-prompt .prompt-text {
       font-size: 0.78rem; font-style: italic; line-height: 1.4;
     }
+    .mode-card[data-pro="1"] { border-color: rgba(232,168,56,0.35); }
+    .mode-pro-badge {
+      position: absolute; top: 8px; right: 8px; z-index: 2;
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.5px;
+      color: #1A1108; background: linear-gradient(135deg, #F2B547, #E8A838);
+      padding: 2px 7px; border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(232,168,56,0.3);
+    }
+
+    /* ---- Tone Analysis section ---- */
+    #tone {
+      background: linear-gradient(180deg, #0F0D1F 0%, #0A0917 100%);
+      color: #fff;
+    }
+    #tone .section-title { color: #fff; }
+    #tone .section-sub { color: #b8b3cc; }
+    .tone-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; max-width: 960px; margin: 0 auto;
+      align-items: center; text-align: left;
+    }
+    @media (max-width: 820px) { .tone-grid { grid-template-columns: 1fr; gap: 2rem; max-width: 460px; } }
+    .tone-mock {
+      background: #0A0917; border-radius: 24px;
+      padding: 1.5rem; border: 1px solid rgba(106,88,221,0.3);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04) inset;
+    }
+    .tone-mock .tone-card-mock { background: linear-gradient(180deg, rgba(106,88,221,0.16), rgba(106,88,221,0.05)); }
+    .tone-mock .tone-card-emotion { font-size: 1.6rem; }
+    .tone-sparkline { margin-bottom: 14px; }
+    .tone-spark-axis { display: flex; justify-content: space-between; font-size: 0.55rem; color: #888; margin-top: 4px; }
+    .tone-detail-btn {
+      display: flex; align-items: center; gap: 10px;
+      margin-top: 12px; padding: 9px 11px;
+      background: rgba(106,88,221,0.12); border: 1px solid rgba(106,88,221,0.3);
+      border-radius: 12px;
+    }
+    .tone-detail-icon {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: rgba(106,88,221,0.3); display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+    }
+    .tone-detail-title { font-size: 0.72rem; font-weight: 700; color: #fff; }
+    .tone-detail-sub { font-size: 0.55rem; color: #999; }
+    .tone-copy { display: flex; flex-direction: column; gap: 1.5rem; }
+    .tone-feature { display: flex; gap: 0.85rem; align-items: flex-start; }
+    .tone-feature-num {
+      flex-shrink: 0; width: 32px; height: 32px; border-radius: 9px;
+      background: linear-gradient(135deg, #8973F0, #6A58DD);
+      color: #fff; font-size: 0.9rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .tone-feature h4 { font-size: 1rem; color: #fff; margin-bottom: 0.35rem; }
+    .tone-feature p { font-size: 0.88rem; color: #b8b3cc; line-height: 1.55; }
+    .tone-pricing {
+      margin-top: 0.5rem; padding: 0.85rem 1rem;
+      background: rgba(232,168,56,0.08);
+      border: 1px solid rgba(232,168,56,0.25);
+      border-radius: 12px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .tone-pricing strong { color: var(--gold); font-size: 0.95rem; }
+    .tone-pricing span { color: #b8b3cc; font-size: 0.78rem; }
+
+    /* ---- Real Life section ---- */
+    #reallife {
+      background: linear-gradient(180deg, #FBF7F4 0%, #F5EFE9 100%);
+    }
+    .rl-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 2rem; max-width: 880px; margin: 0 auto;
+      align-items: flex-start;
+    }
+    @media (max-width: 760px) { .rl-grid { grid-template-columns: 1fr; gap: 1.5rem; max-width: 360px; } }
+    .rl-phone {
+      width: 100%; max-width: 320px; margin: 0 auto;
+      background: var(--app-bg); color: #fff;
+      border-radius: 30px; padding: 28px 18px 18px;
+      border: 3px solid #1a1a1a;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.18);
+      text-align: left; position: relative;
+    }
+    .rl-section-label {
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 1.5px;
+      color: #888; margin-bottom: 6px; margin-top: 10px;
+    }
+    .rl-scenario {
+      background: var(--app-card); border: 1px solid var(--app-border);
+      border-radius: 12px; padding: 10px 11px;
+      font-family: 'Fraunces', serif; font-size: 0.78rem; line-height: 1.45;
+      color: #fff; font-style: italic;
+    }
+    .rl-char-count { font-size: 0.55rem; color: #666; text-align: right; margin-top: 4px; }
+    .rl-duration { background: var(--app-card); border: 1px solid var(--app-border); border-radius: 12px; padding: 10px 11px; }
+    .rl-duration-time {
+      font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700;
+      color: #D44A6F; text-align: center; line-height: 1;
+    }
+    .rl-slider { position: relative; margin-top: 10px; height: 22px; }
+    .rl-slider-track { position: absolute; top: 9px; left: 0; right: 0; height: 4px; background: var(--app-border); border-radius: 2px; }
+    .rl-slider-fill { height: 100%; background: #D44A6F; border-radius: 2px; }
+    .rl-slider-knob {
+      position: absolute; top: 3px; width: 16px; height: 16px;
+      border-radius: 50%; background: #fff; transform: translateX(-50%);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4), 0 0 0 3px rgba(212,74,111,0.25);
+    }
+    .rl-slider-range {
+      display: flex; justify-content: space-between;
+      font-size: 0.5rem; color: #666; margin-top: 4px;
+    }
+    .rl-recents { display: flex; flex-direction: column; gap: 5px; }
+    .rl-recent-chip {
+      background: var(--app-card); border: 1px solid var(--app-border);
+      border-radius: 10px; padding: 7px 10px;
+      font-size: 0.6rem; color: #ccc; line-height: 1.3;
+    }
+    .rl-start-btn {
+      width: 100%; margin-top: 14px;
+      background: linear-gradient(135deg, #D44A6F, #B83A5C);
+      color: #fff; border: none; border-radius: 14px;
+      padding: 11px; font-size: 0.78rem; font-weight: 700;
+      font-family: 'Inter', sans-serif; cursor: pointer;
+      box-shadow: 0 6px 18px rgba(212,74,111,0.35);
+    }
+
+    .rl-phone-secondary { margin-top: 2rem; }
+    @media (max-width: 760px) { .rl-phone-secondary { margin-top: 0; } }
+    .rl-loading-label {
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 1.8px;
+      color: #D44A6F; text-align: center; margin-top: 6px;
+    }
+    .rl-loading-title {
+      font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 700;
+      color: #fff; text-align: center; margin: 4px 0 10px;
+    }
+    .rl-loading-rewrite {
+      background: var(--app-card); border: 1px solid rgba(212,74,111,0.25);
+      border-radius: 12px; padding: 10px;
+      font-size: 0.65rem; line-height: 1.5; color: #ddd;
+      font-style: italic; margin-bottom: 14px;
+    }
+    .rl-focus-label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 1.5px;
+      color: #888; margin-bottom: 8px;
+    }
+    .rl-focus-line { flex: 1; height: 1px; background: var(--app-border); }
+    .rl-tips { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+    .rl-tip { display: flex; align-items: flex-start; gap: 8px; font-size: 0.7rem; color: #ddd; line-height: 1.4; }
+    .rl-tip-num {
+      width: 18px; height: 18px; border-radius: 5px;
+      background: rgba(212,74,111,0.2); color: #E5708F;
+      font-size: 0.6rem; font-weight: 700; flex-shrink: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .rl-ai-tag {
+      font-size: 0.55rem; color: #D44A6F; font-weight: 600;
+      text-align: center; padding: 5px;
+    }
+    .rl-record-btn {
+      width: 100%; margin-top: 10px;
+      background: #fff; color: #1A1108;
+      border: none; border-radius: 14px;
+      padding: 11px; font-size: 0.78rem; font-weight: 700;
+      font-family: 'Inter', sans-serif; cursor: pointer;
+    }
+
+    .rl-points {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem; max-width: 880px; margin: 3rem auto 0;
+    }
+    @media (max-width: 760px) { .rl-points { grid-template-columns: 1fr; max-width: 380px; } }
+    .rl-point {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.25rem;
+      text-align: left;
+    }
+    .rl-point-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .rl-point h4 { font-size: 0.95rem; margin-bottom: 0.4rem; }
+    .rl-point p { font-size: 0.85rem; color: var(--sub); line-height: 1.5; }
 
     /* ---- Gamification ---- */
     .game-grid {
@@ -1071,15 +1337,15 @@
 <!-- ==================== STATS BAR ==================== -->
 <div class="stats-bar">
   <div class="stat-item fade-up">
-    <div class="stat-num">400<span>+</span></div>
+    <div class="stat-num">1,700<span>+</span></div>
     <div class="stat-label">Practice Prompts</div>
   </div>
   <div class="stat-item fade-up delay-1">
-    <div class="stat-num">10</div>
+    <div class="stat-num">11</div>
     <div class="stat-label">Speaking Modes</div>
   </div>
   <div class="stat-item fade-up delay-2">
-    <div class="stat-num">5</div>
+    <div class="stat-num">7<span>+</span></div>
     <div class="stat-label">Metrics Per Session</div>
   </div>
   <div class="stat-item fade-up delay-3">
@@ -1100,9 +1366,15 @@
       <div class="step-card fade-up delay-1">
         <div class="step-num">1</div>
         <h3>Pick a Mode</h3>
-        <p>Interview, pitch, keynote, negotiation — 10 modes built for real situations.</p>
+        <p>Interview, pitch, keynote, real-life scenarios — 11 modes built for real situations.</p>
         <div class="mini-phone">
           <div class="mini-modes-grid">
+            <div class="mini-mode-card">
+              <div class="mm-top"><div class="icon">🎯</div><div class="mm-pro">PRO</div></div>
+              <div class="mini-mode-bar" style="background:#D44A6F"></div>
+              <div class="mini-mode-name">Real Life</div>
+              <div class="mini-mode-desc">Your actual conversation.</div>
+            </div>
             <div class="mini-mode-card">
               <div class="mm-top"><div class="icon">💼</div></div>
               <div class="mini-mode-bar" style="background:var(--gold)"></div>
@@ -1110,16 +1382,10 @@
               <div class="mini-mode-desc">Answer with confidence.</div>
             </div>
             <div class="mini-mode-card">
-              <div class="mm-top"><div class="icon">🚀</div></div>
+              <div class="mm-top"><div class="icon">🚀</div><div class="mm-pro">PRO</div></div>
               <div class="mini-mode-bar" style="background:var(--red)"></div>
               <div class="mini-mode-name">Pitch / Sales</div>
               <div class="mini-mode-desc">Hooks, urgency, persuasion.</div>
-            </div>
-            <div class="mini-mode-card">
-              <div class="mm-top"><div class="icon">⚡</div></div>
-              <div class="mini-mode-bar" style="background:#1ABC9C"></div>
-              <div class="mini-mode-name">Impromptu</div>
-              <div class="mini-mode-desc">Think fast. No prep.</div>
             </div>
             <div class="mini-mode-card">
               <div class="mm-top"><div class="icon">🧠</div></div>
@@ -1135,13 +1401,24 @@
       <div class="step-card fade-up delay-2">
         <div class="step-num">2</div>
         <h3>Record Yourself</h3>
-        <p>Read the prompt, tap record, and speak. Up to 3 minutes per session.</p>
+        <p>See your prompt, focus tips, then tap to record. Up to 3 minutes per session.</p>
         <div class="mini-phone">
-          <div style="text-align:center;color:#999;font-size:0.6rem;margin-bottom:4px;">Recording...</div>
-          <div class="waveform" id="waveform-mini">
-            <!-- bars injected by JS -->
+          <div class="mini-rec-pill">💼 Interview · Lv 3</div>
+          <div class="mini-rec-prompt">"Tell me about a time you led under pressure."</div>
+          <div class="mini-rec-tips">
+            <div class="mini-rec-tip"><span class="mini-rec-tip-num">1</span> Use STAR framework</div>
+            <div class="mini-rec-tip"><span class="mini-rec-tip-num">2</span> Under 90 seconds</div>
           </div>
-          <div style="text-align:center;color:var(--gold);font-size:0.75rem;font-weight:700;">1:24</div>
+          <div class="mini-rec-waveform">
+            <div class="waveform" id="waveform-mini">
+              <!-- bars injected by JS -->
+            </div>
+          </div>
+          <div class="mini-rec-footer">
+            <div class="mini-rec-dot"></div>
+            <span class="mini-rec-time">1:24</span>
+            <span class="mini-rec-rec">REC</span>
+          </div>
         </div>
       </div>
 
@@ -1149,35 +1426,48 @@
       <div class="step-card fade-up delay-3">
         <div class="step-num">3</div>
         <h3>Get AI Feedback</h3>
-        <p>Scores, coaching tips, and your best & worst moments — instantly.</p>
+        <p>Scores across 7+ metrics, vocal-tone analysis, best & worst moments — in seconds.</p>
         <div class="mini-phone">
-          <div style="text-align:center;color:var(--teal);font-weight:700;font-size:1.1rem;margin-bottom:8px;font-family:'Fraunces',serif;">82<span style="font-size:0.6rem;color:#666">/100</span></div>
+          <div class="mini-fb-head">
+            <div class="mini-fb-score">82<span>/100</span></div>
+            <div class="mini-fb-verdict">Strong performance.</div>
+          </div>
           <div class="mini-scores" id="mini-scores">
             <div class="mini-score-row">
-              <span style="width:52px">Fillers</span>
+              <span style="width:62px">Fillers</span>
               <div class="mini-score-bar"><div class="mini-score-fill" data-width="90%" style="background:var(--teal)"></div></div>
               <div class="mini-score-val" style="color:var(--teal)">9</div>
             </div>
             <div class="mini-score-row">
-              <span style="width:52px">Pace</span>
+              <span style="width:62px">Pace</span>
               <div class="mini-score-bar"><div class="mini-score-fill" data-width="70%" style="background:var(--gold)"></div></div>
               <div class="mini-score-val" style="color:var(--gold)">7</div>
             </div>
             <div class="mini-score-row">
-              <span style="width:52px">Clarity</span>
+              <span style="width:62px">Clarity</span>
               <div class="mini-score-bar"><div class="mini-score-fill" data-width="80%" style="background:var(--teal)"></div></div>
               <div class="mini-score-val" style="color:var(--teal)">8</div>
             </div>
             <div class="mini-score-row">
-              <span style="width:52px">Structure</span>
+              <span style="width:62px">Structure</span>
               <div class="mini-score-bar"><div class="mini-score-fill" data-width="90%" style="background:var(--teal)"></div></div>
               <div class="mini-score-val" style="color:var(--teal)">9</div>
             </div>
             <div class="mini-score-row">
-              <span style="width:52px">Vocab</span>
+              <span style="width:62px">Relevance</span>
               <div class="mini-score-bar"><div class="mini-score-fill" data-width="80%" style="background:var(--teal)"></div></div>
               <div class="mini-score-val" style="color:var(--teal)">8</div>
             </div>
+            <div class="mini-score-row">
+              <span style="width:62px">Delivery</span>
+              <div class="mini-score-bar"><div class="mini-score-fill" data-width="70%" style="background:var(--gold)"></div></div>
+              <div class="mini-score-val" style="color:var(--gold)">7</div>
+            </div>
+          </div>
+          <div class="mini-fb-tone">
+            <span class="mini-fb-tone-label">VOCAL TONE</span>
+            <span class="mini-fb-tone-pro">✦ PRO</span>
+            <span class="mini-fb-tone-val">Confidence · 72%</span>
           </div>
         </div>
       </div>
@@ -1225,12 +1515,12 @@
     <p class="section-sub fade-up delay-2">Most tools count filler words. Parlance analyzes how you actually speak — then coaches what matters.</p>
 
     <div class="audio-pills fade-up delay-2">
-      <div class="audio-pill"><span class="pill-icon">🎵</span> Pitch variation</div>
-      <div class="audio-pill"><span class="pill-icon">📊</span> Speaking energy</div>
-      <div class="audio-pill"><span class="pill-icon">⏸️</span> Pause timing</div>
-      <div class="audio-pill"><span class="pill-icon">🎯</span> Argument structure</div>
-      <div class="audio-pill"><span class="pill-icon">⚡</span> Rate variation</div>
       <div class="audio-pill"><span class="pill-icon">🔇</span> Filler detection</div>
+      <div class="audio-pill"><span class="pill-icon">⚡</span> Pace &amp; rhythm</div>
+      <div class="audio-pill"><span class="pill-icon">🎯</span> Argument structure</div>
+      <div class="audio-pill"><span class="pill-icon">🧭</span> On-question relevance</div>
+      <div class="audio-pill"><span class="pill-icon">💬</span> Delivery confidence</div>
+      <div class="audio-pill"><span class="pill-icon">📖</span> Mode-specific metrics</div>
     </div>
 
     <div class="feedback-toggle fade-up delay-2" style="margin-top:2rem">
@@ -1327,7 +1617,49 @@
             <div class="metric-bar"><div class="metric-fill" data-width="80%" style="background:#3BB5A0;"></div></div>
             <div class="metric-tip">Replace "basically" with specific action verbs next time.</div>
           </div>
+          <div class="metric-card">
+            <div class="metric-card-header">
+              <div><div class="metric-card-name">Relevance</div><div class="metric-card-desc">Did you answer the question?</div></div>
+              <div class="metric-card-score" style="color:#3BB5A0;">90%</div>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" data-width="90%" style="background:#3BB5A0;"></div></div>
+            <div class="metric-tip">Stayed on-question throughout — no tangents.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-header">
+              <div><div class="metric-card-name">Comprehensibility</div><div class="metric-card-desc">Could a listener follow your reasoning?</div></div>
+              <div class="metric-card-score" style="color:#3BB5A0;">80%</div>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" data-width="80%" style="background:#3BB5A0;"></div></div>
+            <div class="metric-tip">Cause-and-effect was clear from setup to outcome.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-header">
+              <div><div class="metric-card-name">Delivery Confidence</div><div class="metric-card-desc">Assertiveness without hedging</div></div>
+              <div class="metric-card-score" style="color:var(--gold);">70%</div>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" data-width="70%" style="background:var(--gold);"></div></div>
+            <div class="metric-tip">Cut the "I think maybe" — own the result.</div>
+          </div>
         </div>
+
+        <!-- Tone Analysis card (Pro) -->
+        <div class="tone-card-mock">
+          <div class="tone-card-head">
+            <span class="tone-card-label">VOCAL TONE</span>
+            <span class="tone-card-pro">✦ PRO</span>
+          </div>
+          <div class="tone-card-signal">YOUR STRONGEST SIGNAL</div>
+          <div class="tone-card-emotion">Determination</div>
+          <div class="tone-card-pct">72% <span>· came through across most of your delivery</span></div>
+          <div class="tone-bars">
+            <div class="tone-bar-row"><span class="tone-bar-name">Enthusiasm</span><div class="tone-bar"><div class="tone-bar-fill" data-width="65%" style="background:var(--teal)"></div></div><span class="tone-bar-val" style="color:var(--teal)">65</span></div>
+            <div class="tone-bar-row"><span class="tone-bar-name">Determination</span><div class="tone-bar"><div class="tone-bar-fill" data-width="72%" style="background:var(--gold)"></div></div><span class="tone-bar-val" style="color:var(--gold)">72</span></div>
+            <div class="tone-bar-row"><span class="tone-bar-name">Nervousness</span><div class="tone-bar"><div class="tone-bar-fill" data-width="22%" style="background:var(--red)"></div></div><span class="tone-bar-val" style="color:var(--red)">22</span></div>
+          </div>
+          <div class="tone-card-arc">Tone arc captured every ~2s · Confidence <span style="color:var(--teal);font-weight:700;">↑ 58 → 78</span></div>
+        </div>
+
         <div style="background:var(--app-card);border-radius:14px;padding:10px;margin-top:10px;border:1px solid var(--app-border);display:flex;align-items:center;gap:8px;margin-bottom:16px;">
           <div style="width:32px;height:32px;border-radius:10px;background:rgba(232,168,56,0.2);display:flex;align-items:center;justify-content:center;font-size:0.9rem;">💼</div>
           <div style="flex:1;">
@@ -1424,7 +1756,57 @@
             <div class="metric-bar"><div class="metric-fill" data-width="90%" style="background:#3BB5A0;"></div></div>
             <div class="metric-tip">Strong word choice — "wastes" and "ready to buy" were precise.</div>
           </div>
+          <div class="metric-card">
+            <div class="metric-card-header">
+              <div><div class="metric-card-name">Relevance</div><div class="metric-card-desc">Did you answer the question?</div></div>
+              <div class="metric-card-score" style="color:#3BB5A0;">80%</div>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" data-width="80%" style="background:#3BB5A0;"></div></div>
+            <div class="metric-tip">Stayed close to the brief — keep the proof point tight to the ask.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-header">
+              <div><div class="metric-card-name">Comprehensibility</div><div class="metric-card-desc">Could a listener follow your reasoning?</div></div>
+              <div class="metric-card-score" style="color:var(--gold);">70%</div>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" data-width="70%" style="background:var(--gold);"></div></div>
+            <div class="metric-tip">Solution description got fuzzy — say exactly what it does first.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-header">
+              <div><div class="metric-card-name">Delivery Confidence</div><div class="metric-card-desc">Assertiveness without hedging</div></div>
+              <div class="metric-card-score" style="color:var(--gold);">70%</div>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" data-width="70%" style="background:var(--gold);"></div></div>
+            <div class="metric-tip">"Kind of like" undercuts your hook — speak in absolutes.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-header">
+              <div><div class="metric-card-name">Persuasiveness</div><div class="metric-card-desc">How compelling is your argument?</div></div>
+              <div class="metric-card-score" style="color:#3BB5A0;">80%</div>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" data-width="80%" style="background:#3BB5A0;"></div></div>
+            <div class="metric-tip">Pain → urgency → ask is the spine. Tighten the "why now."</div>
+          </div>
         </div>
+
+        <!-- Tone Analysis card (Pro) -->
+        <div class="tone-card-mock">
+          <div class="tone-card-head">
+            <span class="tone-card-label">VOCAL TONE</span>
+            <span class="tone-card-pro">✦ PRO</span>
+          </div>
+          <div class="tone-card-signal">YOUR STRONGEST SIGNAL</div>
+          <div class="tone-card-emotion">Enthusiasm</div>
+          <div class="tone-card-pct">68% <span>· peaked in your hook, dipped on the close</span></div>
+          <div class="tone-bars">
+            <div class="tone-bar-row"><span class="tone-bar-name">Enthusiasm</span><div class="tone-bar"><div class="tone-bar-fill" data-width="68%" style="background:var(--teal)"></div></div><span class="tone-bar-val" style="color:var(--teal)">68</span></div>
+            <div class="tone-bar-row"><span class="tone-bar-name">Determination</span><div class="tone-bar"><div class="tone-bar-fill" data-width="54%" style="background:var(--gold)"></div></div><span class="tone-bar-val" style="color:var(--gold)">54</span></div>
+            <div class="tone-bar-row"><span class="tone-bar-name">Nervousness</span><div class="tone-bar"><div class="tone-bar-fill" data-width="38%" style="background:var(--red)"></div></div><span class="tone-bar-val" style="color:var(--red)">38</span></div>
+          </div>
+          <div class="tone-card-arc">Tone arc captured every ~2s · Confidence <span style="color:var(--red);font-weight:700;">↓ 74 → 52</span></div>
+        </div>
+
         <div style="background:var(--app-card);border-radius:14px;padding:10px;margin-top:10px;border:1px solid var(--app-border);display:flex;align-items:center;gap:8px;margin-bottom:16px;">
           <div style="width:32px;height:32px;border-radius:10px;background:rgba(224,90,78,0.2);display:flex;align-items:center;justify-content:center;font-size:0.9rem;">🚀</div>
           <div style="flex:1;">
@@ -1438,27 +1820,116 @@
   </div>
 </section>
 
+<!-- ==================== TONE ANALYSIS (PRO) ==================== -->
+<section id="tone">
+  <div class="container">
+    <div class="section-label fade-up" style="color:#6A58DD;">✦ PRO &middot; Tone Analysis</div>
+    <h2 class="display section-title fade-up delay-1">What your voice was actually doing.</h2>
+    <p class="section-sub fade-up delay-2">Transcripts only catch the words. Parlance Pro analyzes the audio itself — the emotion in your delivery, captured every two seconds across the session.</p>
+
+    <div class="tone-grid">
+      <div class="tone-mock fade-up delay-2">
+        <div class="tone-card-mock" style="margin-top:0;">
+          <div class="tone-card-head">
+            <span class="tone-card-label">VOCAL TONE</span>
+            <span class="tone-card-pro">✦ PRO</span>
+          </div>
+          <div class="tone-card-signal">YOUR STRONGEST SIGNAL</div>
+          <div class="tone-card-emotion" style="font-size:1.6rem;">Determination</div>
+          <div class="tone-card-pct" style="font-size:0.75rem;margin-bottom:14px;">72% <span>· came through across most of your delivery</span></div>
+
+          <div class="tone-sparkline">
+            <svg viewBox="0 0 220 50" preserveAspectRatio="none" width="100%" height="50">
+              <defs>
+                <linearGradient id="tg" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#6A58DD" stop-opacity="0.6"/>
+                  <stop offset="100%" stop-color="#6A58DD" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,38 L20,32 L40,36 L60,28 L80,22 L100,26 L120,18 L140,14 L160,20 L180,12 L200,8 L220,10" fill="none" stroke="#6A58DD" stroke-width="2"/>
+              <path d="M0,38 L20,32 L40,36 L60,28 L80,22 L100,26 L120,18 L140,14 L160,20 L180,12 L200,8 L220,10 L220,50 L0,50 Z" fill="url(#tg)"/>
+            </svg>
+            <div class="tone-spark-axis"><span>0:00</span><span>1:24</span></div>
+          </div>
+
+          <div class="tone-bars" style="font-size:0.7rem;">
+            <div class="tone-bar-row" style="font-size:0.7rem;"><span class="tone-bar-name" style="width:96px;font-size:0.7rem;">Enthusiasm</span><div class="tone-bar" style="height:7px;"><div class="tone-bar-fill" data-width="65%" style="background:var(--teal)"></div></div><span class="tone-bar-val" style="color:var(--teal);width:28px;font-size:0.75rem;">65</span></div>
+            <div class="tone-bar-row" style="font-size:0.7rem;"><span class="tone-bar-name" style="width:96px;font-size:0.7rem;">Determination</span><div class="tone-bar" style="height:7px;"><div class="tone-bar-fill" data-width="72%" style="background:var(--gold)"></div></div><span class="tone-bar-val" style="color:var(--gold);width:28px;font-size:0.75rem;">72</span></div>
+            <div class="tone-bar-row" style="font-size:0.7rem;"><span class="tone-bar-name" style="width:96px;font-size:0.7rem;">Nervousness</span><div class="tone-bar" style="height:7px;"><div class="tone-bar-fill" data-width="22%" style="background:var(--red)"></div></div><span class="tone-bar-val" style="color:var(--red);width:28px;font-size:0.75rem;">22</span></div>
+          </div>
+          <div class="tone-card-arc" style="font-size:0.65rem;">Tone arc captured every ~2s · Confidence <span style="color:var(--teal);font-weight:700;">↑ 58 → 78</span></div>
+          <div class="tone-detail-btn">
+            <div class="tone-detail-icon">📈</div>
+            <div>
+              <div class="tone-detail-title">See your full tone analysis</div>
+              <div class="tone-detail-sub">10 emotions · arc over time · peaks &amp; dips</div>
+            </div>
+            <div style="margin-left:auto;color:#666;">›</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tone-copy">
+        <div class="tone-feature fade-up delay-2">
+          <div class="tone-feature-num">✦</div>
+          <div>
+            <h4>Your strongest signal, named</h4>
+            <p>From a 10-emotion model, we surface the one that defined your delivery — and how dominant it was. No abstract scores; a real answer to "how did I come across?"</p>
+          </div>
+        </div>
+        <div class="tone-feature fade-up delay-3">
+          <div class="tone-feature-num">✦</div>
+          <div>
+            <h4>An arc of confidence, not a single number</h4>
+            <p>The sparkline shows how your tone shifted second by second — where you peaked, where you wobbled, and whether you finished stronger than you started.</p>
+          </div>
+        </div>
+        <div class="tone-feature fade-up delay-4">
+          <div class="tone-feature-num">✦</div>
+          <div>
+            <h4>Enthusiasm, determination, nervousness</h4>
+            <p>The three signals that matter most for speaking, broken out with scores you can track session to session. Tap through for the full 10-emotion breakdown.</p>
+          </div>
+        </div>
+        <div class="tone-pricing fade-up delay-4">
+          <strong>Parlance Pro &middot; $4.99/mo</strong>
+          <span>Unlocks tone analysis, all 11 modes, and unlimited daily sessions.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== MODES GRID ==================== -->
 <section id="modes">
   <div class="container">
     <div class="section-label fade-up">Practice Modes</div>
-    <h2 class="display section-title fade-up delay-1">10 ways to practice.</h2>
-    <p class="section-sub fade-up delay-2">Every mode has tailored prompts, coaching tips, and AI feedback tuned to that specific skill.</p>
+    <h2 class="display section-title fade-up delay-1">11 ways to practice.</h2>
+    <p class="section-sub fade-up delay-2">Ten curated modes with 1,700+ prompts — plus Real Life, where you bring your own scenario.</p>
 
     <div class="modes-grid">
+      <div class="mode-card fade-up delay-1" data-pro="1">
+        <span class="mode-pro-badge">✦ PRO</span>
+        <div class="mode-icon">🎯</div>
+        <h4>Real Life</h4>
+        <div class="mode-focus">Your actual conversation</div>
+        <div class="mode-prompt"><div class="prompt-label">Your Scenario</div><div class="prompt-text">"Asking my manager for a promotion in tomorrow's 1:1."</div></div>
+      </div>
       <div class="mode-card fade-up delay-1">
         <div class="mode-icon">💼</div>
         <h4>Job Interview</h4>
         <div class="mode-focus">STAR structure, conciseness</div>
         <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Describe a time you disagreed with your manager's decision."</div></div>
       </div>
-      <div class="mode-card fade-up delay-1">
+      <div class="mode-card fade-up delay-1" data-pro="1">
+        <span class="mode-pro-badge">✦ PRO</span>
         <div class="mode-icon">🚀</div>
         <h4>Pitch / Sales</h4>
         <div class="mode-focus">Hook strength, persuasion</div>
         <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Pitch a product that solves a problem nobody knows they have."</div></div>
       </div>
-      <div class="mode-card fade-up delay-2">
+      <div class="mode-card fade-up delay-2" data-pro="1">
+        <span class="mode-pro-badge">✦ PRO</span>
         <div class="mode-icon">🎤</div>
         <h4>Keynote / Talk</h4>
         <div class="mode-focus">Narrative arc, pacing</div>
@@ -1470,13 +1941,15 @@
         <div class="mode-focus">Clarity, naturalness</div>
         <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Explain what you do for a living to someone outside your field."</div></div>
       </div>
-      <div class="mode-card fade-up delay-3">
+      <div class="mode-card fade-up delay-3" data-pro="1">
+        <span class="mode-pro-badge">✦ PRO</span>
         <div class="mode-icon">🗣️</div>
         <h4>Debate / Argue</h4>
         <div class="mode-focus">Argument flow, rebuttal</div>
         <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Argue for or against: remote work makes teams more productive."</div></div>
       </div>
-      <div class="mode-card fade-up delay-3">
+      <div class="mode-card fade-up delay-3" data-pro="1">
+        <span class="mode-pro-badge">✦ PRO</span>
         <div class="mode-icon">📖</div>
         <h4>Storytelling</h4>
         <div class="mode-focus">Engagement, vivid detail</div>
@@ -1488,7 +1961,8 @@
         <div class="mode-focus">Clarity, simplification</div>
         <div class="mode-prompt"><div class="prompt-label">Sample Prompt</div><div class="prompt-text">"Explain blockchain to a curious 10-year-old."</div></div>
       </div>
-      <div class="mode-card fade-up delay-4">
+      <div class="mode-card fade-up delay-4" data-pro="1">
+        <span class="mode-pro-badge">✦ PRO</span>
         <div class="mode-icon">🤝</div>
         <h4>Negotiation</h4>
         <div class="mode-focus">Persuasion, framing</div>
@@ -1510,11 +1984,93 @@
   </div>
 </section>
 
+<!-- ==================== REAL LIFE MODE ==================== -->
+<section id="reallife">
+  <div class="container">
+    <div class="section-label fade-up" style="color:#D44A6F;">✦ PRO &middot; Real Life</div>
+    <h2 class="display section-title fade-up delay-1">Practice the conversation you're about to have.</h2>
+    <p class="section-sub fade-up delay-2">A hard 1:1 tomorrow. A first date Friday. A salary call this afternoon. Describe it in a sentence — Parlance coaches you through it before it happens.</p>
+
+    <div class="rl-grid">
+      <!-- Setup screen mock -->
+      <div class="phone rl-phone fade-up delay-2">
+        <div class="phone-notch"></div>
+        <div class="phone-nav">
+          <div class="phone-nav-btn">← Back</div>
+          <div class="phone-nav-pill" style="background:rgba(212,74,111,0.18);color:#E5708F;">🎯 Real Life</div>
+          <div class="phone-nav-lvl">PRO</div>
+        </div>
+        <div class="rl-section-label">YOUR SCENARIO</div>
+        <div class="rl-scenario">"Asking my manager for a promotion in tomorrow's 1:1. I've been here 18 months and led the Q3 launch."</div>
+        <div class="rl-char-count">142 / 500</div>
+
+        <div class="rl-section-label" style="margin-top:14px;">DURATION</div>
+        <div class="rl-duration">
+          <div class="rl-duration-time">1:30</div>
+          <div class="rl-slider">
+            <div class="rl-slider-track"><div class="rl-slider-fill" style="width:50%"></div></div>
+            <div class="rl-slider-knob" style="left:50%"></div>
+          </div>
+          <div class="rl-slider-range"><span>0:15</span><span>3:00</span></div>
+        </div>
+
+        <div class="rl-section-label" style="margin-top:14px;">RECENT</div>
+        <div class="rl-recents">
+          <div class="rl-recent-chip">Pitching the new redesign…</div>
+          <div class="rl-recent-chip">First date conversation</div>
+          <div class="rl-recent-chip">Negotiating contract terms</div>
+        </div>
+
+        <button class="rl-start-btn">Start Practice →</button>
+      </div>
+
+      <!-- Loading-with-AI-tips screen mock -->
+      <div class="phone rl-phone rl-phone-secondary fade-up delay-3">
+        <div class="phone-notch"></div>
+        <div class="rl-loading-label">PREPARING YOUR SESSION</div>
+        <div class="rl-loading-title">Your scenario, rewritten</div>
+        <div class="rl-loading-rewrite">"You're sitting down for your scheduled 1:1 with your manager. You've prepared your case for promotion — 18 months on the team, the Q3 launch you led. Make the ask."</div>
+
+        <div class="rl-focus-label">
+          <span class="rl-focus-line"></span>
+          <span>FOCUS AREAS</span>
+          <span class="rl-focus-line"></span>
+        </div>
+        <div class="rl-tips">
+          <div class="rl-tip"><span class="rl-tip-num">1</span><span>Lead with the outcome you want — don't bury the ask.</span></div>
+          <div class="rl-tip"><span class="rl-tip-num">2</span><span>Anchor in specifics: the Q3 launch, the metric it moved.</span></div>
+          <div class="rl-tip"><span class="rl-tip-num">3</span><span>Pause after the ask. Don't fill the silence for them.</span></div>
+        </div>
+        <div class="rl-ai-tag">✦ Tips generated for your scenario</div>
+        <button class="rl-record-btn">Start Recording</button>
+      </div>
+    </div>
+
+    <div class="rl-points">
+      <div class="rl-point fade-up delay-2">
+        <div class="rl-point-icon">✍️</div>
+        <h4>One sentence is enough</h4>
+        <p>Describe the conversation in your own words. Up to 500 characters. Pick a duration from 15 seconds to 3 minutes.</p>
+      </div>
+      <div class="rl-point fade-up delay-3">
+        <div class="rl-point-icon">🧭</div>
+        <h4>AI rewrites it as a prompt</h4>
+        <p>Your scenario becomes a second-person setup — like a coach handing you the moment — plus three focus areas tailored to it.</p>
+      </div>
+      <div class="rl-point fade-up delay-4">
+        <div class="rl-point-icon">🛡️</div>
+        <h4>Off the leaderboard</h4>
+        <p>Real Life sessions still earn XP and count toward your streak, but they're excluded from the league — your custom prompt isn't graded against everyone else's.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== TRY A PROMPT ==================== -->
 <section id="tiers">
   <div class="container">
     <div class="section-label fade-up">Try It Yourself</div>
-    <h2 class="display section-title fade-up delay-1">400+ prompts. Pick your challenge.</h2>
+    <h2 class="display section-title fade-up delay-1">1,700+ prompts. Pick your challenge.</h2>
     <p class="section-sub fade-up delay-2">Choose a mode and difficulty. Every prompt comes with coaching tips — just like in the app.</p>
 
     <!-- Mode selector -->
@@ -1669,9 +2225,9 @@
 
 <!-- ==================== PRIVACY ==================== -->
 <div class="privacy-strip fade-up">
-  <div class="privacy-card"><div class="priv-icon">🔒</div> <strong>No audio</strong>&nbsp;leaves your device</div>
-  <div class="privacy-card"><div class="priv-icon">📱</div> <strong>On-device</strong>&nbsp;transcription</div>
-  <div class="privacy-card"><div class="priv-icon">🗑️</div> <strong>Nothing stored</strong>&nbsp;after scoring</div>
+  <div class="privacy-card"><div class="priv-icon">🔒</div> <strong>Audio deleted</strong>&nbsp;after processing</div>
+  <div class="privacy-card"><div class="priv-icon">📱</div> <strong>Apple Speech</strong>&nbsp;handles transcription</div>
+  <div class="privacy-card"><div class="priv-icon">☁️</div> <strong>Account data</strong>&nbsp;encrypted at rest</div>
 </div>
 
 <!-- ==================== CTA ==================== -->
@@ -2004,7 +2560,7 @@
 
   // ---- Scroll Animations ----
   function animateMetrics(container) {
-    const fills = container.querySelectorAll('.metric-fill, .mini-score-fill');
+    const fills = container.querySelectorAll('.metric-fill, .mini-score-fill, .tone-bar-fill, .rl-bar-fill');
     fills.forEach(fill => {
       fill.style.width = '0';
       requestAnimationFrame(() => {
@@ -2024,6 +2580,12 @@
         }
         // Metric bars
         if (entry.target.id === 'mini-scores' || entry.target.id === 'metrics-interview' || entry.target.id === 'metrics-pitch') {
+          // animate fills in the surrounding feedback-content so the tone card bars also fill in
+          const scope = entry.target.closest('.feedback-content') || entry.target;
+          animateMetrics(scope);
+        }
+        // Tone analysis section mock
+        if (entry.target.classList && entry.target.classList.contains('tone-mock')) {
           animateMetrics(entry.target);
         }
         // Before/After bars
@@ -2063,11 +2625,12 @@
     const el = document.getElementById(id);
     if (el) observer.observe(el);
   });
+  document.querySelectorAll('.tone-mock').forEach(el => observer.observe(el));
 
   // Fallback: force-show everything if observer fails (e.g. mobile edge cases)
   setTimeout(() => {
     document.querySelectorAll('.fade-up:not(.visible)').forEach(el => el.classList.add('visible'));
-    document.querySelectorAll('.ba-metric-fill, .mini-score-fill, .metric-fill').forEach(fill => {
+    document.querySelectorAll('.ba-metric-fill, .mini-score-fill, .metric-fill, .tone-bar-fill').forEach(fill => {
       if (fill.style.width === '0px' || fill.style.width === '0' || !fill.style.width) {
         fill.style.width = fill.dataset.width;
       }
