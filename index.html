@@ -326,6 +326,7 @@
     .mini-modes-grid {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;
     }
+    .mini-mode-card-wide { grid-column: 1 / -1; }
     /* mini mode card, matches actual ModeGridView card: emoji, accent bar, name, description */
     /* Mini mode cards inside the How-It-Works step phone mockup — mirror the main mode cards */
     .mini-mode-card {
@@ -1992,6 +1993,11 @@
               <div class="mini-mode-name">Explain a Topic</div>
               <div class="mini-mode-desc">Break down ideas simply.</div>
             </div>
+            <div class="mini-mode-card mini-mode-card-wide" style="--mode-accent:#8E44AD">
+              <div class="mm-top"><div class="icon">🌐</div></div>
+              <div class="mini-mode-name">Networking</div>
+              <div class="mini-mode-desc">Introduce yourself. Make connections.</div>
+            </div>
           </div>
         </div>
       </div>
@@ -2025,7 +2031,7 @@
       <div class="step-card fade-up delay-3">
         <div class="step-num">3</div>
         <h3>Get AI Feedback</h3>
-        <p>Scores across 7+ metrics, vocal-tone analysis, best & worst moments, in seconds.</p>
+        <p>Pitch, pacing, and per-word timing measured on-device. Scored across 8+ metrics with best & worst moments, in seconds.</p>
         <div class="mini-phone">
           <div class="mini-fb-head">
             <div class="mini-fb-score">82<span>/100</span></div>
@@ -2525,7 +2531,7 @@
         </div>
         <div class="tone-pricing fade-up delay-4">
           <strong>Parlance Pro &middot; $4.99/mo</strong>
-          <span>Unlocks tone analysis, all 11 modes, and unlimited daily sessions.</span>
+          <span>Unlocks tone analysis, all 10 modes plus Real Life, and unlimited daily sessions.</span>
         </div>
       </div>
     </div>
@@ -2917,6 +2923,15 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ==================== SOCIAL ==================== -->
+<section id="social" class="social-section">
+  <div class="container">
+    <div class="section-label fade-up">Better Together</div>
+    <h2 class="display section-title fade-up delay-1">Bring your friends.</h2>
+    <p class="section-sub fade-up delay-2">Search by username, send friend requests, and watch your XP race in a friends-only leaderboard. Push notifications keep the back-and-forth alive.</p>
   </div>
 </section>
 
