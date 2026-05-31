@@ -1404,6 +1404,25 @@
     .cl-progress strong { color: var(--text); }
     .cl-bar-track { height: 6px; background: rgba(232,168,56,0.15); border-radius: 3px; overflow: hidden; }
     .cl-bar-fill { height: 100%; background: linear-gradient(90deg, var(--gold), #F0C060); border-radius: 3px; width: 0; transition: width 1.5s ease-out; }
+    .cl-ladder {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 4px; margin-top: 0.7rem;
+    }
+    .cl-tier {
+      flex: 1; text-align: center;
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.3px;
+      color: var(--dim); padding: 4px 2px; border-radius: 6px;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .cl-tier .cl-tier-icon { display: block; font-size: 0.95rem; margin-bottom: 1px; filter: grayscale(0.6); opacity: 0.55; }
+    .cl-tier.current {
+      color: var(--text);
+      background: rgba(232,168,56,0.12);
+      border-color: rgba(232,168,56,0.35);
+    }
+    .cl-tier.current .cl-tier-icon { filter: none; opacity: 1; }
+    .cl-tier-sep { color: var(--dim); font-size: 0.6rem; opacity: 0.6; }
 
     /* Promotion/demotion status pills */
     .league-pills { display: flex; gap: 6px; margin: 0.5rem 0 0.75rem; flex-wrap: wrap; }
@@ -1792,7 +1811,7 @@
         <div class="phone-nav">
           <div class="phone-nav-btn">‹ Back</div>
           <div class="phone-nav-pill" style="background:rgba(232,168,56,0.18);color:var(--gold);">💼 Interview</div>
-          <div class="phone-nav-lvl">Lv 3</div>
+          <div class="phone-nav-lvl">Developing</div>
         </div>
         <div class="phone-subtitle">Read the prompt, then tap to begin recording.</div>
         <div class="phone-prompt-card">
@@ -1829,7 +1848,7 @@
         <div class="phone-nav">
           <div class="phone-nav-btn">‹ Back</div>
           <div class="phone-nav-pill" style="background:rgba(224,90,78,0.18);color:var(--red);">🚀 Pitch / Sales</div>
-          <div class="phone-nav-lvl">Lv 4</div>
+          <div class="phone-nav-lvl">Developing</div>
         </div>
         <div class="phone-subtitle">Read the prompt, then tap to begin recording.</div>
         <div class="phone-prompt-card">
@@ -1866,7 +1885,7 @@
         <div class="phone-nav">
           <div class="phone-nav-btn">‹ Back</div>
           <div class="phone-nav-pill" style="background:rgba(106,88,221,0.18);color:var(--purple);">🎤 Keynote / Talk</div>
-          <div class="phone-nav-lvl">Lv 5</div>
+          <div class="phone-nav-lvl">Confident</div>
         </div>
         <div class="phone-subtitle">Read the prompt, then tap to begin recording.</div>
         <div class="phone-prompt-card">
@@ -1903,7 +1922,7 @@
         <div class="phone-nav">
           <div class="phone-nav-btn">‹ Back</div>
           <div class="phone-nav-pill" style="background:rgba(46,158,139,0.18);color:var(--teal);">💬 Daily Convo</div>
-          <div class="phone-nav-lvl">Lv 3</div>
+          <div class="phone-nav-lvl">Developing</div>
         </div>
         <div class="phone-subtitle">Read the prompt, then tap to begin recording.</div>
         <div class="phone-prompt-card">
@@ -2008,7 +2027,7 @@
         <h3>Record Yourself</h3>
         <p>See your prompt, focus tips, then tap to record. Up to 3 minutes per session.</p>
         <div class="mini-phone">
-          <div class="mini-rec-pill">💼 Interview · Lv 3</div>
+          <div class="mini-rec-pill">💼 Interview · Developing</div>
           <div class="mini-rec-prompt">"Tell me about a time you led under pressure."</div>
           <div class="mini-rec-tips">
             <div class="mini-rec-tip"><span class="mini-rec-tip-num">1</span> Use STAR framework</div>
@@ -2817,6 +2836,13 @@
           </div>
           <div class="cl-progress"><span>Progress to <strong>Silver</strong></span><span>1,080 / 1,500 XP</span></div>
           <div class="cl-bar-track"><div class="cl-bar-fill" id="cl-fill"></div></div>
+          <div class="cl-ladder" aria-label="League tiers">
+            <div class="cl-tier current"><span class="cl-tier-icon">🥉</span>Bronze</div>
+            <div class="cl-tier"><span class="cl-tier-icon">🥈</span>Silver</div>
+            <div class="cl-tier"><span class="cl-tier-icon">🥇</span>Gold</div>
+            <div class="cl-tier"><span class="cl-tier-icon">🛡️</span>Platinum</div>
+            <div class="cl-tier"><span class="cl-tier-icon">💎</span>Diamond</div>
+          </div>
         </div>
       </div>
 
