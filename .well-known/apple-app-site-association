@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["497VU99KK9.org.Parlance"],
+        "components": [
+          { "/": "/reset-password*", "comment": "Password recovery deep link" }
+        ]
+      }
+    ]
+  }
+}
