@@ -4,7 +4,8 @@
       {
         "appIDs": ["497VU99KK9.org.Parlance"],
         "components": [
-          { "/": "/reset-password*", "comment": "Password recovery deep link" }
+          { "/": "/reset-password*", "comment": "Password recovery deep link" },
+          { "/": "/confirm-email*",  "comment": "Signup confirmation deep link" }
         ]
       }
     ]
