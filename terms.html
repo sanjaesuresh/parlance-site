@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service · Parlance</title>
+  <meta name="description" content="The terms that govern your use of Parlance, the AI speech coach app">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #F5F3EF;
+      --card: #FFFFFF;
+      --card2: #F0EDE8;
+      --border: #E0DDD8;
+      --text: #1A1A1A;
+      --sub: #666666;
+      --dim: #999999;
+      --gold: #E8A838;
+      --radius: 18px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .display { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; }
+
+    /* ---- Nav ---- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(245, 243, 239, 0.85);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700;
+      color: var(--text); text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-home {
+      color: var(--sub); font-size: 0.85rem; font-weight: 600;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-home:hover { color: var(--text); }
+
+    /* ---- Page Header ---- */
+    .page-header {
+      padding: 8rem 1.5rem 3rem;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+    .page-meta {
+      font-size: 0.875rem;
+      color: var(--sub);
+      line-height: 2;
+    }
+    .page-meta a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .page-meta a:hover { text-decoration: underline; }
+
+    /* ---- Content ---- */
+    .content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .content h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      border-left: 3px solid var(--gold);
+      padding-left: 0.75rem;
+      margin: 2.5rem 0 0.85rem;
+    }
+
+    .content p {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--sub);
+      margin-bottom: 0.75rem;
+    }
+
+    .content strong { color: var(--text); font-weight: 600; }
+
+    .content a { color: var(--gold); text-decoration: none; font-weight: 600; }
+    .content a:hover { text-decoration: underline; }
+
+    .content ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0.75rem;
+    }
+    .content ul li {
+      font-size: 0.95rem;
+      color: var(--sub);
+      line-height: 1.75;
+      padding: 0.2rem 0 0.2rem 1.25rem;
+      position: relative;
+    }
+    .content ul li::before {
+      content: '-';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* Sub-groups */
+    .sub-group { margin: 1rem 0 0.25rem; }
+    .sub-group-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.75px;
+      color: var(--text);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    /* ---- Callout ---- */
+    .callout {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.25rem;
+      margin: 1rem 0 0.5rem;
+    }
+    .callout p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+
+    /* ---- Footer ---- */
+    .site-footer {
+      text-align: center;
+      padding: 1.75rem 1.5rem;
+      font-size: 0.8rem;
+      color: var(--dim);
+      border-top: 1px solid var(--border);
+    }
+    .site-footer a { color: var(--sub); text-decoration: none; transition: color 0.2s; }
+    .site-footer a:hover { color: var(--text); }
+    .site-footer .sep { margin: 0 0.5rem; }
+
+    /* ---- Fade up ---- */
+    .fade-up {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Parlance<span>.</span></a>
+  <a href="/" class="nav-home">← Home</a>
+</nav>
+
+<div class="page-header fade-up">
+  <h1 class="display">Terms of Service</h1>
+  <div class="page-meta fade-up delay-1">
+    Effective date: June 6, 2026<br>
+    App: Parlance, AI Speech Coach<br>
+    Questions? <a href="mailto:parlance.app@gmail.com">parlance.app@gmail.com</a>
+  </div>
+</div>
+
+<div class="content">
+
+  <h2 class="fade-up">Agreement</h2>
+  <p class="fade-up">These Terms of Service ("Terms") form a binding agreement between you and Parlance ("we," "us," or "our") and govern your access to and use of the Parlance iOS application and the website at <a href="https://theparlance.app">theparlance.app</a> (together, the "Service"). By downloading, installing, creating an account, or using the Service, you agree to these Terms. If you do not agree, do not use the Service.</p>
+
+  <h2 class="fade-up">Who Can Use Parlance</h2>
+  <ul class="fade-up">
+    <li>You must be at least 13 years old to use Parlance. If you are between 13 and the age of legal majority in your jurisdiction, you confirm that a parent or legal guardian has reviewed and agreed to these Terms on your behalf</li>
+    <li>You must be able to form a binding contract under applicable law</li>
+    <li>You agree to provide accurate information when creating your account and to keep it current</li>
+    <li>You are responsible for all activity that takes place under your account and for keeping your sign-in credentials secure</li>
+  </ul>
+
+  <h2 class="fade-up">The Service</h2>
+  <p class="fade-up">Parlance is an AI-powered speech coaching app. The core loop is: pick a practice mode, receive a prompt, record yourself speaking, and get AI-generated feedback on your delivery and structure. Features include practice modes (job interview, daily conversation, impromptu, explanation, and Pro modes such as pitch, keynote, debate, storytelling, negotiation, and networking), difficulty levels, XP, streaks, achievements, weekly global and friends leaderboards, and a progress dashboard.</p>
+  <p class="fade-up">We may add, change, or remove features, practice modes, questions, or other parts of the Service at any time. We try to give notice of material changes when reasonable, but we are not required to.</p>
+
+  <h2 class="fade-up">Your Account</h2>
+  <ul class="fade-up">
+    <li>You create an account using your email address or Apple ID via Supabase Auth</li>
+    <li>One account per person. Do not share your account or let anyone else use it</li>
+    <li>You may set a display name, username, and avatar. These are visible to other users on leaderboards and your public profile</li>
+    <li>You can delete your account at any time from Profile → Settings → Delete Account, which permanently removes your server-side profile, stats, and friend connections</li>
+  </ul>
+
+  <h2 class="fade-up">Subscriptions and Payments</h2>
+  <p class="fade-up">Parlance offers a free tier and a paid <strong>Parlance Pro</strong> subscription. Pro unlocks additional practice modes (pitch, keynote, debate, storytelling, negotiation, networking), advanced difficulty bands, and vocal emotion analysis.</p>
+
+  <div class="sub-group fade-up">
+    <div class="sub-group-label">Billing</div>
+    <ul>
+      <li>Subscriptions are sold and processed by Apple through the App Store using your Apple ID</li>
+      <li>Payment is charged to your Apple ID at confirmation of purchase and at the start of each renewal period</li>
+      <li>Prices and billing intervals are shown in the app before purchase and may vary by region</li>
+    </ul>
+  </div>
+
+  <div class="sub-group fade-up">
+    <div class="sub-group-label">Auto-renewal</div>
+    <ul>
+      <li>Your subscription automatically renews at the end of each billing period unless you turn off auto-renew at least 24 hours before the period ends</li>
+      <li>You can manage or cancel auto-renewal at any time in your Apple ID account settings on your device</li>
+      <li>Deleting the Parlance app does not cancel your subscription</li>
+    </ul>
+  </div>
+
+  <div class="sub-group fade-up">
+    <div class="sub-group-label">Refunds and trials</div>
+    <ul>
+      <li>If a free trial is offered, any unused portion is forfeited when you upgrade to a paid subscription</li>
+      <li>Refund requests for App Store purchases are handled by Apple at <a href="https://support.apple.com/billing" target="_blank" rel="noopener">support.apple.com/billing</a> in accordance with Apple's policies</li>
+    </ul>
+  </div>
+
+  <h2 class="fade-up">Your Content</h2>
+  <p class="fade-up">"Your Content" means the speech you record, the transcripts generated from that speech, your profile information, and anything else you submit through the Service.</p>
+  <ul class="fade-up">
+    <li>You retain all rights you already have in Your Content. We do not claim ownership of it</li>
+    <li>You grant us a limited, worldwide, non-exclusive, royalty-free license to host, store, transmit, process, and display Your Content solely to operate and provide the Service to you — for example, to transcribe your speech, generate AI feedback, calculate metrics, sync your profile, and show your stats on leaderboards</li>
+    <li>You confirm that you have the right to record and submit Your Content and that doing so does not violate anyone else's rights or any law</li>
+    <li>We do not use Your Content to train foundation AI models, and we do not sell it. See our <a href="/privacy">Privacy Policy</a> for full detail on how data is handled</li>
+  </ul>
+
+  <h2 class="fade-up">AI Feedback Disclaimer</h2>
+  <div class="callout fade-up">
+    <p>Parlance is a practice tool, not a professional service. AI-generated scores, transcripts, and coaching feedback are produced by automated systems and can be incomplete, inaccurate, or wrong. They are <strong>not</strong> professional speech coaching, psychological assessment, medical advice, career advice, legal advice, or any form of certified evaluation. Do not rely on Parlance for decisions that have material consequences for your health, career, finances, or legal standing.</p>
+  </div>
+
+  <h2 class="fade-up">Acceptable Use</h2>
+  <p class="fade-up">You agree not to:</p>
+  <ul class="fade-up">
+    <li>Use the Service to record anyone without their knowledge or consent where the law requires it, or to record content that is unlawful, harassing, defamatory, hateful, sexually explicit, or threatening</li>
+    <li>Submit someone else's voice, performance, or content as your own, or impersonate another person on your profile or leaderboard</li>
+    <li>Attempt to manipulate XP, streaks, scores, league standings, achievements, or leaderboards through automation, scripts, bots, multiple accounts, or any technique designed to misrepresent activity</li>
+    <li>Abuse the friends or social features (harassment, spam friend requests, repeatedly contacting someone who has indicated they do not want contact)</li>
+    <li>Reverse engineer, decompile, or attempt to extract the source code of the app, except where this restriction is prohibited by law</li>
+    <li>Probe, scan, or attempt to breach the security of the Service, our AI proxy infrastructure, or any third-party service we use</li>
+    <li>Use the Service to send excessive requests, generate spam, or otherwise interfere with how the Service runs for other users</li>
+    <li>Use the Service in violation of any applicable law or regulation, including export controls and sanctions</li>
+  </ul>
+  <p class="fade-up">We may remove content, restrict features, or suspend or terminate accounts that violate these rules.</p>
+
+  <h2 class="fade-up">Third-Party Services</h2>
+  <p class="fade-up">Parlance relies on third-party providers to operate. These include <strong>Apple</strong> (App Store, in-app purchases, Speech Recognition), <strong>Supabase</strong> (account, profile, and league data), <strong>Google Gemini</strong> (AI coaching feedback), <strong>Cloudflare Workers</strong> (secure AI proxy), and <strong>Hume AI</strong> (vocal emotion analysis for Pro). Your use of these features is also subject to those providers' terms. We are not responsible for third-party services and have no control over their availability, behavior, or content.</p>
+
+  <h2 class="fade-up">Intellectual Property</h2>
+  <p class="fade-up">The Parlance app, website, name, logo, design, question bank, prompts, coaching tips, copy, and all related software and content are owned by us or our licensors and are protected by copyright, trademark, and other laws. Except for the rights expressly granted to you in these Terms, no rights are granted. You may not copy, modify, distribute, sell, lease, or create derivative works from any part of the Service.</p>
+
+  <h2 class="fade-up">Feedback</h2>
+  <p class="fade-up">If you send us suggestions, ideas, or feedback about the Service, we may use them without obligation or compensation to you. You will not be entitled to any rights in the Service as a result of sending feedback.</p>
+
+  <h2 class="fade-up">Termination</h2>
+  <ul class="fade-up">
+    <li>You can stop using the Service at any time. You can delete your account from Profile → Settings → Delete Account</li>
+    <li>We may suspend or terminate your access to all or part of the Service at any time if you violate these Terms, if your account is being used in a way that risks harm to other users or the Service, or if we are required to do so by law</li>
+    <li>Sections that by their nature should survive termination — including Your Content license to the extent needed to operate the Service for other users, AI Feedback Disclaimer, Intellectual Property, Disclaimers, Limitation of Liability, Indemnity, and Governing Law — will survive</li>
+  </ul>
+
+  <h2 class="fade-up">Disclaimers</h2>
+  <p class="fade-up">The Service is provided <strong>"as is" and "as available"</strong> without warranties of any kind, whether express, implied, or statutory, including warranties of merchantability, fitness for a particular purpose, non-infringement, accuracy, or uninterrupted operation. We do not warrant that scores, feedback, transcripts, or leaderboard standings will be accurate, complete, or available at any given time. You use the Service at your own risk.</p>
+
+  <h2 class="fade-up">Limitation of Liability</h2>
+  <p class="fade-up">To the maximum extent permitted by law, Parlance and its officers, employees, and agents will not be liable for any indirect, incidental, special, consequential, exemplary, or punitive damages, or any loss of profits, revenue, data, goodwill, or business opportunities, arising out of or relating to the Service or these Terms, even if advised of the possibility of such damages. Our total cumulative liability for all claims relating to the Service will not exceed the greater of (a) the amount you paid us for the Service in the twelve months before the event giving rise to the claim, or (b) USD $50.</p>
+  <p class="fade-up">Some jurisdictions do not allow certain limitations of liability, so some of the above may not apply to you. In those cases, our liability is limited to the smallest extent permitted by applicable law.</p>
+
+  <h2 class="fade-up">Indemnity</h2>
+  <p class="fade-up">You agree to defend, indemnify, and hold harmless Parlance from any claims, damages, liabilities, losses, costs, and expenses (including reasonable attorneys' fees) arising out of or related to your use of the Service, Your Content, or your violation of these Terms or any law or the rights of any third party.</p>
+
+  <h2 class="fade-up">Apple-Specific Terms</h2>
+  <p class="fade-up">This section applies because Parlance is distributed through the Apple App Store:</p>
+  <ul class="fade-up">
+    <li>These Terms are between you and Parlance, not Apple. Apple is not responsible for the Service or its content</li>
+    <li>Your license to use the app is a non-transferable license to use it on any Apple-branded device that you own or control, as permitted by the Apple Media Services Terms</li>
+    <li>Apple has no obligation to provide maintenance or support for the app</li>
+    <li>If the app fails to conform to any applicable warranty, you may notify Apple, and Apple may refund the purchase price (where applicable). To the maximum extent permitted by law, Apple has no other warranty obligation with respect to the app</li>
+    <li>Apple is not responsible for addressing any claims by you or any third party relating to the app, including product liability claims, claims that the app fails to conform to any applicable legal or regulatory requirement, and claims arising under consumer protection or similar legislation</li>
+    <li>In the event of any third-party claim that the app or your use of it infringes that third party's intellectual property rights, Apple is not responsible for the investigation, defense, settlement, or discharge of that claim</li>
+    <li>Apple and Apple's subsidiaries are third-party beneficiaries of these Terms and may enforce them against you</li>
+  </ul>
+
+  <h2 class="fade-up">Changes to These Terms</h2>
+  <p class="fade-up">We may update these Terms from time to time. When we do, we will revise the effective date at the top of this page. For material changes, we will provide reasonable notice in the app or by email. Your continued use of the Service after changes take effect constitutes your acceptance of the updated Terms.</p>
+
+  <h2 class="fade-up">Governing Law</h2>
+  <p class="fade-up">These Terms are governed by the laws of the State of California, United States, without regard to conflict-of-laws principles. You and Parlance agree to the exclusive jurisdiction of the state and federal courts located in California for any dispute that is not required to be resolved otherwise by applicable law. Nothing in this section limits any non-waivable rights you have as a consumer under the laws of your country of residence.</p>
+
+  <h2 class="fade-up">Contact</h2>
+  <p class="fade-up">
+    Questions about these Terms? Email: <a href="mailto:parlance.app@gmail.com">parlance.app@gmail.com</a><br>
+    Or visit: <a href="/support">parlance.app/support</a>
+  </p>
+
+</div>
+
+<footer class="site-footer">
+  <span>© 2026 Parlance</span>
+  <span class="sep">·</span>
+  <a href="/privacy">Privacy Policy</a>
+  <span class="sep">·</span>
+  <a href="/terms">Terms of Service</a>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px 40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  setTimeout(() => {
+    document.querySelectorAll('.fade-up:not(.visible)').forEach(el => el.classList.add('visible'));
+  }, 2000);
+</script>
+
+</body>
+</html>
